@@ -1,13 +1,13 @@
 /* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/17 14:30:35 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/22 20:41:50 by ele-lean         ###   ########.fr       */
-/*                                                                            */
+/*																			*/
+/*														:::	  ::::::::   */
+/*   ft_printf.c										:+:	  :+:	:+:   */
+/*													+:+ +:+		 +:+	 */
+/*   By: ele-lean <ele-lean@student.42.fr>		  +#+  +:+	   +#+		*/
+/*												+#+#+#+#+#+   +#+		   */
+/*   Created: 2024/10/17 14:30:35 by ele-lean		  #+#	#+#			 */
+/*   Updated: 2024/10/22 20:41:50 by ele-lean		 ###   ########.fr	   */
+/*																			*/
 /* ************************************************************************** */
 
 #include "printf.h"
@@ -53,9 +53,11 @@ void	init_flags(t_flags *flags)
 	flags->precision = 1000;
 }
 
-void	manage_flags2(t_info *info, int *i, t_flags *flags)
+void manage_flags2(t_info *info, int *i, t_flags *flags)
 {
-	va_list		args_copy;
+	va_list args_copy;
+
+	va_copy(args_copy, info->args);
 
 	if (search_c(info->format[*i], "di") && flags->point == 1
 		&& (flags->precision == 0 || flags->precision == 1)
@@ -64,6 +66,7 @@ void	manage_flags2(t_info *info, int *i, t_flags *flags)
 		if (va_arg(args_copy, int) < 0)
 			info->count--;
 	}
+
 	va_end(args_copy);
 }
 

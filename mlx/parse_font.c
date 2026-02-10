@@ -16,12 +16,21 @@ static int	create_letter(t_mlx_font *font, int index)
 {
 	t_mlx_letter	*letter;
 
+	if (!font->letters_str)
+	{
+		printf("Error: Font letters string is not initialized\n");
+		return (0);
+	}
+
 	letter = malloc(sizeof(t_mlx_letter));
 	if (!letter)
 	{
 		printf("Error: Failed to allocate memory for letter\n");
 		return (0);
 	}
+
+	ft_bzero(letter, sizeof(t_mlx_letter));
+
 	font->letters[index] = *letter;
 	free(letter);
 	return (1);

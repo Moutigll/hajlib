@@ -11,13 +11,13 @@
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -g -Wall -Werror -Wextra -I$(INCLUDE_DIR) -fPIC
+CFLAGS = -g -Wall -Werror -Wextra -I$(INCLUDE_DIR) -fPIC -O3
 NAME = libft.a
 
-PART1_DIR = ft/part1
-PART2_DIR = ft/part2
-PART_BONUS_DIR = ft/bonus
-PART_EXTRA_DIR = ft/extra
+PART1_DIR = src/part1
+PART2_DIR = src/part2
+PART_BONUS_DIR = src/bonus
+PART_EXTRA_DIR = src/extra
 PART_PRINTF_DIR = ft_printf
 PART_GET_NEXT_LINE_DIR = get_next_line
 PART_MLX_DIR = mlx
