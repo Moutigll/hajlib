@@ -99,7 +99,8 @@ UTIL_SRCS	=	free_tab.c \
 				ft_is_empty_string.c \
 				ft_realloctab.c \
 				ft_remove_duplicates.c \
-				ft_tablen.c
+				ft_tablen.c \
+				ft_getoptLong.c
 
 # Convert to full paths
 CHAR_SRCS	:= $(addprefix $(CHAR_DIR)/,$(CHAR_SRCS))

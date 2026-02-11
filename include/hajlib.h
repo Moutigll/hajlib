@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:47:48 by ele-lean          #+#    #+#             */
-/*   Updated: 2026/02/11 17:06:38 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/11 18:51:43 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define HAJLIB_H
 
 # include "hchar.h"
+# include "hgetopt.h"
 # include "hgnl.h"
 # include "hio.h"
 # include "hlist.h"
