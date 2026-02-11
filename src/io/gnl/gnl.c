@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   gnl.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:25:41 by ele-lean          #+#    #+#             */
-/*   Updated: 2025/01/30 13:33:30 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:08:25 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-#include "../../../include/gnl.h"
+#include "../../../include/hgnl.h"
 
 static int	findNl(t_list *list, t_newline *line)
 {

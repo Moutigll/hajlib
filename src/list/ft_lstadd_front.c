@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 17:00:07 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/16 17:13:34 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:09:10 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/list.h"
+#include "../../include/hlist.h"
 
 void	ft_lstadd_front(t_list **lst, t_list *newNode)
 {

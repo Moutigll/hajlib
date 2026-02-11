@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcut.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-goff <tle-goff@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/11 16:34:46 by tle-goff          #+#    #+#             */
-/*   Updated: 2024/12/18 15:43:15 by tle-goff         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:16 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/string.h"
+#include "../../include/hstring.h"
 
 char	*ft_strcut(char *str, char c)
 {

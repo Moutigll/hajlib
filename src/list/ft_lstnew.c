@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 16:28:53 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/12/03 06:47:36 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:09:10 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/list.h"
+#include "../../include/hlist.h"
 
 t_list	*ft_lstnew(void *content)
 {

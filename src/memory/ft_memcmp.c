@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:26:30 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/15 14:40:34 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:01 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/memory.h"
+#include "../../include/hmemory.h"
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {

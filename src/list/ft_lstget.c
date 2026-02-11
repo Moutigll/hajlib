@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstget.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 09:27:28 by ele-lean          #+#    #+#             */
-/*   Updated: 2025/01/07 11:55:43 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:09:10 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/list.h"
+#include "../../include/hlist.h"
 
 t_list	*ft_lstget(t_list *list, int index)
 {

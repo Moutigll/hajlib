@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <math.h>
 
-#include "../include/libft.h"
+#include "../include/hmath.h"
+#include "../include/hmemory.h"
 
 #define ITER_SMALL	10
 #define ITER_LARGE	6
@@ -81,7 +81,7 @@ calcStats(t_stats *stats)
 				 ((double)stats->times[i] - stats->mean);
 		i++;
 	}
-	stats->stddev = sqrt(sumSq / count);
+	stats->stddev = ft_sqrtNewton(sumSq / count);
 }
 
 static void

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:14:18 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/16 16:31:45 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:08:38 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-#include "../../include/io.h"
+#include "../../include/hio.h"
 
 void	ft_putchar_fd(char c, int fd)
 {

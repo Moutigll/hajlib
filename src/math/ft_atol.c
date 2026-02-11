@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 17:19:44 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/12/07 17:24:03 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:09:44 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 
-#include "../../include/math.h"
+#include "../../include/hmath.h"
 
 int	get_sign(const char **str)
 {

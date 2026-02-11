@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   gnlUtils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moutig <moutig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:25:58 by ele-lean          #+#    #+#             */
-/*   Updated: 2025/02/07 02:35:17 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/11 17:08:20 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/gnl.h"
+#include "../../../include/hgnl.h"
 
 void	gnlLstaddBack(t_list **list, char *buffer, int fd)
 {

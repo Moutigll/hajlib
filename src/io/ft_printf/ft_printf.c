@@ -10,8 +10,8 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include "../../../include/io.h"
-#include "../../../include/printf.h"
+#include "../../../include/hio.h"
+#include "../../../include/hprintf.h"
 
 int	search_c(char c, const char *string)
 {

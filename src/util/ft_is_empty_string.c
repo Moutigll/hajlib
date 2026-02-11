@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_empty_string.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 17:56:21 by ele-lean          #+#    #+#             */
-/*   Updated: 2025/01/22 18:07:11 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:52 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/utils.h"
+#include "../../include/hutils.h"
 
 int	ft_is_empty_string(char *str)
 {

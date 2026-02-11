@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 14:42:08 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/17 16:11:30 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:16 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/string.h"
+#include "../../include/hstring.h"
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 19:29:11 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/16 19:33:15 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:09:10 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/list.h"
+#include "../../include/hlist.h"
 
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {

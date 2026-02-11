@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 20:49:22 by ele-lean          #+#    #+#             */
-/*   Updated: 2025/02/07 22:58:52 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:16 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/string.h"
+#include "../../include/hstring.h"
 
 char	*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2)
 {

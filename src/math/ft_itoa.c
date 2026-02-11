@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 12:45:13 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/16 16:31:07 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:16 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "../../include/string.h"
-#include "../../include/math.h"
+#include "../../include/hstring.h"
+#include "../../include/hmath.h"
 
 static int	gesize_t(int n, int sign)
 {

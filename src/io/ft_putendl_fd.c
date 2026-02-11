@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:40:00 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/16 15:42:11 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:08:38 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/io.h"
+#include "../../include/hio.h"
 
 void	ft_putendl_fd(char *s, int fd)
 {

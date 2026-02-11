@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 17:55:57 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/16 16:32:03 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:01 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "../../include/memory.h"
+#include "../../include/hmemory.h"
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {

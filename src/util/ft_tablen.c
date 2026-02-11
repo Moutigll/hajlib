@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 22:56:22 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/12/07 22:56:32 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:52 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/utils.h"
+#include "../../include/hutils.h"
 
 int	ft_tablen(void **tab)
 {

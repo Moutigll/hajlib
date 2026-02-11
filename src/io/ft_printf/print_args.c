@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   print_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 17:38:36 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/22 20:42:11 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:08:03 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-#include "../../../include/io.h"
-#include "../../../include/string.h"
-#include "../../../include/printf.h"
+#include "../../../include/hio.h"
+#include "../../../include/hstring.h"
+#include "../../../include/hprintf.h"
 
 static void	print_maj_x(t_info *info, int i, va_list argu, t_flags flags)
 {

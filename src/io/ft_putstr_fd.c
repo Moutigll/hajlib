@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 15:30:29 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/22 20:43:52 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:08:38 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/io.h"
+#include "../../include/hio.h"
 
 int	ft_putstr_fd(char *s, int fd)
 {

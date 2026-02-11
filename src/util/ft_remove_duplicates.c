@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_remove_duplicates.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 22:44:35 by ele-lean          #+#    #+#             */
-/*   Updated: 2025/01/25 22:48:57 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:52 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/string.h"
-#include "../../include/utils.h"
+#include "../../include/hstring.h"
+#include "../../include/hutils.h"
 
 static int	is_duplicate_at_index(char *str, int i)
 {

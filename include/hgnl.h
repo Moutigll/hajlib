@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   hgnl.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:26:13 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/12/01 19:12:12 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:07:04 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "list.h"
+#include "hlist.h"
 
 #ifndef BUFFER_SIZE
 # define BUFFER_SIZE 4096

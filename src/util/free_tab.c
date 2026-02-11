@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   free_tab.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 06:12:40 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/12/08 06:12:51 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:52 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "../../include/utils.h"
+#include "../../include/hutils.h"
 
 void	free_tab(void **tab)
 {

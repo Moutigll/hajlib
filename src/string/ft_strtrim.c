@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/16 10:22:19 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/16 16:30:38 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:11:40 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/string.h"
+#include "../../include/hstring.h"
 
 
 static int	is_in_set(char c, const char *set)

@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   print_argsbis.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 18:30:51 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/22 20:42:08 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:08:07 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "../../../include/io.h"
-#include "../../../include/math.h"
-#include "../../../include/string.h"
-#include "../../../include/printf.h"
+#include "../../../include/hio.h"
+#include "../../../include/hmath.h"
+#include "../../../include/hstring.h"
+#include "../../../include/hprintf.h"
 
 char	*print_di_mode0(t_info *info, int tmp, t_flags flags)
 {

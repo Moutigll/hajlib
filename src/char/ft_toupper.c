@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 12:53:38 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/15 17:32:51 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:07:23 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/char.h"
+#include "../../include/hchar.h"
 
 int	ft_toupper(int c)
 {

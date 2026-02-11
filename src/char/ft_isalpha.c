@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:03:29 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/14 15:04:53 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:07:23 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/char.h"
+#include "../../include/hchar.h"
 
 int	ft_isalpha(int c)
 {

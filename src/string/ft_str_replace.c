@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_replace.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 21:33:34 by ele-lean          #+#    #+#             */
-/*   Updated: 2025/01/22 22:40:17 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:16 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/string.h"
+#include "../../include/hstring.h"
 
 
 char	*ft_str_replace(char *str, char *to_replace, char *replacement)

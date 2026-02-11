@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_addchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 21:03:18 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/12/17 21:06:30 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:52 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/memory.h"
-#include "../../include/string.h"
-#include "../../include/utils.h"
+#include "../../include/hmemory.h"
+#include "../../include/hstring.h"
+#include "../../include/hutils.h"
 
 char	*ft_addchar(char *str, char c)
 {

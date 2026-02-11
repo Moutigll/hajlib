@@ -50,7 +50,8 @@ MATH_SRCS	=	ft_atoi.c \
 				ft_atol.c \
 				ft_atoi_base.c \
 				ft_dtoa.c \
-				ft_itoa.c
+				ft_itoa.c \
+				ft_sqrtNewton.c
 
 # Memory functions
 MEMORY_SRCS	=	ft_bzero.c \

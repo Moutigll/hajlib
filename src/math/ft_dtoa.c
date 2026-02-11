@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_dtoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 08:46:19 by ele-lean          #+#    #+#             */
-/*   Updated: 2025/02/21 08:53:35 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:16 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include "../../include/string.h"
-#include "../../include/math.h"
+#include "../../include/hstring.h"
+#include "../../include/hmath.h"
 
 char	*ft_dtoa(double n, int precision)
 {

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:32:23 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/14 15:51:47 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:10:01 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdint.h>
 
-#include "../../include/memory.h"
+#include "../../include/hmemory.h"
 
 #define BYTE_SET(d, c, len)					\
 	do {										\

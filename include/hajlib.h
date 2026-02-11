@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   hajlib.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 14:47:48 by ele-lean          #+#    #+#             */
-/*   Updated: 2025/02/24 17:43:12 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:06:38 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef HAJLIB_H
 # define HAJLIB_H
 
-# include "char.h"
-# include "gnl.h"
-# include "io.h"
-# include "list.h"
-# include "math.h"
-# include "memory.h"
-# include "printf.h"
-# include "string.h"
-# include "utils.h"
+# include "hchar.h"
+# include "hgnl.h"
+# include "hio.h"
+# include "hlist.h"
+# include "hmath.h"
+# include "hmemory.h"
+# include "hprintf.h"
+# include "hstring.h"
+# include "hutils.h"
 
 #endif /* HAJLIB_H */

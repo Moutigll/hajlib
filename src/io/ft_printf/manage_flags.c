@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   manage_flags.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 17:38:40 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/22 20:42:16 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/02/11 17:07:54 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/char.h"
-#include "../../../include/io.h"
-#include "../../../include/math.h"
-#include "../../../include/printf.h"
+#include "../../../include/hchar.h"
+#include "../../../include/hio.h"
+#include "../../../include/hmath.h"
+#include "../../../include/hprintf.h"
 
 void	get_info2(t_flags *flags, t_info *info, int *i)
 {

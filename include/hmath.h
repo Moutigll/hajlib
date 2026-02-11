@@ -46,4 +46,11 @@ char	*ft_itoa(int n);
  */
 char	*ft_dtoa(double n, int precision);
 
+/**
+ * @brief Calculates the square root of a number using the Newton's method.
+ * @param x - number to calculate the square root of
+ * @return square root of x, or -1 if x is negative
+ */
+double	ft_sqrtNewton(double x);
+
 #endif	/* HAJLIB_MATH_H */
