@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   test_libft.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/libft.h"
+#include "../include/libft.h"
 #include <stdio.h>
 #include <fcntl.h>
 
@@ -348,6 +348,7 @@ void	test_ft_itoa(void)
 }
 char	fttoupper(unsigned int index, char c)
 {
+	(void)index;
 	if (c >= 'a' && c <= 'z')
 		return (c - 32);
 	return (c);
@@ -373,8 +374,10 @@ void	test_ft_strmapi(void)
 }
 #include <fcntl.h> // Pour O_RDWR
 #include <unistd.h>
+
 void	ftttoupper(unsigned int index, char *c)
 {
+	(void)index;
 	if (*c >= 'a' && *c <= 'z')
 	{
 		*c = *c - 32;

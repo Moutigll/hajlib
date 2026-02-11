@@ -6,9 +6,9 @@
 
 #include "../include/libft.h"
 
-#define ITER_SMALL	5
-#define ITER_LARGE	3
-#define ITER_BIG	1
+#define ITER_SMALL	10
+#define ITER_LARGE	6
+#define ITER_BIG	2
 #define NUM_SIZES	7
 
 #define COLOR_RED	"\x1b[31m"
@@ -59,25 +59,29 @@ fillBuff(unsigned char *buf, size_t size)
 static void
 calcStats(t_stats *stats)
 {
-	double	sum = 0;
-	double	sumSq = 0;
+	double	sum;
+	double	sumSq;
 	int		i;
+	int		count;
 
-	i = 0;
+	sum = 0.0;
+	sumSq = 0.0;
+	i = 1;
+	count = stats->iterations - 1;
 	while (i < stats->iterations)
 	{
 		sum += (double)stats->times[i];
 		i++;
 	}
-	stats->mean = sum / stats->iterations;
-	i = 0;
+	stats->mean = sum / count;
+	i = 1;
 	while (i < stats->iterations)
 	{
 		sumSq += ((double)stats->times[i] - stats->mean) *
 				 ((double)stats->times[i] - stats->mean);
 		i++;
 	}
-	stats->stddev = sqrt(sumSq / stats->iterations);
+	stats->stddev = sqrt(sumSq / count);
 }
 
 static void
@@ -105,6 +109,9 @@ benchmarkCopy(	const char	*name,
 
 	fillBuff(src, size);
 
+	/* Warm up the cache */
+	copyFunc(dst, src, size);
+
 	i = 0;
 	while (i < iterations)
 	{
@@ -112,17 +119,26 @@ benchmarkCopy(	const char	*name,
 		copyFunc(dst, src, size);
 		end = getTimeNs();
 		stats->times[i] = end - start;
-		printf("[%s] Iteration %d: %ld ns\n", name, i + 1, stats->times[i]);
+
+		if (i == 0)
+			printf("[%s] Iteration %d: %ld ns (ignored)\n",
+				name, i + 1, stats->times[i]);
+		else
+			printf("[%s] Iteration %d: %ld ns\n",
+				name, i + 1, stats->times[i]);
+
 		i++;
 	}
 
 	calcStats(stats);
+
 	printf("[%s] Size %8zu bytes: mean = %.0f ns, stddev = %.0f ns\n",
 		name, size, stats->mean, stats->stddev);
 
 	free(src);
 	free(dst);
 }
+
 
 int	main(void)
 {
