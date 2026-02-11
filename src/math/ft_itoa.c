@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
+
+#include "../../include/string.h"
+#include "../../include/math.h"
 
 static int	gesize_t(int n, int sign)
 {
@@ -29,7 +32,7 @@ static int	gesize_t(int n, int sign)
 	return (size);
 }
 
-char	*conver_num(int n, char *res, int size, int sign)
+static char	*conver_num(int n, char *res, int size, int sign)
 {
 	res[size] = '\0';
 	while (size > 0)

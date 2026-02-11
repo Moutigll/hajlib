@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/string.h"
 
 char	*ft_strcut(char *str, char c)
 {

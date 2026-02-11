@@ -10,84 +10,44 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/string.h"
 
-static size_t	count_occurrences(char *str, char *to_replace)
-{
-	size_t	count;
-	char	*current;
-	int		to_replace_len;
-
-	count = 0;
-	to_replace_len = ft_strlen(to_replace);
-	if (str && to_replace && *to_replace)
-	{
-		current = str;
-		while (current)
-		{
-			current = ft_strstr(current, to_replace);
-			if (current)
-			{
-				count++;
-				current += to_replace_len;
-			}
-		}
-	}
-	return (count);
-}
-
-static size_t	calculate_new_str_len(char *str,
-	char *to_replace, char *replacement)
-{
-	size_t	to_replace_len;
-	size_t	replacement_len;
-	size_t	new_str_len;
-
-	to_replace_len = ft_strlen(to_replace);
-	replacement_len = ft_strlen(replacement);
-	new_str_len = ft_strlen(str) + count_occurrences(str, to_replace)
-		* (replacement_len - to_replace_len) + 1;
-	return (new_str_len);
-}
-
-static char	*replace_occurrences(char *str,
-	char *to_replace, char *replacement, char *new_str_pos)
-{
-	char	*current;
-	char	*match;
-	size_t	to_replace_len;
-
-	to_replace_len = ft_strlen(to_replace);
-	current = str;
-	while (*current)
-	{
-		match = ft_strstr(current, to_replace);
-		if (match == current)
-		{
-			ft_memcpy(new_str_pos, replacement, ft_strlen(replacement));
-			new_str_pos += ft_strlen(replacement);
-			current += to_replace_len;
-		}
-		else
-		{
-			*new_str_pos++ = *current++;
-		}
-	}
-	*new_str_pos = '\0';
-	return (new_str_pos);
-}
 
 char	*ft_str_replace(char *str, char *to_replace, char *replacement)
 {
-	char	*new_str_pos;
-	size_t	new_str_len;
+	char	**parts;
+	char	*result;
+	char	*tmp;
+	int		i;
 
 	if (!str || !to_replace || !replacement)
 		return (NULL);
-	new_str_len = calculate_new_str_len(str, to_replace, replacement);
-	new_str_pos = malloc(new_str_len);
-	if (!new_str_pos)
+
+	parts = ft_split(str, to_replace[0]);
+	if (!parts)
 		return (NULL);
-	replace_occurrences(str, to_replace, replacement, new_str_pos);
-	return (new_str_pos);
+
+	result = ft_strdup(parts[0]);
+	if (!result)
+	{
+		free(parts);
+		return (NULL);
+	}
+
+	i = 1;
+	while (parts[i])
+	{
+		tmp = ft_strjoin(result, replacement);
+		free(result);
+		result = ft_strjoin(tmp, parts[i]);
+		free(tmp);
+		i++;
+	}
+
+	i = 0;
+	while (parts[i])
+		free(parts[i++]);
+	free(parts);
+
+	return (result);
 }

@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/string.h"
+#include "../../include/utils.h"
 
-int	is_duplicate_at_index(char *str, int i)
+static int	is_duplicate_at_index(char *str, int i)
 {
 	int	j;
 

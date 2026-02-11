@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <limits.h>
+
+#include "../../include/math.h"
 
 int	get_sign(const char **str)
 {

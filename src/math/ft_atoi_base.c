@@ -10,9 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/string.h"
+#include "../../include/math.h"
 
-int	ft_is_in_base(char c, char *base)
+static int	ft_is_in_base(char c, char *base)
 {
 	int	i;
 

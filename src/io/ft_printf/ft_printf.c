@@ -10,8 +10,8 @@
 /*																			*/
 /* ************************************************************************** */
 
-#include "printf.h"
-#include <stdarg.h>
+#include "../../../include/io.h"
+#include "../../../include/printf.h"
 
 int	search_c(char c, const char *string)
 {
@@ -53,7 +53,7 @@ void	init_flags(t_flags *flags)
 	flags->precision = 1000;
 }
 
-void manage_flags2(t_info *info, int *i, t_flags *flags)
+static void manage_flags2(t_info *info, int *i, t_flags *flags)
 {
 	va_list args_copy;
 

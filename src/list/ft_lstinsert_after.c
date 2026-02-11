@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/libft.h"
+#include "../../include/list.h"
 
 void	ft_lstinsert_after(t_list *current, t_list *new_node)
 {

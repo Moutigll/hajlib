@@ -10,13 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include <unistd.h>
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 4096
-#endif
+#include "../../../include/gnl.h"
 
-int	find_newline(t_list *list, t_newline *line)
+static int	findNl(t_list *list, t_newline *line)
 {
 	int	i;
 
@@ -28,9 +26,9 @@ int	find_newline(t_list *list, t_newline *line)
 	{
 		i = 0;
 		line->buffers++;
-		while (list->buffer[i] && i < BUFFER_SIZE)
+		while (CONTENT(list)[i] && i < BUFFER_SIZE)
 		{
-			if (list->buffer[i] == '\n')
+			if (CONTENT(list)[i] == '\n')
 				return (1);
 			i++;
 			line->size++;
@@ -40,12 +38,12 @@ int	find_newline(t_list *list, t_newline *line)
 	return (0);
 }
 
-void	create_list(t_list **list, int fd, t_newline *line)
+static void	createList(t_list **list, int fd, t_newline *line)
 {
 	char	*buffer;
 	int		size;
 
-	while (!find_newline(list[fd], line))
+	while (!findNl(list[fd], line))
 	{
 		buffer = malloc(BUFFER_SIZE + 1);
 		if (!buffer)
@@ -54,11 +52,11 @@ void	create_list(t_list **list, int fd, t_newline *line)
 		if (!size || size == -1)
 			return (free(buffer));
 		buffer[size] = '\0';
-		ft_lstaddd_back(list, buffer, fd);
+		gnlLstaddBack(list, buffer, fd);
 	}
 }
 
-char	*extract_line(t_list *list, t_newline *line)
+static char	*extractLine(t_list *list, t_newline *line)
 {
 	char	*char_line;
 	int		i;
@@ -71,15 +69,15 @@ char	*extract_line(t_list *list, t_newline *line)
 	while (list)
 	{
 		i = 0;
-		while (list->buffer[i])
+		while (CONTENT(list)[i])
 		{
-			if (list->buffer[i] == '\n')
+			if (CONTENT(list)[i] == '\n')
 			{
 				char_line[k++] = '\n';
 				char_line[k] = '\0';
 				return (char_line);
 			}
-			char_line[k++] = list->buffer[i++];
+			char_line[k++] = CONTENT(list)[i++];
 		}
 		list = list->next;
 	}
@@ -87,7 +85,7 @@ char	*extract_line(t_list *list, t_newline *line)
 	return (char_line);
 }
 
-void	clean_list(t_list **list)
+static void	cleanList(t_list **list)
 {
 	t_list	*last_node;
 	t_list	*clean_node;
@@ -102,17 +100,17 @@ void	clean_list(t_list **list)
 	last_node = ft_lstlast(*list);
 	i = 0;
 	k = 0;
-	while (last_node->buffer[i] && last_node->buffer[i] != '\n')
+	while (CONTENT(last_node)[i] && CONTENT(last_node)[i] != '\n')
 		i++;
-	while (last_node->buffer[i] && last_node->buffer[++i])
-		buf[k++] = last_node->buffer[i];
+	while (CONTENT(last_node)[i] && CONTENT(last_node)[++i])
+		buf[k++] = CONTENT(last_node)[i];
 	buf[k] = '\0';
-	clean_node->buffer = buf;
+	clean_node->content = buf;
 	clean_node->next = NULL;
-	freegnl_list(list, clean_node, buf);
+	freeGnlList(list, clean_node, buf);
 }
 
-char	*get_next_line(int fd)
+char	*getNextLine(int fd)
 {
 	static t_list	*list[4096];
 	char			*next_line;
@@ -123,14 +121,14 @@ char	*get_next_line(int fd)
 	line = malloc(sizeof(t_newline));
 	if (!line)
 		return (NULL);
-	create_list(list, fd, line);
+	createList(list, fd, line);
 	if (!list[fd])
 	{
 		free(line);
 		return (NULL);
 	}
-	next_line = extract_line(list[fd], line);
-	clean_list(&list[fd]);
+	next_line = extractLine(list[fd], line);
+	cleanList(&list[fd]);
 	free(line);
 	return (next_line);
 }

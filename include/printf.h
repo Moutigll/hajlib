@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#ifndef HAJLIB_PRINTF_H
+# define HAJLIB_PRINTF_H
 
 #include <stdarg.h>
-#include "libft.h"
+#include <stddef.h>
 
 typedef unsigned long long	t_addr;
 typedef struct s_info
@@ -48,3 +49,5 @@ void	print_di(t_info *info, int i, va_list argu, t_flags flags);
 t_flags	manage_flags(t_info *info, int *i);
 int		fspace(int size, char c);
 void	init_flags(t_flags *flags);
+
+#endif /* HAJLIB_PRINTF_H */

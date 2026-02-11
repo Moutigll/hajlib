@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/math.h"
 
 int	ft_atoi(const char *str)
 {

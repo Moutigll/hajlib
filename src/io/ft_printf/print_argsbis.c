@@ -10,7 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include <stdlib.h>
+
+#include "../../../include/io.h"
+#include "../../../include/math.h"
+#include "../../../include/string.h"
+#include "../../../include/printf.h"
 
 char	*print_di_mode0(t_info *info, int tmp, t_flags flags)
 {
@@ -40,7 +45,7 @@ char	*print_di_mode0(t_info *info, int tmp, t_flags flags)
 	return (str_tmp);
 }
 
-char	*print_di_mode1(t_info *info, t_flags flags)
+static char	*print_di_mode1(t_info *info, t_flags flags)
 {
 	int		tmp;
 	char	*str_tmp;

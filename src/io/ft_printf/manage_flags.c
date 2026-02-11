@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "../../../include/char.h"
+#include "../../../include/io.h"
+#include "../../../include/math.h"
+#include "../../../include/printf.h"
 
 void	get_info2(t_flags *flags, t_info *info, int *i)
 {

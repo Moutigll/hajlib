@@ -23,8 +23,7 @@ CHAR_SRCS	=	ft_isalnum.c \
 				ft_toupper.c
 
 # String functions
-STRING_SRCS	=	ft_putchar_fd.c \
-				ft_split.c \
+STRING_SRCS	=	ft_split.c \
 				ft_strchr.c \
 				ft_strcmp.c \
 				ft_strcut.c \
@@ -74,16 +73,18 @@ LIST_SRCS	=	free_list.c \
 				ft_lstlast.c \
 				ft_lstmap.c \
 				ft_lstnew.c \
-				ft_lstsize.c
+				ft_lstsize.c \
+				ft_removenode.c
 
 # IO functions
 IO_SRCS		=	ft_getnline.c \
+				ft_putchar_fd.c \
 				ft_putendl_fd.c \
 				ft_putnbr_fd.c \
 				ft_putstr_fd.c
 
-GNL_SRCS	=	ft_get_next_line.c \
-				ft_get_next_line_utils.c
+GNL_SRCS	=	gnl.c \
+				gnlUtils.c
 
 PRINTF_SRCS	=	ft_printf.c \
 				utils.c \
@@ -97,7 +98,6 @@ UTIL_SRCS	=	free_tab.c \
 				ft_is_empty_string.c \
 				ft_realloctab.c \
 				ft_remove_duplicates.c \
-				ft_removenode.c \
 				ft_tablen.c
 
 # Convert to full paths

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/utils.h"
 
 int	ft_is_empty_string(char *str)
 {

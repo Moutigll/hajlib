@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include <stdlib.h>
+
+#include "../../../include/io.h"
+#include "../../../include/printf.h"
 
 int	paddr(unsigned long long addr, int mode)
 {

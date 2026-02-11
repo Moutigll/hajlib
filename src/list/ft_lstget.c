@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/list.h"
 
 t_list	*ft_lstget(t_list *list, int index)
 {

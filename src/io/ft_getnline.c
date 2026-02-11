@@ -10,7 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+#include "../../include/io.h"
+#include "../../include/gnl.h"
 
 int	ft_getnline(char *file)
 {
@@ -21,13 +26,13 @@ int	ft_getnline(char *file)
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (-1);
-	line = get_next_line(fd);
+	line = getNextLine(fd);
 	n = 0;
 	while (line)
 	{
 		n++;
 		free(line);
-		line = get_next_line(fd);
+		line = getNextLine(fd);
 	}
 	close(fd);
 	return (n);

@@ -10,9 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include <unistd.h>
 
-void	print_maj_x(t_info *info, int i, va_list argu, t_flags flags)
+#include "../../../include/io.h"
+#include "../../../include/string.h"
+#include "../../../include/printf.h"
+
+static void	print_maj_x(t_info *info, int i, va_list argu, t_flags flags)
 {
 	int	tmp;
 
@@ -40,7 +44,7 @@ void	print_maj_x(t_info *info, int i, va_list argu, t_flags flags)
 	}
 }
 
-void	print_min_x(t_info *info, int i, va_list argu, t_flags flags)
+static void	print_min_x(t_info *info, int i, va_list argu, t_flags flags)
 {
 	int		tmp;
 
@@ -68,7 +72,7 @@ void	print_min_x(t_info *info, int i, va_list argu, t_flags flags)
 	}
 }
 
-void	print_string(t_info *info, int i, va_list argu, t_flags flags)
+static void	print_string(t_info *info, int i, va_list argu, t_flags flags)
 {
 	char	*strr;
 
@@ -94,7 +98,7 @@ void	print_string(t_info *info, int i, va_list argu, t_flags flags)
 	}
 }
 
-void	print_c(t_info *info, int i, va_list argu, t_flags flags)
+static void	print_c(t_info *info, int i, va_list argu, t_flags flags)
 {
 	print_di(info, i, argu, flags);
 	print_unsigned(info, i, argu, flags);

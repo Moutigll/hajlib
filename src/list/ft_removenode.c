@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/list.h"
 
-void	rm_node(t_list *current,
+static void	rm_node(t_list *current,
 	t_list *prev, t_list **head, void (*del)(void *))
 {
 	t_list	*temp;

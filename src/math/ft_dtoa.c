@@ -10,7 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
+
+#include "../../include/string.h"
+#include "../../include/math.h"
 
 char	*ft_dtoa(double n, int precision)
 {

@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stdlib.h>
+
+#include "../../include/utils.h"
 
 void	**ft_realloctab(void **array, size_t old_size, size_t new_size)
 {
