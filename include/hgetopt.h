@@ -95,7 +95,7 @@ void	ftGetoptInit(tFtGetopt *state, int argc, char **argv);
  * @param longOpts - array of valid long options
  * @return the option character or value, or a negative status code
  */
-tFtGetoptStatus	ftGetoptLong(
+tFtGetoptStatus	ft_getoptLong(
 		tFtGetopt			*state,
 		const char			*shortOpts,
 		const tFtLongOption	*longOpts);
