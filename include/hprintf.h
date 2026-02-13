@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:53:40 by ele-lean          #+#    #+#             */
-/*   Updated: 2026/02/13 14:56:08 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/13 19:36:44 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int		ft_vsnprintf(char *dst,
  * Parses the format string and dispatches each
  * format specification to the appropriate handler.
  */
-int		ft_printfEngine(t_printfBuffer *buffer,
+int		printfEngine(t_printfBuffer *buffer,
 			const char *format,
 			va_list ap);
 
@@ -144,33 +144,33 @@ int		ft_printfEngine(t_printfBuffer *buffer,
 /**
  * @brief Initializes a buffer for file descriptor output.
  */
-void	ft_bufferInitFd(t_printfBuffer *buffer,
+void	bufferInitFd(t_printfBuffer *buffer,
 			int fd,
 			int mode);
 
 /**
  * @brief Initializes a buffer for memory output.
  */
-void	ft_bufferInitMemory(t_printfBuffer *buffer,
+void	bufferInitMemory(t_printfBuffer *buffer,
 			char *dst,
 			size_t size);
 
 /**
  * @brief Flushes the internal buffer to its output target.
  */
-int		ft_bufferFlush(t_printfBuffer *buffer);
+int		bufferFlush(t_printfBuffer *buffer);
 
 /**
  * @brief Writes raw data into the buffer.
  */
-int		ft_bufferWrite(t_printfBuffer *buffer,
+int		bufferWrite(t_printfBuffer *buffer,
 			const char *data,
 			size_t len);
 
 /**
  * @brief Writes a single character into the buffer.
  */
-int		ft_bufferPutChar(t_printfBuffer *buffer,
+int		bufferPutChar(t_printfBuffer *buffer,
 			char c);
 
 /* ============================ PARSING ============================ */
