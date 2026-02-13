@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:34:14 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/11 18:51:17 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/13 13:43:33 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,7 +268,7 @@ handleLong(tFtGetopt *st, const tFtLongOption *opts)
 }
 
 void
-ftGetoptInit(tFtGetopt *st, int argc, char **argv)
+ft_getoptInit(tFtGetopt *st, int argc, char **argv)
 {
 	st->argc = argc;
 	st->argv = argv;
