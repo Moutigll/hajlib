@@ -87,11 +87,9 @@ IO_SRCS		=	ft_getnline.c \
 GNL_SRCS	=	gnl.c \
 				gnlUtils.c
 
-PRINTF_SRCS	=	ft_printf.c \
-				utils.c \
-				manage_flags.c \
-				print_args.c \
-				print_argsbis.c
+PRINTF_SRCS	=	printf.c \
+				buffer.c \
+				engine.c
 
 # Util functions
 UTIL_SRCS	=	free_tab.c \
