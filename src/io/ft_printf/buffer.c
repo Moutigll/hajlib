@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 19:00:07 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/13 19:35:49 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/15 20:20:30 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,23 +79,5 @@ bufferPutChar(t_printfBuffer *buffer, char c)
 		return (bufferFlush(buffer));
 	if (buffer->index >= FT_PRINTF_BUFFER_SIZE)
 		return (bufferFlush(buffer));
-	return (0);
-}
-
-	
-int
-bufferWrite(t_printfBuffer	*buffer,
-			const char		*data,
-			size_t			len)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (bufferPutChar(buffer, data[i]) < 0)
-			return (-1);
-		i++;
-	}
 	return (0);
 }
