@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 17:25:45 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/15 22:33:57 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/15 23:41:24 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ emitFormatted(t_printfBuffer *buffer,
 	if (spec->truncate && spec->width > 0
 		&& (size_t)spec->width < finalLen)
 	{
-		finalLen = (size_t)spec->width;
+		finalLen = (size_t)spec->width - 1; /* reserve space for '.' */
 		truncated = 1;
 	}
 
@@ -114,8 +114,6 @@ emitFormatted(t_printfBuffer *buffer,
 	/* replace last char with '.' if truncated */
 	if (truncated && finalLen > 0)
 	{
-		buffer->totalWritten--;
-		buffer->externalIndex--;
 		if (bufferPutChar(buffer, '.') < 0)
 			return (-1);
 	}
@@ -147,6 +145,8 @@ dispatchFormat(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
 		if (!s)
 			s = "(null)";
 		len = ft_strlen(s);
+		if (spec->hasPrecision && spec->precision < (int)len)
+			len = spec->precision;
 		return (emitFormatted(buffer, spec, s, len));
 	}
 	if (spec->specifier == 'd' || spec->specifier == 'i')

@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 19:00:07 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/15 20:20:30 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/15 23:43:23 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,16 @@ bufferFlush(t_printfBuffer *buffer)
 		return (0);
 	if (buffer->outputType == OUTPUT_FD)
 	{
-		written = write(buffer->fd,
-				buffer->internalBuffer,
-				buffer->index);
-		if (written < 0)
-			return (-1);
+		written = 0;
+		while (written < (ssize_t)buffer->index) /* handle partial writes */
+		{
+			ssize_t ret = write(buffer->fd,
+								buffer->internalBuffer + written,
+								buffer->index - written);
+			if (ret < 0)
+				return (-1);
+			written += ret;
+		}
 	}
 	buffer->index = 0;
 	return (0);

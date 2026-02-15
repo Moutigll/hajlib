@@ -2,6 +2,7 @@
 # define HAJLIB_MATH_H
 
 #include <stddef.h>
+#include <stdint.h>
 
 /**
  * @brief Converts a string representing a number in a given base to an integer.
@@ -77,7 +78,6 @@ char	*ft_utoa(unsigned int n);
  * @param upper - if non-zero, use uppercase letters for bases > 10
  * @return string representation of the unsigned integer in the specified base
  */
-char	*ft_utoa_base(unsigned int n, unsigned int base, int upper);
-
+char	*ft_utoa_base(uintptr_t value, int base, int upper);
 
 #endif	/* HAJLIB_MATH_H */

@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:53:40 by ele-lean          #+#    #+#             */
-/*   Updated: 2026/02/15 21:50:19 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/15 23:37:48 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,11 @@ typedef struct s_printfBuffer
  *  - %s: string (null pointer prints "(null)")
  *  - %d/%i: signed integer with sign-aware zero padding
  *  - %%: literal '%'
+ *  - %u: unsigned integer
+ *  - %x/%X: unsigned hexadecimal (lower/upper case)
+ *  - %p: pointer (prints "0x" followed by hex address, or "(nil)" if null)
+ *  - %f: floating-point number (default precision 6)
+ *
  * Supports width, precision, left-align (-), center-align (_), zero-pad (0),
  * repeat (*N), and truncate (!).
  *

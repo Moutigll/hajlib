@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:42:29 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/15 23:01:31 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/15 23:51:19 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,38 +14,95 @@
 #include <stdlib.h>
 
 #include "../../../include/hmath.h"
+#include "../../../include/hmemory.h"
 #include "../../../include/hstring.h"
 
 #include "../../../include/hprintf.h"
+
+static char *
+applyNumberPrecision(t_formatSpec *spec, char *digits)
+{
+	size_t	len;
+	size_t	zeros;
+	char	*newstr;
+	size_t	i;
+
+	if (!spec->hasPrecision)
+		return (digits);
+
+	spec->zeroPad = 0;
+
+	len = ft_strlen(digits);
+
+	/* 0 value with precision 0 => empty string */
+	if (spec->precision == 0 && len == 1 && digits[0] == '0')
+	{
+		digits[0] = '\0';
+		return (digits);
+	}
+
+	if ((size_t)spec->precision <= len)
+		return (digits);
+
+	zeros = spec->precision - len;
+
+	newstr = malloc(spec->precision + 1);
+	if (!newstr)
+	{
+		free(digits);
+		return (NULL);
+	}
+
+	i = 0;
+	while (i < zeros)
+		newstr[i++] = '0';
+
+	ft_memcpy(newstr + zeros, digits, len + 1);
+	free(digits);
+	return (newstr);
+}
 
 int
 handleInt(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
 {
 	char	*s;
+	char	*digits;
 	int		val;
 	int		ret;
+	int		isNeg;
 
 	val = va_arg(ap, int);
+	isNeg = (val < 0);
+
 	s = ft_itoa(val);
 	if (!s)
 		return (-1);
 
-	if (s[0] == '-' && spec->zeroPad && !spec->leftAlign && !spec->centerAlign) /* Handle negative numbers with zero padding */
-	{
-		/* write sign */
-		if (bufferPutChar(buffer, '-') < 0)
-		{
-			free(s);
-			return (-1);
-		}
-		/* emit digits without sign, and width decreased by 1 for sign */
-		ret = emitFormatted(buffer, spec, s + 1, ft_strlen(s + 1));
-		free(s);
-		return (ret);
-	}
-	/* default: print whole string (with sign) */
-	ret = emitFormatted(buffer, spec, s, ft_strlen(s));
+	if (isNeg)
+		digits = ft_strdup(s + 1);
+	else
+		digits = ft_strdup(s);
+
 	free(s);
+	if (!digits)
+		return (-1);
+
+	digits = applyNumberPrecision(spec, digits);
+	if (!digits)
+		return (-1);
+
+	if (isNeg)
+	{
+		char *tmp = ft_strjoin("-", digits);
+		spec->width--; /* account for sign in width */
+		free(digits);
+		digits = tmp;
+		if (!digits)
+			return (-1);
+	}
+
+	ret = emitFormatted(buffer, spec, digits, ft_strlen(digits));
+	free(digits);
 	return (ret);
 }
 
@@ -60,11 +117,15 @@ handleUnsigned(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
 	s = ft_utoa(val);
 	if (!s)
 		return (-1);
+
+	s = applyNumberPrecision(spec, s);
+	if (!s)
+		return (-1);
+
 	ret = emitFormatted(buffer, spec, s, ft_strlen(s));
 	free(s);
 	return (ret);
 }
-
 
 int
 handleHex(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
@@ -79,6 +140,11 @@ handleHex(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
 	s = ft_utoa_base(val, 16, upper);
 	if (!s)
 		return (-1);
+
+	s = applyNumberPrecision(spec, s);
+	if (!s)
+		return (-1);
+
 	ret = emitFormatted(buffer, spec, s, ft_strlen(s));
 	free(s);
 	return (ret);
@@ -93,7 +159,11 @@ handlePointer(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
 	int		ret;
 
 	ptr = va_arg(ap, void *);
-	addr = ft_utoa_base((unsigned long)ptr, 16, 0);
+
+	if (!ptr)
+		return (emitFormatted(buffer, spec, "(nil)", 5));
+
+	addr = ft_utoa_base((uintptr_t)ptr, 16, 0);
 	if (!addr)
 		return (-1);
 	full = ft_strjoin("0x", addr);
@@ -126,6 +196,7 @@ handleFloat(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
 			free(s);
 			return (-1);
 		}
+		spec->width--; /* account for sign in width */
 		/* emit digits without sign, and width decreased by 1 for sign */
 		ret = emitFormatted(buffer, spec, s + 1, ft_strlen(s + 1));
 		free(s);
@@ -134,6 +205,5 @@ handleFloat(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
 	/* default: print whole string (with sign) */
 	ret = emitFormatted(buffer, spec, s, ft_strlen(s));
 	free(s);
-	return (ret);
 	return (ret);
 }
