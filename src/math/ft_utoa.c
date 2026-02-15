@@ -1,45 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
+/*   ft_utoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 20:49:22 by ele-lean          #+#    #+#             */
-/*   Updated: 2026/02/15 22:57:49 by moutig           ###   ########.fr       */
+/*   Created: 2026/02/15 21:36:56 by moutig            #+#    #+#             */
+/*   Updated: 2026/02/15 21:40:32 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/hstring.h"
+#include <stdlib.h>
 
-char	*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2)
+#include "../../include/hmath.h"
+
+char	*ft_utoa(unsigned int n)
 {
 	char	*str;
+	size_t	len;
 
-	if (!s1 || !s2)
-	{
-		if (free_s1 && s1)
-		{
-			free(s1);
-			s1 = NULL;
-		}
-		if (free_s2 && s2)
-		{
-			free(s2);
-			s2 = NULL;
-		}
+	len = ft_numlen(n, 10);
+	str = (char *)malloc(len + 1);
+	if (!str)
 		return (NULL);
-	}
-	str = ft_strjoin(s1, s2);
-	if (free_s1)
+	str[len] = '\0';
+	while (len > 0)
 	{
-		free(s1);
-		s1 = NULL;
-	}
-	if (free_s2)
-	{
-		free(s2);
-		s2 = NULL;
+		str[--len] = '0' + (n % 10);
+		n /= 10;
 	}
 	return (str);
 }

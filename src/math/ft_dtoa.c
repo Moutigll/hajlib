@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 08:46:19 by ele-lean          #+#    #+#             */
-/*   Updated: 2026/02/11 17:10:16 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/15 22:58:15 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,66 @@
 #include "../../include/hstring.h"
 #include "../../include/hmath.h"
 
-char	*ft_dtoa(double n, int precision)
+static char	*fracToStr(long long frac_val, int precision)
 {
-	char	*str;
-	char	*int_part;
 	char	*frac_part;
 	int		i;
-	int		frac_n;
 
-	if (precision < 0)
-		precision = 2;
-	frac_n = (int)((n - (int)n) * 10 * precision);
-	if (frac_n < 0)
-		frac_n *= -1;
-	int_part = ft_itoa((int)n);
-	frac_part = malloc(precision + 2);
+	frac_part = malloc(precision + 2); /* '.' + '\0' */
 	if (!frac_part)
 		return (NULL);
+
 	frac_part[0] = '.';
-	i = 1;
-	while (precision--)
+	i = precision - 1;
+	while (i >= 0)
 	{
-		frac_part[i++] = (frac_n % 10) + '0';
-		frac_n /= 10;
+		frac_part[i + 1] = '0' + (frac_val % 10);
+		frac_val /= 10;
+		i--;
 	}
-	frac_part[i] = '\0';
-	str = ft_strjoin_free(int_part, frac_part, 1, 1);
-	return (str);
+	frac_part[precision + 1] = '\0';
+	return (frac_part);
+}
+
+char	*ft_dtoa(double n, int precision)
+{
+	char			*frac_part;
+	long long		frac_val;
+	long long		int_val;
+	long long		multiplier;
+	int				i;
+
+	if (precision < 0)
+		precision = 6;
+
+	int_val = (long long)n;
+	if (n < 0)
+		n = -n;
+
+	multiplier = 1;
+	i = 0;
+	while (i < precision)
+	{
+		multiplier *= 10;
+		i++;
+	}
+
+	frac_val = (long long)((n - (long long)n) * multiplier + 0.5);
+	if (frac_val >= multiplier)
+	{
+		if (int_val >= 0)
+			int_val += 1;
+		else
+			int_val -= 1;
+		frac_val -= multiplier;
+	}
+
+	if (precision == 0)
+		return (ft_itoa((int)int_val));
+
+	frac_part = fracToStr(frac_val, precision);
+	if (!frac_part)
+		return (NULL);
+
+	return (ft_strjoin_free(ft_itoa((int)int_val), frac_part, 1, 1));
 }

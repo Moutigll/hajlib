@@ -1,6 +1,8 @@
 #ifndef HAJLIB_MATH_H
 # define HAJLIB_MATH_H
 
+#include <stddef.h>
+
 /**
  * @brief Converts a string representing a number in a given base to an integer.
  * @param str - string to convert
@@ -47,10 +49,35 @@ char	*ft_itoa(int n);
 char	*ft_dtoa(double n, int precision);
 
 /**
+* @brief Calculates the number of digits needed to represent an unsigned integer in a given base.
+* @param n - unsigned integer to calculate length for
+* @param base - base to use for calculation
+* @return number of digits needed to represent n in the given base
+*/
+size_t	ft_numlen(unsigned int n, unsigned int base);
+
+/**
  * @brief Calculates the square root of a number using the Newton's method.
  * @param x - number to calculate the square root of
  * @return square root of x, or -1 if x is negative
  */
 double	ft_sqrtNewton(double x);
+
+/**
+ * @brief Converts an unsigned integer to a string.
+ * @param n - unsigned integer to convert
+ * @return string representation of the unsigned integer
+ */
+char	*ft_utoa(unsigned int n);
+
+/**
+ * @brief Converts an unsigned integer to a string in a specified base.
+ * @param n - unsigned integer to convert
+ * @param base - base to convert to (e.g., 10 for decimal, 16 for hexadecimal)
+ * @param upper - if non-zero, use uppercase letters for bases > 10
+ * @return string representation of the unsigned integer in the specified base
+ */
+char	*ft_utoa_base(unsigned int n, unsigned int base, int upper);
+
 
 #endif	/* HAJLIB_MATH_H */
