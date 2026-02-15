@@ -51,7 +51,10 @@ MATH_SRCS	=	ft_atoi.c \
 				ft_atoi_base.c \
 				ft_dtoa.c \
 				ft_itoa.c \
-				ft_sqrtNewton.c
+				ft_numlen.c \
+				ft_sqrtNewton.c \
+				ft_utoa_base.c \
+				ft_utoa.c
 
 # Memory functions
 MEMORY_SRCS	=	ft_bzero.c \
@@ -87,11 +90,12 @@ IO_SRCS		=	ft_getnline.c \
 GNL_SRCS	=	gnl.c \
 				gnlUtils.c
 
-PRINTF_SRCS	=	ft_printf.c \
-				utils.c \
-				manage_flags.c \
-				print_args.c \
-				print_argsbis.c
+PRINTF_SRCS	=	printf.c \
+				buffer.c \
+				dispatch.c \
+				engine.c \
+				parsing.c \
+				handlers.c
 
 # Util functions
 UTIL_SRCS	=	free_tab.c \

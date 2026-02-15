@@ -84,7 +84,7 @@ typedef struct sFtGetopt
  * @param argc - argument count
  * @param argv - argument vector
  */
-void	ftGetoptInit(tFtGetopt *state, int argc, char **argv);
+void	ft_getoptInit(tFtGetopt *state, int argc, char **argv);
 
 /**
  * @brief Parse the next option from the argument vector

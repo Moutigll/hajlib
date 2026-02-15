@@ -1,45 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
+/*   ft_numlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/22 20:49:22 by ele-lean          #+#    #+#             */
-/*   Updated: 2026/02/15 22:57:49 by moutig           ###   ########.fr       */
+/*   Created: 2026/02/15 21:38:42 by moutig            #+#    #+#             */
+/*   Updated: 2026/02/15 21:40:13 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/hstring.h"
+#include "../../include/hmath.h"
 
-char	*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2)
+size_t	ft_numlen(unsigned int n, unsigned int base)
 {
-	char	*str;
+	size_t	len;
 
-	if (!s1 || !s2)
+	if (base < 2)
+		return (0);
+	len = 1;
+	while (n >= base)
 	{
-		if (free_s1 && s1)
-		{
-			free(s1);
-			s1 = NULL;
-		}
-		if (free_s2 && s2)
-		{
-			free(s2);
-			s2 = NULL;
-		}
-		return (NULL);
+		n /= base;
+		len++;
 	}
-	str = ft_strjoin(s1, s2);
-	if (free_s1)
-	{
-		free(s1);
-		s1 = NULL;
-	}
-	if (free_s2)
-	{
-		free(s2);
-		s2 = NULL;
-	}
-	return (str);
+	return (len);
 }
