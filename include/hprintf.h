@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:53:40 by ele-lean          #+#    #+#             */
-/*   Updated: 2026/02/13 19:36:44 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/15 20:20:43 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,27 @@
  * flags, width, precision, length modifier, specifier,
  * and custom extension parameters.
  */
+
 typedef struct s_formatSpec
 {
-	char	flags[6];
-	int		width;
-	int		precision;
-	char	length[3];
-	char	spec;
+	/* flags */
+	int		leftAlign;
+	int		centerAlign;
+	int		zeroPad;
 
-	char	padChar;
-	char	align;
+	/* width */
+	int		width;
+
+	/* precision */
+	int		precision;
+	int		hasPrecision;
+
+	/* conversion */
+	char	specifier;
+
+	int		repeat;
 	int		truncate;
+
 }	t_formatSpec;
 
 /* ============================ OUTPUT TARGET ============================ */
@@ -90,196 +100,149 @@ typedef struct s_printfBuffer
 /* ============================ PUBLIC API ============================ */
 
 /**
- * @brief Prints formatted output to stdout.
+ * @brief A printf-like function that formats and prints data to standard output.
+ * You can use the following format specifiers:
+ *  - %c: character
+ *  - %s: string (null pointer prints "(null)")
+ *  - %d/%i: signed integer with sign-aware zero padding
+ *  - %%: literal '%'
+ * Supports width, precision, left-align (-), center-align (_), zero-pad (0),
+ * repeat (*N), and truncate (!).
+ *
+ * It must be ordered as follows: %[flags][width][.precision][!][*repeat]specifier
+ * @param format - the format string
+ * @param ... - variadic arguments corresponding to format specifiers
+ * @return the total number of characters printed (not including null terminator)
  */
 int		ft_printf(const char *format, ...);
 
 /**
- * @brief Prints formatted output to a file descriptor.
+ * @brief A printf-like function that formats and prints data to a specified file descriptor.
+ * Same format specifiers and features as ft_printf.
+ * @param fd - file descriptor to write to
+ * @param format - the format string
+ * @param ... - variadic arguments corresponding to format specifiers
+ * @return the total number of characters printed (not including null terminator)
  */
 int		ft_dprintf(int fd, const char *format, ...);
 
 /**
- * @brief vprintf equivalent using va_list.
+ * @brief A printf-like function that formats and prints data to standard output using a va_list.
+ * Same format specifiers and features as ft_printf.
+ * @param format - the format string
+ * @param ap - va_list of arguments corresponding to format specifiers
+ * @return the total number of characters printed (not including null terminator)
  */
 int		ft_vprintf(const char *format, va_list ap);
 
 /**
- * @brief vdprintf equivalent using va_list.
+ * @brief A printf-like function that formats and prints data to a specified file descriptor using a va_list.
+ * Same format specifiers and features as ft_printf.
+ * @param fd - file descriptor to write to
+ * @param format - the format string
+ * @param ap - va_list of arguments corresponding to format specifiers
+ * @return the total number of characters printed (not including null terminator)
  */
 int		ft_vdprintf(int fd, const char *format, va_list ap);
 
 /**
- * @brief Writes formatted output to a memory buffer.
- *
- * Behaves similarly to snprintf.
+ * @brief A printf-like function that formats and writes data to a memory buffer.
+ * Same format specifiers and features as ft_printf.
+ * Writes at most size-1 characters to dst, null-terminating the result.
+ * @param dst - destination buffer
+ * @param size - size of the destination buffer
+ * @param format - the format string
+ * @param ... - variadic arguments corresponding to format specifiers
+ * @return the total number of characters that would have been written if size were unlimited (not including null terminator)
  */
-int		ft_snprintf(char *dst,
-			size_t size,
-			const char *format,
-			...);
+int		ft_snprintf(char		*dst,
+					size_t		size,
+					const char	*format,
+					...);
 
 /**
- * @brief vsnprintf equivalent using va_list.
+ * @brief A printf-like function that formats and writes data to a memory buffer using a va_list.
+ * Same format specifiers and features as ft_printf.
+ * Writes at most size-1 characters to dst, null-terminating the result.
+ * @param dst - destination buffer
+ * @param size - size of the destination buffer
+ * @param format - the format string
+ * @param ap - va_list of arguments corresponding to format specifiers
+ * @return the total number of characters that would have been written if size were unlimited (not including null terminator)
  */
-int		ft_vsnprintf(char *dst,
-			size_t size,
-			const char *format,
-			va_list ap);
+int		ft_vsnprintf(char		*dst,
+					size_t		size,
+					const char	*format,
+					va_list		ap);
 
 /* ============================ CORE ENGINE ============================ */
 
 /**
- * @brief Core formatting engine.
- *
- * Parses the format string and dispatches each
- * format specification to the appropriate handler.
+ * @brief 
+ * @param buffer - the printf buffer to write into
+ * @param format - the format string
+ * @param ap - the variadic arguments list
+ * @return the total number of characters printed (not including null terminator), or -1 on error
  */
-int		printfEngine(t_printfBuffer *buffer,
-			const char *format,
-			va_list ap);
+int		printfEngine(t_printfBuffer	*buffer,
+					const char		*format,
+					va_list			ap);
 
 /* ============================ BUFFER MANAGEMENT ============================ */
 
 /**
- * @brief Initializes a buffer for file descriptor output.
+ * @brief Initializes a printfBuffer for writing to a file descriptor.
+ * @param buffer - the printf buffer to initialize
+ * @param fd - file descriptor to write to
+ * @param mode - mode of operation (e.g., buffered or unbuffered)
  */
-void	bufferInitFd(t_printfBuffer *buffer,
-			int fd,
-			int mode);
+void	bufferInitFd(t_printfBuffer	*buffer,
+					int				fd,
+					int				mode);
 
 /**
- * @brief Initializes a buffer for memory output.
+ * @brief Initializes a printfBuffer for writing to a memory buffer (snprintf mode).
+ * @param buffer - the printf buffer to initialize
+ * @param dst - destination buffer
+ * @param size - size of the destination buffer
  */
-void	bufferInitMemory(t_printfBuffer *buffer,
-			char *dst,
-			size_t size);
+void	bufferInitMemory(t_printfBuffer	*buffer,
+						char			*dst,
+						size_t			size);
 
 /**
- * @brief Flushes the internal buffer to its output target.
+ * @brief Flushes the internal buffer to the output target (file descriptor or memory buffer).
+ * @param buffer - the printf buffer to flush
+ * @return 0 on success, -1 on error
  */
 int		bufferFlush(t_printfBuffer *buffer);
 
 /**
- * @brief Writes raw data into the buffer.
+ * @brief Writes a single character to the printf buffer, handling buffering and output.
+ * @param buffer - the printf buffer to write into
+ * @param c - the character to write
+ * @return 0 on success, -1 on error
  */
-int		bufferWrite(t_printfBuffer *buffer,
-			const char *data,
-			size_t len);
-
-/**
- * @brief Writes a single character into the buffer.
- */
-int		bufferPutChar(t_printfBuffer *buffer,
-			char c);
+int		bufferPutChar(t_printfBuffer *buffer, char c);
 
 /* ============================ PARSING ============================ */
 
 /**
- * @brief Initializes a format specification structure.
+ * @brief Parses a format specification from the format string.
+ * @param format - the full format string
+ * @param i - pointer to current index in format (starts after '%')
+ * @param spec - output struct to fill with parsed specifier details
+ * @return 0 on success, -1 on error (e.g. invalid format)
  */
-void	ft_initFormatSpec(t_formatSpec *format);
+int parseFormat(const char *format, size_t *i, t_formatSpec *spec);
 
 /**
- * @brief Parses a format sequence starting after '%'.
- *
- * Fills the formatSpec structure accordingly.
+ * @brief Resets a formatSpec struct to default values.
+ * @param buffer - the printf buffer to write into
+ * @param spec - the parsed format specification
+ * @param ap - the variadic arguments list
+ * @return 0 on success, -1 on error
  */
-const char	*ft_parseFormat(const char *str,
-					t_formatSpec *format,
-					va_list *ap);
-
-/**
- * @brief Handles a fully parsed format specification.
- */
-int		ft_handleFormat(t_printfBuffer *buffer,
-			t_formatSpec *format,
-			va_list *ap);
-
-/* ============================ SPECIFIER HANDLERS ============================ */
-
-/**
- * @brief Handles %c specifier.
- */
-int		ft_printChar(t_printfBuffer *buffer,
-			t_formatSpec *format,
-			va_list *ap);
-
-/**
- * @brief Handles %s specifier.
- */
-int		ft_printString(t_printfBuffer *buffer,
-			t_formatSpec *format,
-			va_list *ap);
-
-/**
- * @brief Handles signed integer specifiers.
- */
-int		ft_printInteger(t_printfBuffer *buffer,
-			t_formatSpec *format,
-			va_list *ap);
-
-/**
- * @brief Handles unsigned integer specifiers.
- */
-int		ft_printUnsigned(t_printfBuffer *buffer,
-			t_formatSpec *format,
-			va_list *ap);
-
-/**
- * @brief Handles hexadecimal specifiers.
- */
-int		ft_printHex(t_printfBuffer *buffer,
-			t_formatSpec *format,
-			va_list *ap);
-
-/**
- * @brief Handles pointer specifier.
- */
-int		ft_printPointer(t_printfBuffer *buffer,
-			t_formatSpec *format,
-			va_list *ap);
-
-/**
- * @brief Handles floating point specifiers.
- */
-int		ft_printFloat(t_printfBuffer *buffer,
-			t_formatSpec *format,
-			va_list *ap);
-
-/* ============================ EXTENSIONS ============================ */
-
-/**
- * @brief Handles repeat extension syntax: %R{count}{char}
- */
-int		ft_printRepeat(t_printfBuffer *buffer,
-			const char *format,
-			size_t *i);
-
-/**
- * @brief Handles pipe extension syntax:
- *
- * %|[pad][align]width[.precision]spec|
- */
-int		ft_parsePipe(const char *format,
-			size_t *i,
-			t_formatSpec *fmt,
-			va_list *ap);
-
-/* ============================ ALIGNMENT & WIDTH ============================ */
-
-/**
- * @brief Applies width padding to formatted content.
- */
-int		ft_applyWidth(t_printfBuffer *buffer,
-			t_formatSpec *format,
-			char *content);
-
-/**
- * @brief Applies alignment rules to formatted content.
- */
-int		ft_applyAlignment(t_printfBuffer *buffer,
-			t_formatSpec *format,
-			char *content);
+int dispatchFormat(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap);
 
 #endif
