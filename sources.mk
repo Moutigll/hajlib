@@ -50,8 +50,10 @@ MATH_SRCS	=	ft_atoi.c \
 				ft_atol.c \
 				ft_atoi_base.c \
 				ft_dtoa.c \
+				ft_fabs.c \
 				ft_itoa.c \
 				ft_numlen.c \
+				ft_sin.c \
 				ft_sqrtNewton.c \
 				ft_utoa_base.c \
 				ft_utoa.c

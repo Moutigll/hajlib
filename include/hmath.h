@@ -19,7 +19,6 @@ int		ft_atoi_base(char *str, char *base);
  */
 int		ft_atoi(const char *str);
 
-
 /**
  * @brief Gets the sign of a number represented as a string.
  * @param str - pointer to the string to check
@@ -50,12 +49,26 @@ char	*ft_itoa(int n);
 char	*ft_dtoa(double n, int precision);
 
 /**
+ * @brief Calculates the absolute value of a double.
+ * @param x - double to calculate absolute value for
+ * @return absolute value of x
+ */
+double ft_fabs(double x);
+
+/**
 * @brief Calculates the number of digits needed to represent an unsigned integer in a given base.
 * @param n - unsigned integer to calculate length for
 * @param base - base to use for calculation
 * @return number of digits needed to represent n in the given base
 */
 size_t	ft_numlen(unsigned int n, unsigned int base);
+
+/**
+ * @brief Calculates the sine of a double ( x in radians) using a Taylor series expansion.
+ * @param x - double to calculate sine for
+ * @return sine of x
+ */
+double ft_sin(double x);
 
 /**
  * @brief Calculates the square root of a number using the Newton's method.
