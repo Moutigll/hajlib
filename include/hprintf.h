@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:53:40 by ele-lean          #+#    #+#             */
-/*   Updated: 2026/02/15 23:37:48 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/16 10:48:20 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -248,7 +248,7 @@ int parseFormat(const char *format, size_t *i, t_formatSpec *spec);
  * @param ap - the variadic arguments list
  * @return 0 on success, -1 on error
  */
-int dispatchFormat(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap);
+int dispatchFormat(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap);
 
 /**
  * @brief Applies padding (spaces or zeros) based on the format specification and alignment.
@@ -265,10 +265,10 @@ int emitFormatted(t_printfBuffer *buffer,
 
 /* ============================ HANDLERS ============================ */
 
-int		handleInt(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap);
-int		handleUnsigned(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap);
-int		handleHex(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap);
-int		handlePointer(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap);
-int		handleFloat(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap);
+int		handleInt(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap);
+int		handleUnsigned(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap);
+int		handleHex(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap);
+int		handlePointer(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap);
+int		handleFloat(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap);
 
 #endif

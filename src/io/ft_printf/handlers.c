@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:42:29 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/15 23:51:19 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/16 10:48:59 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ applyNumberPrecision(t_formatSpec *spec, char *digits)
 }
 
 int
-handleInt(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
+handleInt(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap)
 {
 	char	*s;
 	char	*digits;
@@ -71,7 +71,7 @@ handleInt(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
 	int		ret;
 	int		isNeg;
 
-	val = va_arg(ap, int);
+	val = va_arg(*ap, int);
 	isNeg = (val < 0);
 
 	s = ft_itoa(val);
@@ -107,13 +107,13 @@ handleInt(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
 }
 
 int
-handleUnsigned(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
+handleUnsigned(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap)
 {
 	char			*s;
 	unsigned int	val;
 	int				ret;
 
-	val = va_arg(ap, unsigned int);
+	val = va_arg(*ap, unsigned int);
 	s = ft_utoa(val);
 	if (!s)
 		return (-1);
@@ -128,14 +128,14 @@ handleUnsigned(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
 }
 
 int
-handleHex(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
+handleHex(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap)
 {
 	char			*s;
 	unsigned int	val;
 	int				upper;
 	int				ret;
 
-	val = va_arg(ap, unsigned int);
+	val = va_arg(*ap, unsigned int);
 	upper = (spec->specifier == 'X');
 	s = ft_utoa_base(val, 16, upper);
 	if (!s)
@@ -151,14 +151,14 @@ handleHex(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
 }
 
 int
-handlePointer(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
+handlePointer(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap)
 {
 	char	*addr;
 	char	*full;
 	void	*ptr;
 	int		ret;
 
-	ptr = va_arg(ap, void *);
+	ptr = va_arg(*ap, void *);
 
 	if (!ptr)
 		return (emitFormatted(buffer, spec, "(nil)", 5));
@@ -176,13 +176,13 @@ handlePointer(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
 }
 
 int
-handleFloat(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
+handleFloat(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap)
 {
 	char	*s;
 	double	val;
 	int		ret;
 
-	val = va_arg(ap, double);
+	val = va_arg(*ap, double);
 	s = ft_dtoa(val, 
 		spec->hasPrecision ? spec->precision : 6);
 	if (!s)

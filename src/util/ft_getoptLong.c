@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:34:14 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/13 13:43:33 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/16 10:54:50 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -302,7 +302,15 @@ ft_getoptLong(
 		return (FT_GETOPT_END);
 	}
 	if (isLongOption(st->argv[st->index]))
+	{
+		if (!long_opts)
+		{
+			st->badOpt = st->argv[st->index];
+			st->status = FT_GETOPT_UNKNOWN;
+			return (FT_GETOPT_ERROR);
+		}
 		return (handleLong(st, long_opts));
+}
 	if (isShortOption(st->argv[st->index]))
 	{
 		if (st->subIndex == 0)

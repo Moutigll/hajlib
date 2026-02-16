@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 17:25:45 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/15 23:41:24 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/16 10:48:30 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,14 +126,14 @@ emitFormatted(t_printfBuffer *buffer,
 }
 
 int
-dispatchFormat(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
+dispatchFormat(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap)
 {
 	if (spec->specifier == '%')
 		return (emitFormatted(buffer, spec, "%", 1));
 	if (spec->specifier == 'c')
 	{
 		char	c;
-		c = (char)va_arg(ap, int);
+		c = (char)va_arg(*ap, int);
 		/* %c: precision ignored, repeat supported */
 		return (emitFormatted(buffer, spec, &c, 1));
 	}
@@ -141,7 +141,7 @@ dispatchFormat(t_printfBuffer *buffer, t_formatSpec *spec, va_list ap)
 	{
 		char	*s;
 		size_t	len;
-		s = va_arg(ap, char *);
+		s = va_arg(*ap, char *);
 		if (!s)
 			s = "(null)";
 		len = ft_strlen(s);

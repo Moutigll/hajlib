@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 19:17:42 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/15 20:21:50 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/16 10:47:48 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ printfEngine(t_printfBuffer	*buffer,
 			i++;
 			if (parseFormat(format, &i, &spec) < 0)
 				return (-1);
-			if (dispatchFormat(buffer, &spec, ap) < 0)
+			if (dispatchFormat(buffer, &spec, &ap) < 0)
 				return (-1);
 		}
 		else
