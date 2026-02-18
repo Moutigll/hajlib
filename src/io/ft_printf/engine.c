@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/13 19:17:42 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/16 10:47:48 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/16 16:38:46 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ printfEngine(t_printfBuffer	*buffer,
 			const char		*format,
 			va_list			ap)
 {
-	size_t			i;
 	t_formatSpec	spec;
+	va_list			apCopy;
+	size_t			i;
+
+	va_copy(apCopy, ap);
 
 	i = 0;
 	if (!format)
@@ -30,7 +33,7 @@ printfEngine(t_printfBuffer	*buffer,
 			i++;
 			if (parseFormat(format, &i, &spec) < 0)
 				return (-1);
-			if (dispatchFormat(buffer, &spec, &ap) < 0)
+			if (dispatchFormat(buffer, &spec, &apCopy) < 0)
 				return (-1);
 		}
 		else

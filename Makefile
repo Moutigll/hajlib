@@ -1,5 +1,5 @@
 CC		= clang
-CFLAGS	= -g -Wall -Werror -Wextra -Iinclude -O3 -march=native
+CFLAGS	= -g -Wall -Werror -Wextra -Iinclude -O3 -march=native --pedantic
 NAME	= hajlib.a
 OBJDIR	= objs
 
