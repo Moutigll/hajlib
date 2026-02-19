@@ -34,6 +34,13 @@ int		get_sign(const char **str);
 long	ft_atol(const char *str);
 
 /**
+ * @brief Calculates the cube root of a double using the Newton-Raphson method.
+ * @param x - double to calculate the cube root of
+ * @return cube root of x
+ */
+double	ft_cbrt(double x);
+
+/**
  * @brief Converts an integer to a string.
  * @param n - integer to convert
  * @return string representation of the integer

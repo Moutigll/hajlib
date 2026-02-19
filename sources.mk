@@ -46,9 +46,10 @@ STRING_SRCS	=	ft_split.c \
 				ft_substr.c
 
 # Math functions
-MATH_SRCS	=	ft_atoi.c \
+MATH_SRCS	=	ft_atoi_base.c \
+				ft_atoi.c \
 				ft_atol.c \
-				ft_atoi_base.c \
+				ft_cbrt.c \
 				ft_dtoa.c \
 				ft_fabs.c \
 				ft_itoa.c \
