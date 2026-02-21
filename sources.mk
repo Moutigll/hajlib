@@ -59,6 +59,11 @@ MATH_SRCS	=	ft_atoi_base.c \
 				ft_utoa_base.c \
 				ft_utoa.c
 
+GALLOIS_SRCS	=	galoisField/ft_gf2nAffine.c \
+					galoisField/ft_gf2nInv.c \
+					galoisField/ft_gf2nMul.c \
+					galoisField/ft_gf2nPow.c
+
 # Memory functions
 MEMORY_SRCS	=	ft_bzero.c \
 				ft_calloc.c \
@@ -108,6 +113,8 @@ UTIL_SRCS	=	free_tab.c \
 				ft_remove_duplicates.c \
 				ft_tablen.c \
 				ft_getoptLong.c
+
+MATH_SRCS	+= $(GALLOIS_SRCS)
 
 # Convert to full paths
 CHAR_SRCS	:= $(addprefix $(CHAR_DIR)/,$(CHAR_SRCS))

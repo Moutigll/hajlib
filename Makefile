@@ -1,11 +1,18 @@
 CC		= clang
-CFLAGS	= -g -Wall -Werror -Wextra -Iinclude -O3 -march=native --pedantic
+CFLAGS	= -g -Wall -Werror -Wextra -Iinclude -O3 -march=native -DUSE_PARITY_TABLE --pedantic
 NAME	= hajlib.a
 OBJDIR	= objs
+
+ARCH := $(shell uname -m)
 
 include sources.mk
 
 SECTIONS = CHAR STRING MATH MEMORY LIST IO PRINTF UTIL
+
+# Add popcnt optimization for GF(2^n) operations if supported
+ifeq ($(ARCH),x86_64)
+	CFLAGS += -mpopcnt
+endif
 
 # Map section sources to object files
 define make_objects
