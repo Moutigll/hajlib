@@ -19,6 +19,7 @@ CHAR_SRCS	=	ft_isalnum.c \
 				ft_isascii.c \
 				ft_isdigit.c \
 				ft_isprint.c \
+				ft_isspace.c \
 				ft_tolower.c \
 				ft_toupper.c
 
@@ -36,6 +37,7 @@ STRING_SRCS	=	ft_split.c \
 				ft_strlen.c \
 				ft_strmapi.c \
 				ft_strncmp.c \
+				ft_strncpy.c \
 				ft_strndup.c \
 				ft_strnstr.c \
 				ft_strpos.c \
@@ -54,8 +56,11 @@ MATH_SRCS	=	ft_atoi_base.c \
 				ft_fabs.c \
 				ft_itoa.c \
 				ft_numlen.c \
+				ft_pow.c \
 				ft_sin.c \
 				ft_sqrtNewton.c \
+				ft_strtod.c \
+				ft_strtoul.c \
 				ft_utoa_base.c \
 				ft_utoa.c
 

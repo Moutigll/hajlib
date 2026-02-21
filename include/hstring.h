@@ -118,6 +118,15 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /**
+ * @brief Copies a string up to a specified length, null-terminating is not guaranteed, use ft_strlcpy for safer copying.
+ * @param dest - The destination buffer to which `src` will be copied. This buffer must have enough allocated space to hold the result.
+ * @param src - The string to copy from.
+ * @param n - The maximum number of characters to copy from `src`. If `src` is shorter than `n`, the entire string is copied. If `n` is greater than 0, the result will be null-terminated.
+ * @return A pointer to the destination string `dest`.
+ */
+char	*ft_strncpy(char *dest, const char *src, size_t n);
+
+/**
  * @brief Duplicates a string up to a specified length by allocating memory and copying the contents.
  * @param s - The string to duplicate.
  * @param n - The maximum number of characters to duplicate from `s`. If `s` is shorter than `n`, the entire string is duplicated.

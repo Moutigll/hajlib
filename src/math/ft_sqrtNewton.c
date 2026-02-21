@@ -6,9 +6,11 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 16:44:10 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/11 16:50:44 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/21 19:11:05 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../include/hmath.h"
 
 double	ft_sqrtNewton(double x)
 {

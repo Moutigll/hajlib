@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:34:14 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/16 10:54:50 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/21 20:25:07 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,12 +143,12 @@ parseLongArg(tFtGetopt *st, char *name, size_t size)
 		len = (size_t)(eq - arg);
 		if (len >= size)
 			len = size - 1;
-		ft_strlcpy(name, arg, len);
+		ft_strncpy(name, arg, len);
 		name[len] = '\0';
 		st->optArg = (char *)(eq + 1);
 		return (1);
 	}
-	ft_strlcpy(name, arg, size - 1);
+	ft_strncpy(name, arg, size - 1);
 	name[size - 1] = '\0';
 	st->optArg = NULL;
 	return (0);
@@ -310,7 +310,7 @@ ft_getoptLong(
 			return (FT_GETOPT_ERROR);
 		}
 		return (handleLong(st, long_opts));
-}
+	}
 	if (isShortOption(st->argv[st->index]))
 	{
 		if (st->subIndex == 0)

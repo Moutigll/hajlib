@@ -71,6 +71,14 @@ double ft_fabs(double x);
 size_t	ft_numlen(unsigned int n, unsigned int base);
 
 /**
+ * @brief Calculates the power of a base raised to an exponent.
+ * @param base - base value
+ * @param exp - exponent value
+ * @return result of base raised to the power of exp
+ */
+double	ft_pow(double base, double exp);
+
+/**
  * @brief Calculates the sine of a double ( x in radians) using a Taylor series expansion.
  * @param x - double to calculate sine for
  * @return sine of x
@@ -83,6 +91,23 @@ double ft_sin(double x);
  * @return square root of x, or -1 if x is negative
  */
 double	ft_sqrtNewton(double x);
+
+/**
+ * @brief Converts a string to a double.
+ * @param str - string to convert
+ * @param endptr - pointer to a pointer that will be set to the character after the last character used in the conversion
+ * @return double value of the string
+ */
+double	ft_strtod(const char *str, char **endptr);
+
+/**
+ * @brief Converts a string to an unsigned long integer.
+ * @param str - string to convert
+ * @param endptr - pointer to a pointer that will be set to the character after the last character used in the conversion
+ * @param base - base to convert to
+ * @return unsigned long integer value of the string
+ */
+unsigned long	ft_strtoul(const char *str, char **endptr, int base);
 
 /**
  * @brief Converts an unsigned integer to a string.

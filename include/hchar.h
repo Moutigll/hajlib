@@ -36,6 +36,12 @@ int	ft_isdigit(int c);
  */
 int	ft_isprint(int c);
 
+/**
+ * @brief Checks if the character is a whitespace character (space, tab, newline, etc.).
+ * @param c - The character to check.
+ * @return 1 if `c` is a whitespace character, 0 otherwise.
+ */
+int	ft_isspace(int c);
 
 /**
  * @brief Converts the character to lowercase if it is uppercase.
