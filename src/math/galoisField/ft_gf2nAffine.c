@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/20 23:32:09 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/20 23:48:56 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/24 17:29:17 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static const uint8_t	g_parityTable[256] = {
  * @param x 64-bit value
  * @return 1 if odd number of 1 bits, 0 otherwise
  */
-static inline uint64_t	parityFast(uint64_t x)
+static inline uint64_t	__attribute__((unused)) parityFast(uint64_t x)
 {
 	uint64_t	parity = 0;
 	
