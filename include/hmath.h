@@ -4,6 +4,14 @@
 #include <stddef.h>
 #include <stdint.h>
 
+
+/**
+ * @brief Converts a string to a double.
+ * @param str - string to convert
+ * @return double value of the string
+ */
+double	ft_atod(const char *str);
+
 /**
  * @brief Converts a string representing a number in a given base to an integer.
  * @param str - string to convert

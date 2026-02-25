@@ -48,7 +48,8 @@ STRING_SRCS	=	ft_split.c \
 				ft_substr.c
 
 # Math functions
-MATH_SRCS	=	ft_atoi_base.c \
+MATH_SRCS	=	ft_atod.c \
+				ft_atoi_base.c \
 				ft_atoi.c \
 				ft_atol.c \
 				ft_cbrt.c \
