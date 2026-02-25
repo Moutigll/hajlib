@@ -18,6 +18,7 @@ typedef enum eFtGetoptHasArg
 /**
  * @brief Enumeration for getopt status codes
  * - FT_GETOPT_OK: option parsed successfully
+ * - FT_GETOPT_POSITIONAL: a non-option argument was encountered (not an error)
  * - FT_GETOPT_END: end of options reached
  * - FT_GETOPT_ERROR: an error occurred
  * - FT_GETOPT_UNKNOWN: unknown option encountered
@@ -27,6 +28,7 @@ typedef enum eFtGetoptHasArg
 typedef enum eFtGetoptStatus
 {
 	FT_GETOPT_OK			= 0,
+	FT_GETOPT_POSITIONAL	= 1,
 	FT_GETOPT_END			= -1,
 	FT_GETOPT_ERROR			= -2,
 	FT_GETOPT_UNKNOWN		= -4,

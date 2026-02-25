@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/11 18:34:14 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/21 20:25:07 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/25 18:14:37 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -294,6 +294,7 @@ ft_getoptLong(
 	st->ambiguousA = NULL;
 	st->ambiguousB = NULL;
 	st->status = FT_GETOPT_OK;
+
 	if (st->index >= st->argc)
 		return (FT_GETOPT_END);
 	if (isEndOptions(st->argv[st->index]))
@@ -317,5 +318,5 @@ ft_getoptLong(
 			st->subIndex = 1;
 		return (handleShort(st, short_opts));
 	}
-	return (FT_GETOPT_END);
+	return (FT_GETOPT_POSITIONAL);
 }
