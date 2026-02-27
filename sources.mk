@@ -14,7 +14,8 @@ GNL_DIR		= $(IO_DIR)/gnl
 UTIL_DIR	= src/util
 
 # Char functions
-CHAR_SRCS	=	ft_isalnum.c \
+CHAR_SRCS	=	ft_charToDigit.c \
+				ft_isalnum.c \
 				ft_isalpha.c \
 				ft_isascii.c \
 				ft_isdigit.c \
@@ -61,6 +62,7 @@ MATH_SRCS	=	ft_atod.c \
 				ft_sin.c \
 				ft_sqrtNewton.c \
 				ft_strtod.c \
+				ft_strtol.c \
 				ft_strtoul.c \
 				ft_utoa_base.c \
 				ft_utoa.c

@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/21 19:15:38 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/21 20:43:42 by moutig           ###   ########.fr       */
+/*   Updated: 2026/02/27 16:57:37 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,6 @@
 #include "../../include/hchar.h"
 
 #include "../../include/hmath.h"
-
-
-static int	charToDigit(int c, int base)
-{
-	int	digit;
-
-	if (ft_isdigit(c))
-		digit = c - '0';
-	else if (ft_isalpha(c))
-	{
-		if (c >= 'A' && c <= 'Z')
-			digit = c - 'A' + 10;
-		else
-			digit = c - 'a' + 10;
-	}
-	else
-		return (-1);
-	
-	if (digit >= base)
-		return (-1);
-	return (digit);
-}
 
 static int	willOverflow(unsigned long acc, int digit, int base)
 {
@@ -88,7 +66,7 @@ unsigned long	ft_strtoul(const char *nptr, char **endptr, int base)
 		c = *s++;
 
 		/* Convert character to digit */
-		c = charToDigit(c, base);
+		c = ft_charToDigit(c, base);
 		if (c < 0)
 			break;
 

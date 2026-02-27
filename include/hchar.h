@@ -2,6 +2,16 @@
 #define HAJLIB_CHAR_H
 
 /**
+ * @brief Converts a character to its corresponding digit value in a given base.
+ * For example, '0' to '9' will be converted to 0-9, 'A' to 'Z' will be converted to 10-35, and 'a' to 'z' will also be converted to 10-35.
+ * If the character is not a valid digit in the specified base, the function returns -1.
+ * @param c The character to convert.
+ * @param base The numerical base (e.g., 10 for decimal, 16 for hexadecimal).
+ * @return The digit value of the character if it is valid for the given base, or -1 if it is not a valid digit.
+ */
+int	ft_charToDigit(int c, int base);
+
+/**
  * @brief Checks if the character is alphanumeric (letter or digit).
  * @param c - The character to check.
  * @return 1 if `c` is alphanumeric, 0 otherwise.

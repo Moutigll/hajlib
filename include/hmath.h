@@ -109,6 +109,15 @@ double	ft_sqrtNewton(double x);
 double	ft_strtod(const char *str, char **endptr);
 
 /**
+ * @brief Converts a string to a long integer.
+ * @param str - string to convert
+ * @param endptr - pointer to a pointer that will be set to the character after the last character used in the conversion
+ * @param base - base to convert to
+ * @return long integer value of the string in the given base
+ */
+long	ft_strtol(const char *nptr, char **endptr, int base);
+
+/**
  * @brief Converts a string to an unsigned long integer.
  * @param str - string to convert
  * @param endptr - pointer to a pointer that will be set to the character after the last character used in the conversion
