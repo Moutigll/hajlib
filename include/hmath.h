@@ -56,6 +56,13 @@ double	ft_cbrt(double x);
 char	*ft_itoa(int n);
 
 /**
+ * @brief Calculates the base-2 logarithm of a 64-bit unsigned integer.
+ * @param x - unsigned integer to calculate the logarithm for
+ * @return floor(log2(x)), or 0 if x is 0
+ */
+int ft_log2(uint64_t x);
+
+/**
  * @brief Converts a double to a string with specified precision.
  * @param n - double to convert
  * @param precision - number of decimal places

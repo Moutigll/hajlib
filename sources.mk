@@ -57,6 +57,7 @@ MATH_SRCS	=	ft_atod.c \
 				ft_dtoa.c \
 				ft_fabs.c \
 				ft_itoa.c \
+				ft_log2.c \
 				ft_numlen.c \
 				ft_pow.c \
 				ft_sin.c \
