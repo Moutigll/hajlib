@@ -157,7 +157,7 @@ int		ft_strpos(const char *str, char c);
  * @param c - The character to locate.
  * @return A pointer to the last occurrence of `c` in `s`, or NULL if `c` is not found.
  */
-char	*ft_strrchr(const char *s, int c);
+const char	*ft_strrchr(const char *s, int c);
 
 /**
  * @brief Locates the first occurrence of a substring in a string.
@@ -165,7 +165,7 @@ char	*ft_strrchr(const char *s, int c);
  * @param needle - The substring to locate.
  * @return A pointer to the first occurrence of `needle` in `haystack`, or NULL if `needle` is not found.
  */
-char	*ft_strstr(char *haystack, char *needle);
+const char	*ft_strstr(const char *haystack, const char *needle);
 
 /**
  * @brief Trims characters from the beginning and end of a string.

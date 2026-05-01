@@ -6,16 +6,16 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 21:50:48 by ele-lean          #+#    #+#             */
-/*   Updated: 2026/02/11 17:10:16 by moutig           ###   ########.fr       */
+/*   Updated: 2026/05/01 06:22:04 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/hstring.h"
 
-char	*ft_strstr(char *haystack, char *needle)
+const char	*ft_strstr(const char *haystack, const char *needle)
 {
-	char	*h;
-	char	*n;
+	const char	*h;
+	const char	*n;
 
 	if (!*needle)
 		return (haystack);
