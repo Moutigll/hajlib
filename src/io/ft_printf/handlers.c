@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/15 21:42:29 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/16 10:48:59 by moutig           ###   ########.fr       */
+/*   Updated: 2026/05/19 16:13:48 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,34 @@
 #include "../../../include/hstring.h"
 
 #include "../../../include/hprintf.h"
+
+static intmax_t readSignedArg(va_list *ap, t_length len)
+{
+	switch (len) {
+		case LEN_HH:	return (signed char)va_arg(*ap, int);
+		case LEN_H:		return (short)va_arg(*ap, int);
+		case LEN_L:		return va_arg(*ap, long);
+		case LEN_LL:	return va_arg(*ap, long long);
+		case LEN_Z:		return (intmax_t)va_arg(*ap, size_t); // %zd
+		case LEN_T:		return (intmax_t)va_arg(*ap, ptrdiff_t);
+		case LEN_J:		return va_arg(*ap, intmax_t);
+		default:		return va_arg(*ap, int);
+	}
+}
+
+static uintmax_t readUnsignedArg(va_list *ap, t_length len)
+{
+	switch (len) {
+		case LEN_HH:	return (unsigned char)va_arg(*ap, unsigned int);
+		case LEN_H:		return (unsigned short)va_arg(*ap, unsigned int);
+		case LEN_L:		return va_arg(*ap, unsigned long);
+		case LEN_LL:	return va_arg(*ap, unsigned long long);
+		case LEN_Z:		return va_arg(*ap, size_t);
+		case LEN_T:		return (uintmax_t)va_arg(*ap, ptrdiff_t); // %tu
+		case LEN_J:		return va_arg(*ap, uintmax_t);
+		default:		return va_arg(*ap, unsigned int);
+	}
+}
 
 static char *
 applyNumberPrecision(t_formatSpec *spec, char *digits)
@@ -65,16 +93,16 @@ applyNumberPrecision(t_formatSpec *spec, char *digits)
 int
 handleInt(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap)
 {
-	char	*s;
-	char	*digits;
-	int		val;
-	int		ret;
-	int		isNeg;
+	char		*s;
+	char		*digits;
+	intmax_t	val;
+	int			ret;
+	int			isNeg;
 
-	val = va_arg(*ap, int);
+	val = readSignedArg(ap, spec->length);
 	isNeg = (val < 0);
 
-	s = ft_itoa(val);
+	s = ft_itoa_intmax(val);
 	if (!s)
 		return (-1);
 
@@ -109,12 +137,12 @@ handleInt(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap)
 int
 handleUnsigned(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap)
 {
-	char			*s;
-	unsigned int	val;
-	int				ret;
+	char		*s;
+	uintmax_t	val;
+	int			ret;
 
-	val = va_arg(*ap, unsigned int);
-	s = ft_utoa(val);
+	val = readUnsignedArg(ap, spec->length);
+	s = ft_utoa_uintmax(val);
 	if (!s)
 		return (-1);
 
@@ -131,13 +159,13 @@ int
 handleHex(t_printfBuffer *buffer, t_formatSpec *spec, va_list *ap)
 {
 	char			*s;
-	unsigned int	val;
+	uintmax_t		val;
 	int				upper;
 	int				ret;
 
-	val = va_arg(*ap, unsigned int);
+	val = readUnsignedArg(ap, spec->length);
 	upper = (spec->specifier == 'X');
-	s = ft_utoa_base(val, 16, upper);
+	s = ft_utoa_base_uintmax(val, upper ? "0123456789ABCDEF" : "0123456789abcdef");
 	if (!s)
 		return (-1);
 

@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/14 17:35:44 by moutig            #+#    #+#             */
-/*   Updated: 2026/02/15 15:23:03 by moutig           ###   ########.fr       */
+/*   Updated: 2026/05/19 16:33:13 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ initFormatSpec(t_formatSpec *spec)
 	spec->specifier = 0;
 	spec->repeat = 1;
 	spec->truncate = 0;
+	spec->length = LEN_NONE;
 }
 
 /**
@@ -70,6 +71,36 @@ parseNumber(const char *format, size_t *i)
 	return (value);
 }
 
+static void parseLength(const char *format, size_t *i, t_formatSpec *spec)
+{
+	if (format[*i] == 'h') {
+		(*i)++;
+		if (format[*i] == 'h') {
+			spec->length = LEN_HH;
+			(*i)++;
+		} else
+			spec->length = LEN_H;
+	} else if (format[*i] == 'l') {
+		(*i)++;
+		if (format[*i] == 'l') {
+			spec->length = LEN_LL;
+			(*i)++;
+		} else
+			spec->length = LEN_L;
+	} else if (format[*i] == 'z') {
+		spec->length = LEN_Z;
+		(*i)++;
+	} else if (format[*i] == 't') {
+		spec->length = LEN_T;
+		(*i)++;
+	} else if (format[*i] == 'j') {
+		spec->length = LEN_J;
+		(*i)++;
+	} else {
+		spec->length = LEN_NONE;
+	}
+}
+
 /**
  * @brief Parse a single format starting at format[*i] (after '%').
  *
@@ -109,6 +140,7 @@ parseFormat(const char *format, size_t *i, t_formatSpec *spec)
 		if (spec->repeat <= 0)
 			spec->repeat = 1; /* treat non-positive repeat as 1 */
 	}
+	parseLength(format, i, spec);
 	if (format[*i] == '\0')
 		return (-1);
 	spec->specifier = format[*i];

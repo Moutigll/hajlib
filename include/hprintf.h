@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/19 11:53:40 by ele-lean          #+#    #+#             */
-/*   Updated: 2026/02/18 13:51:53 by moutig           ###   ########.fr       */
+/*   Updated: 2026/05/19 15:25:06 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,33 +28,47 @@
 /* ============================ FORMAT STRUCTURE ============================ */
 
 /**
+ * @brief Represents the length modifier for format specifiers.
+ */
+typedef enum {
+	LEN_NONE,
+	LEN_HH,	/* signed/unsigned char */
+	LEN_H,	/* signed/unsigned short */
+	LEN_L,	/* signed/unsigned long */
+	LEN_LL,	/* signed/unsigned long long */
+	LEN_Z,	/* size_t */
+	LEN_T,	/* ptrdiff_t */
+	LEN_J,	/* intmax_t */
+} t_length;
+
+/**
  * @brief Represents a parsed format specification.
  *
  * Contains all extracted components from a format sequence:
  * flags, width, precision, length modifier, specifier,
  * and custom extension parameters.
  */
-
 typedef struct s_formatSpec
 {
 	/* flags */
-	int		leftAlign;
-	int		centerAlign;
-	int		zeroPad;
+	int			leftAlign;
+	int			centerAlign;
+	int			zeroPad;
 
 	/* width */
-	int		width;
+	int			width;
 
 	/* precision */
-	int		precision;
-	int		hasPrecision;
+	int			precision;
+	int			hasPrecision;
 
 	/* conversion */
 	char	specifier;
 
-	int		repeat;
-	int		truncate;
+	int			repeat;
+	int			truncate;
 
+	t_length	length;
 }	t_formatSpec;
 
 /* ============================ OUTPUT TARGET ============================ */
@@ -183,7 +197,7 @@ int		ft_vsnprintf(char		*dst,
 /* ============================ CORE ENGINE ============================ */
 
 /**
- * @brief 
+ * @brief The core engine for handling printf-like formatting.
  * @param buffer - the printf buffer to write into
  * @param format - the format string
  * @param ap - the variadic arguments list
