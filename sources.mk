@@ -56,6 +56,7 @@ MATH_SRCS	=	ft_atod.c \
 				ft_cbrt.c \
 				ft_dtoa.c \
 				ft_fabs.c \
+				ft_itoa_intmax.c \
 				ft_itoa.c \
 				ft_log2.c \
 				ft_numlen.c \
@@ -65,7 +66,9 @@ MATH_SRCS	=	ft_atod.c \
 				ft_strtod.c \
 				ft_strtol.c \
 				ft_strtoul.c \
+				ft_utoa_base_uintmax.c \
 				ft_utoa_base.c \
+				ft_utoa_uintmax.c \
 				ft_utoa.c
 
 GALLOIS_SRCS	=	galoisField/ft_gf2nAffine.c \

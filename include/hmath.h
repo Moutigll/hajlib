@@ -49,6 +49,13 @@ long	ft_atol(const char *str);
 double	ft_cbrt(double x);
 
 /**
+ * @brief Converts an intmax_t to a string.
+ * @param n - intmax_t to convert
+ * @return string representation of the intmax_t
+ */
+char	*ft_itoa_intmax(intmax_t n);
+
+/**
  * @brief Converts an integer to a string.
  * @param n - integer to convert
  * @return string representation of the integer
@@ -134,11 +141,26 @@ long	ft_strtol(const char *nptr, char **endptr, int base);
 unsigned long	ft_strtoul(const char *str, char **endptr, int base);
 
 /**
+ * @brief Converts a uintmax_t to a string.
+ * @param n - uintmax_t to convert
+ * @return string representation of the uintmax_t
+ */
+char	*ft_utoa_uintmax(uintmax_t n);
+
+/**
  * @brief Converts an unsigned integer to a string.
  * @param n - unsigned integer to convert
  * @return string representation of the unsigned integer
  */
 char	*ft_utoa(unsigned int n);
+
+/**
+ * @brief Converts a uintmax_t to a string in a specified base.
+ * @param n - uintmax_t to convert
+ * @param base - base to convert to (e.g., 10 for decimal, 16 for hexadecimal)
+ * @return string representation of the uintmax_t in the specified base
+ */
+char	*ft_utoa_base_uintmax(uintmax_t n, char *base);
 
 /**
  * @brief Converts an unsigned integer to a string in a specified base.
