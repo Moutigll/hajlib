@@ -79,6 +79,7 @@ GALLOIS_SRCS	=	galoisField/ft_gf2nAffine.c \
 # Memory functions
 MEMORY_SRCS	=	ft_bzero.c \
 				ft_calloc.c \
+				ft_cmemcmp.c \
 				ft_memchr.c \
 				ft_memcmp.c \
 				ft_memcpy.c \

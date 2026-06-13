@@ -69,6 +69,16 @@ void	*ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 
 /**
+ * @brief Compares the first n bytes of the memory areas s1 and s2 in constant time.
+ * This function is designed to prevent timing attacks by ensuring that the comparison takes the same amount of time regardless of the input values.
+ * @param s1 - pointer to the first memory area
+ * @param s2 - pointer to the second memory area
+ * @param n - number of bytes to compare
+ * @return 1 if the first n bytes of s1 and s2 are equal, 0 otherwise
+ */
+int		ft_cmemcmp(const void *s1, const void *s2, size_t n);
+
+/**
  * @brief Copies n bytes from memory area src to memory area dest. The memory areas must not overlap.
  * @param dest - pointer to the destination memory area
  * @param src - pointer to the source memory area
