@@ -1,6 +1,6 @@
 CC		= clang
 CFLAGS	= -Wall -Werror -Wextra -Iinclude -O3 -march=native -DUSE_PARITY_TABLE --pedantic
-NAME	= hajlib.a
+NAME	= libhaj.a
 OBJDIR	= objs
 
 ARCH := $(shell uname -m)
