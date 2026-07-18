@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 13:25:41 by ele-lean          #+#    #+#             */
-/*   Updated: 2026/02/11 17:08:25 by moutig           ###   ########.fr       */
+/*   Updated: 2026/07/18 10:18:00 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ static void	createList(t_list **list, int fd, t_newline *line)
 			return ;
 		size = read(fd, buffer, BUFFER_SIZE);
 		if (!size || size == -1)
-			return (free(buffer));
+		{
+			free(buffer);
+			return ;
+		}
 		buffer[size] = '\0';
 		gnlLstaddBack(list, buffer, fd);
 	}

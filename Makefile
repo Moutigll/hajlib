@@ -7,7 +7,7 @@ ARCH := $(shell uname -m)
 
 include sources.mk
 
-SECTIONS = CHAR STRING MATH MEMORY LIST IO PRINTF UTIL
+SECTIONS = CHAR STRING MATH MEMORY LIST IO GNL PRINTF UTIL
 
 # Add popcnt optimization for GF(2^n) operations if supported
 ifeq ($(ARCH),x86_64)
@@ -57,6 +57,9 @@ list: $(LIST_OBJS)
 io: $(IO_OBJS)
 	ar rcs $(OBJDIR)/io.a $^
 
+gnl: $(GNL_OBJS)
+	ar rcs $(OBJDIR)/gnl.a $^
+
 printf: $(PRINTF_OBJS)
 	ar rcs $(OBJDIR)/printf.a $^
 
@@ -75,4 +78,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re char string math memory list io printf util
+.PHONY: all clean fclean re char string math memory list io gnl printf util
