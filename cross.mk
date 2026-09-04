@@ -21,7 +21,7 @@ endif
 
 ifeq ($(NATIVE),1)
 # Force native compilation
-	CC ?= clang
+	CC = clang
 	AR = ar
 	TARGET_EXT =
 	CROSS_COMPILING = 0
@@ -29,7 +29,7 @@ else ifneq ($(WIN32),1)
 	ifneq ($(WIN64),1)
 		ifneq ($(CROSS_WIN),1)
 # Default native compilation
-			CC ?= clang
+			CC = clang
 			AR = ar
 			TARGET_EXT =
 			CROSS_COMPILING = 0
