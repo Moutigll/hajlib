@@ -6,7 +6,7 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/08 06:36:32 by ele-lean          #+#    #+#             */
-/*   Updated: 2026/02/11 17:08:46 by moutig           ###   ########.fr       */
+/*   Updated: 2026/09/08 05:30:47 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "../../include/hio.h"
 #include "../../include/hgnl.h"
 
-int	ft_getnline(char *file)
+int	ft_getnline(const char *file)
 {
 	int		fd;
 	char	*line;

@@ -6,7 +6,7 @@
  * @param file - The file path to read.
  * @return The number of lines in the specified file, or -1 if there is an error.
  */
-int		ft_getnline(char *file);
+int		ft_getnline(const char *file);
 
 /**
  * @brief Write a character to the specified file descriptor.
@@ -20,7 +20,7 @@ void	ft_putchar_fd(char c, int fd);
  * @param s - The string to write.
  * @param fd - The file descriptor to write to.
  */
-void	ft_putendl_fd(char *s, int fd);
+void	ft_putendl_fd(const char *s, int fd);
 
 /**
  * @brief Write an integer to the specified file descriptor.
@@ -34,6 +34,6 @@ void	ft_putnbr_fd(int n, int fd);
  * @param s - The string to write.
  * @param fd - The file descriptor to write to.
  */
-int		ft_putstr_fd(char *s, int fd);
+int		ft_putstr_fd(const char *s, int fd);
 
 #endif /* HAJLIB_IO_H */
