@@ -6,13 +6,15 @@
 /*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/19 15:51:08 by moutig            #+#    #+#             */
-/*   Updated: 2026/05/19 15:53:41 by moutig           ###   ########.fr       */
+/*   Updated: 2026/09/09 09:36:43 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
 #include "../../include/hstring.h"
+#include "../../include/hmemory.h"
+
 #include "../../include/hmath.h"
 
 static size_t	ft_uintmax_len(uintmax_t n, size_t base_len)
@@ -40,7 +42,7 @@ char	*ft_utoa_base_uintmax(uintmax_t n, char *base)
 	if (base_len < 2)
 		return (NULL);
 	len = ft_uintmax_len(n, base_len);
-	str = calloc(len + 1, sizeof(char));
+	str = ft_calloc(len + 1, sizeof(char));
 	if (!str)
 		return (NULL);
 	str[len] = '\0';

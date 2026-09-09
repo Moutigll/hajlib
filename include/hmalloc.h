@@ -5,45 +5,6 @@
 
 # define HMALLOC_TINY_MAX		128
 # define HMALLOC_SMALL_MAX		1024
-# define HMALLOC_ALIGNMENT		16	/* Align adresses for fast access */
-
-/**
- * @struct s_mallocBlock
- * @brief Represents a memory allocation block in the heap memory allocator.
- * 
- * This structure is used to manage individual memory blocks allocated by the
- * custom malloc implementation. It maintains metadata for tracking allocated
- * and freed memory regions.
- * 
- * @member size The size of the allocated memory block in bytes.
- * @member next Pointer to the next memory block in the linked list.
- * @member prev Pointer to the previous memory block in the linked list.
- * @member free Flag indicating whether the block is free (1) or allocated (0).
- */
-typedef struct s_mallocBlock {
-	size_t					size;
-	struct s_mallocBlock	*next;
-	struct s_mallocBlock	*prev;
-	int						free;
-}	t_mallocBlock;
-
-/**
- * @struct s_mallocZone
- * @brief Represents a memory zone in the heap memory allocator.
- * 
- * This structure is used to manage a collection of memory blocks within a
- * specific memory zone. It maintains metadata for tracking the size of the
- * zone and the linked list of allocated blocks.
- * 
- * @member size The total size of the memory zone in bytes.
- * @member blocks Pointer to the first memory block in the linked list of blocks.
- * @member next Pointer to the next memory zone in the linked list.
- */
-typedef struct s_mallocZone {
-	size_t				size;
-	t_mallocBlock		*blocks;
-	struct s_mallocZone	*next;
-}	t_mallocZone;
 
 /**
  * @brief Allocates a block of memory of the specified size.
