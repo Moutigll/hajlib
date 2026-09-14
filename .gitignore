@@ -2,3 +2,7 @@ objs
 libhaj.a
 *.png
 __pycache__
+results_*.txt
+bench_*
+!bench_plot.py
+test/malloc/build
