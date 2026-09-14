@@ -74,8 +74,4 @@ static inline void	hmallocUnmap(void *ptr, size_t size)
 	#define HMALLOC_MUTEX_INITIALIZER	PTHREAD_MUTEX_INITIALIZER
 #endif
 
-
-# define HMALLOC_TINY_ZONE_SIZE		(8 * hmallocPagesize())		/* 8 pages ~ 32 Ko */
-# define HMALLOC_SMALL_ZONE_SIZE	(32 * hmallocPagesize())	/* 32 pages ~ 128 Ko */
-
 #endif

@@ -1,97 +1,6 @@
 #include "../../include/hmemory.h"
 
-#include "malloc.h"
 #include "tcache.h"
-
-t_mallocState g_mallocState = {
-	.tinyZones	= NULL,
-	.smallZones	= NULL,
-	.largeZones	= NULL,
-	.mutex		= HMALLOC_MUTEX_INITIALIZER,
-	.totalAlloc	= 0,
-	.totalFree	= 0
-};
-
-static t_mallocZone **getZoneList(size_t size)
-{
-	if (size <= HMALLOC_TINY_MAX)
-		return (&g_mallocState.tinyZones);
-	else if (size <= HMALLOC_SMALL_MAX)
-		return (&g_mallocState.smallZones);
-	else
-		return (&g_mallocState.largeZones);
-}
-
-static size_t getZoneSize(size_t size)
-{
-	size_t	alignedZoneHdr;
-	size_t	blockTotal;
-
-	if (size <= HMALLOC_TINY_MAX)
-		return (HMALLOC_TINY_ZONE_SIZE);
-	else if (size <= HMALLOC_SMALL_MAX)
-		return (HMALLOC_SMALL_ZONE_SIZE);
-
-	alignedZoneHdr = (sizeof(t_mallocZone) + HMALLOC_ALIGNMENT - 1)
-					 & ~(HMALLOC_ALIGNMENT - 1);
-	blockTotal = (sizeof(t_mallocBlock) + size + HMALLOC_ALIGNMENT - 1)
-				 & ~(HMALLOC_ALIGNMENT - 1);
-	return (alignedZoneHdr + blockTotal);
-}
-
-void *hmallocAllocInternal(size_t size)
-{
-	t_mallocZone	**zoneList;
-	t_mallocZone	*newZone;
-	t_mallocBlock	*block;
-	size_t			alignedSize;
-
-	if (size == 0)
-		return (NULL);
-
-	alignedSize = (size + HMALLOC_ALIGNMENT - 1) & ~(HMALLOC_ALIGNMENT - 1);
-
-	hmallocMutexLock(&g_mallocState.mutex);
-
-	zoneList = getZoneList(alignedSize);
-	block = findFreeBlock(zoneList, alignedSize);
-
-	if (!block) {
-		newZone = createZone(getZoneSize(alignedSize), alignedSize);
-		if (!newZone) {
-			hmallocMutexUnlock(&g_mallocState.mutex);
-			return (NULL);
-		}
-		addZoneToList(zoneList, newZone);
-		block = newZone->blocks;
-	}
-
-	splitBlock(block, alignedSize);
-	block->free = 0;
-	g_mallocState.totalAlloc += block->size;
-
-	hmallocMutexUnlock(&g_mallocState.mutex);
-
-	return ((void *)(block + 1));
-}
-
-
-void hmallocFreeInternal(void *ptr)
-{
-	t_mallocBlock *block;
-
-	if (!ptr)
-		return;
-
-	hmallocMutexLock(&g_mallocState.mutex);
-	block = (t_mallocBlock *)ptr - 1;
-	block->free = 1;
-	g_mallocState.totalFree += block->size;
-	coalesceBlocks(block);
-	hmallocMutexUnlock(&g_mallocState.mutex);
-}
-
-/* --------------- Public malloc API using tcache --------------- */
 
 void *malloc(size_t size)
 {
@@ -222,8 +131,11 @@ void *realloc(void *ptr, size_t size)
 		block->size + sizeof(t_mallocBlock) + block->next->size >= alignedSize)
 	{
 		hmallocMutexLock(&g_mallocState.mutex);
-		block->size += sizeof(t_mallocBlock) + block->next->size;
-		block->next = block->next->next;
+		t_mallocBlock *nextBlock = block->next;
+
+		freeListRemove(nextBlock);   /* <-- le fix : on désenregistre AVANT d'écraser son header */
+		block->size += sizeof(t_mallocBlock) + nextBlock->size;
+		block->next = nextBlock->next;
 		if (block->next)
 			block->next->prev = block;
 		splitBlock(block, alignedSize);

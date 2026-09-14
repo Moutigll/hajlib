@@ -50,9 +50,10 @@ STRING_SRCS	=	ft_split.c \
 				ft_substr.c
 
 MALLOC_SRCS	=	malloc.c \
+				mallocInternal.c \
+				showMemory.c \
 				tcache.c \
-				zones.c \
-				showMemory.c
+				zones.c
 
 # Math functions
 MATH_SRCS	=	ft_atod.c \

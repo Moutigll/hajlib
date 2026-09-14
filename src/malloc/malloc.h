@@ -9,6 +9,31 @@
 # define HMALLOC_ALIGNMENT			16	/* Align adresses for fast access */
 # define HMALLOC_MIN_BLOCKS			100
 
+# define HMALLOC_TINY_ZONE_SIZE		(8 * hmallocPagesize())		/* 8 pages ~ 32 Ko */
+# define HMALLOC_SMALL_ZONE_SIZE	(32 * hmallocPagesize())	/* 32 pages ~ 128 Ko */
+
+# define HMALLOC_SEG_ALIGNMENT		HMALLOC_ALIGNMENT	/* Alignment for memory segments */
+# define HMALLOC_SEG_MAX_EXACT		8192 /* Maximum size of a memory segment */
+# define HMALLOC_SEG_NUM_BINS		((HMALLOC_SEG_MAX_EXACT / HMALLOC_SEG_ALIGNMENT) + 1)  /* Number of bins for memory segments */
+# define HMALLOC_SEG_SEARCH_LIMIT	4 /* Maximum number of bins to search for a suitable memory block */
+
+
+/**
+ * @enum e_mallocCategory
+ * @brief Represents the category of a memory allocation.
+ * 
+ * This enum is used to classify memory allocations into different categories
+ * based on their size. The categories are:
+ * - HMALLOC_CAT_TINY: Small allocations (typically < 256 bytes)
+ * - HMALLOC_CAT_SMALL: Medium allocations (typically 256 bytes to 1 KB)
+ * - HMALLOC_CAT_LARGE: Large allocations (typically > 1 KB)
+ */
+typedef enum e_mallocCategory {
+	HMALLOC_CAT_TINY  = 0,
+	HMALLOC_CAT_SMALL = 1,
+	HMALLOC_CAT_LARGE = 2
+}	t_mallocCategory;
+
 /**
  * @struct s_mallocBlock
  * @brief Represents a memory allocation block in the heap memory allocator.
@@ -20,13 +45,21 @@
  * @member size The size of the allocated memory block in bytes.
  * @member next Pointer to the next memory block in the linked list.
  * @member prev Pointer to the previous memory block in the linked list.
+ * @member freeNext Pointer to the next free memory block in the free list.
+ * @member freePrev Pointer to the previous free memory block in the free list.
  * @member free Flag indicating whether the block is free (1) or allocated (0).
+ * @member binIdx The index of the bin in which this block is stored (used for small allocations).
+ * @member category The category of the memory block (tiny, small, or large).
  */
 typedef struct s_mallocBlock {
 	size_t					size;
 	struct s_mallocBlock	*next;
 	struct s_mallocBlock	*prev;
+	struct s_mallocBlock	*freeNext;
+	struct s_mallocBlock	*freePrev;
 	int						free;
+	int						binIdx;
+	t_mallocCategory		category;
 }	__attribute__((aligned(HMALLOC_ALIGNMENT))) t_mallocBlock;
 
 /**
@@ -45,6 +78,7 @@ typedef struct s_mallocZone {
 	size_t				size;
 	t_mallocBlock		*blocks;
 	struct s_mallocZone	*next;
+	t_mallocCategory	category;
 }	__attribute__((aligned(HMALLOC_ALIGNMENT))) t_mallocZone;
 
 
@@ -59,6 +93,9 @@ typedef struct s_mallocZone {
  * @member tinyZones Pointer to the linked list of tiny memory zones.
  * @member smallZones Pointer to the linked list of small memory zones.
  * @member largeZones Pointer to the linked list of large memory zones.
+ * @member tinyFreeBins Array of pointers to free lists for tiny memory blocks, indexed by size.
+ * @member smallFreeBins Array of pointers to free lists for small memory blocks, indexed by size.
+ * @member largeFreeList Pointer to the free list for large memory blocks.
  * @member mutex A mutex for synchronizing access to the allocator state in multithreaded environments.
  * @member totalAlloc The total amount of memory allocated by the allocator in bytes.
  * @member totalFree The total amount of memory freed by the allocator in bytes.
@@ -67,6 +104,9 @@ typedef struct s_mallocState {
 	t_mallocZone	*tinyZones;
 	t_mallocZone	*smallZones;
 	t_mallocZone	*largeZones;
+	t_mallocBlock	*tinyFreeBins[HMALLOC_SEG_NUM_BINS];
+	t_mallocBlock	*smallFreeBins[HMALLOC_SEG_NUM_BINS];
+	t_mallocBlock	*largeFreeList;  
 	hmallocMutex_t	mutex;
 	size_t			totalAlloc;
 	size_t			totalFree;
@@ -114,22 +154,23 @@ void hmallocFreeInternal(void *ptr);
  * 
  * @param zoneSize The size of the memory zone to create in bytes.
  * @param blockSize The size of individual blocks within the zone in bytes.
+ * @param category The category of the memory zone (tiny, small, or large).
  * @return A pointer to the newly created memory zone, or NULL if allocation fails.
  */
-t_mallocZone	*createZone(size_t zoneSize, size_t blockSize);
+t_mallocZone	*createZone(size_t zoneSize, size_t blockSize, t_mallocCategory category);
 
 /**
  * @brief Finds a free memory block of the specified size within the given zone list.
  * 
- * This function searches through the linked list of memory zones to find a free
- * memory block that can accommodate the requested size. If a suitable block is
- * found, it returns a pointer to that block; otherwise, it returns NULL.
- * 
- * @param zoneList A pointer to the head of the linked list of memory zones.
+ * This function searches for a free memory block of the requested size within the
+ * specified category of memory zones. It returns a pointer to a suitable free block
+ * if found, or NULL if no suitable block is available.
+ *
+ * @param category The category of the memory block to find (tiny, small, or large).
  * @param size The size of the memory block to find in bytes.
  * @return A pointer to a free memory block of the requested size, or NULL if none is found.
  */
-t_mallocBlock	*findFreeBlock(t_mallocZone **zoneList, size_t size);
+t_mallocBlock	*findFreeBlock(t_mallocCategory category, size_t size);
 
 /**
  * @brief Splits a memory block into two smaller blocks.
@@ -165,5 +206,16 @@ void			coalesceBlocks(t_mallocBlock *block);
  * @param zone Pointer to the memory zone to add to the list.
  */
 void			addZoneToList(t_mallocZone **list, t_mallocZone *zone);
+
+/**
+ * @brief Removes a memory block from the free list.
+ * 
+ * This function removes the specified memory block from the free list, updating
+ * the pointers of neighboring blocks in the list. It is used to manage the free
+ * list of memory blocks in the custom malloc implementation.
+ * 
+ * @param block Pointer to the memory block to remove from the free list.
+ */
+void freeListRemove(t_mallocBlock *block);
 
 #endif
