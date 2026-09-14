@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_libft.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ele-lean <ele-lean@student.42.fr>          +#+  +:+       +#+        */
+/*   By: moutig <moutig-tan@proton.me>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/15 17:38:43 by ele-lean          #+#    #+#             */
-/*   Updated: 2024/10/17 14:01:51 by ele-lean         ###   ########.fr       */
+/*   Updated: 2026/09/10 12:52:12 by moutig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	test_ft_calloc(void)
 	int	*arr;
 	int	i;
 
-	arr = ft_calloc(5, sizeof(int));
-	printf("\n(3/23)Testing ft_calloc:\n");
-	printf("ft_calloc(5, sizeof(int)) Expected: array of 5 zeroed ints\n");
+	arr = calloc(5, sizeof(int));
+	printf("\n(3/23)Testing calloc:\n");
+	printf("calloc(5, sizeof(int)) Expected: array of 5 zeroed ints\n");
 	for (i = 0; i < 5; i++)
 		printf("arr[%d] = %d\n", i, arr[i]);
 	free(arr);

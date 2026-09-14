@@ -1,15 +1,13 @@
 #ifndef HMALLOC_PRIVATE_H
 # define HMALLOC_PRIVATE_H
 
-#include <pthread.h>
-#include <unistd.h>
+#include <stdint.h>
 
 # include "../../include/hmalloc.h"
+# include "mallocos.h"
 
 # define HMALLOC_ALIGNMENT			16	/* Align adresses for fast access */
 # define HMALLOC_MIN_BLOCKS			100
-# define HMALLOC_TINY_ZONE_SIZE		(8 * getpagesize())		/* 8 pages ~ 32 Ko */
-# define HMALLOC_SMALL_ZONE_SIZE	(32 * getpagesize())	/* 32 pages ~ 128 Ko */
 
 /**
  * @struct s_mallocBlock
@@ -69,7 +67,7 @@ typedef struct s_mallocState {
 	t_mallocZone	*tinyZones;
 	t_mallocZone	*smallZones;
 	t_mallocZone	*largeZones;
-	pthread_mutex_t	mutex;
+	hmallocMutex_t	mutex;
 	size_t			totalAlloc;
 	size_t			totalFree;
 }	t_mallocState;
@@ -83,6 +81,30 @@ typedef struct s_mallocState {
  * the allocator functions to manage memory allocations and deallocations.
  */
 extern t_mallocState	g_mallocState;
+
+/**
+ * @brief Allocates a block of memory of the specified size.
+ * 
+ * This function allocates a block of memory of the given size and returns a
+ * pointer to the allocated memory. It is an internal function used by the
+ * custom malloc implementation to manage memory allocations.
+ * This is implementation is bare-bones and does not use the tcache. It is used for large allocations.
+ * 
+ * @param size The size of the memory block to allocate in bytes.
+ * @return A pointer to the allocated memory block, or NULL if allocation fails.
+ */
+void *hmallocAllocInternal(size_t size);
+
+/**
+ * @brief Frees a previously allocated block of memory.
+ * 
+ * This function frees a block of memory that was previously allocated by the
+ * custom malloc implementation. It is an internal function used to manage
+ * memory deallocations and coalescing of free blocks.
+ * 
+ * @param ptr A pointer to the memory block to free.
+ */
+void hmallocFreeInternal(void *ptr);
 
 /**
  * @brief Creates a new memory zone of the specified size.

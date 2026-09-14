@@ -50,6 +50,7 @@ STRING_SRCS	=	ft_split.c \
 				ft_substr.c
 
 MALLOC_SRCS	=	malloc.c \
+				tcache.c \
 				zones.c \
 				showMemory.c
 
@@ -83,7 +84,6 @@ GALLOIS_SRCS	=	galoisField/ft_gf2nAffine.c \
 
 # Memory functions
 MEMORY_SRCS	=	ft_bzero.c \
-				ft_calloc.c \
 				ft_cmemcmp.c \
 				ft_memchr.c \
 				ft_memcmp.c \

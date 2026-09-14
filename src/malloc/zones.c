@@ -1,9 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/mman.h>
-#include <sanitizer/asan_interface.h>
-
 #include "malloc.h"
+#include "mallocos.h"
 
 t_mallocZone	*createZone(size_t zoneSize, size_t blockSize)
 {
@@ -15,18 +11,7 @@ t_mallocZone	*createZone(size_t zoneSize, size_t blockSize)
 	size_t			offset;
 	size_t			blockTotal;
 
-	/* Create a new memory zone with
-	 * Protections:
-	 * - Read to allow reading from the memory region.
-	 * - Write to allow writing to the memory region.
-	 * Flags:
-	 * - MAP_PRIVATE to create a private mapping that is not shared with other processes.
-	 * - MAP_ANONYMOUS to create an anonymous mapping that is not backed by any file.
-	 */
-	zone = mmap(NULL, zoneSize, PROT_READ | PROT_WRITE,
-				MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-	if (zone == MAP_FAILED)
-		return (NULL);
+	zone = hmallocMap(zoneSize);
 
 	zone->size = zoneSize;
 	zone->blocks = NULL;

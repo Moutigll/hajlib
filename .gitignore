@@ -1,2 +1,4 @@
 objs
-hajlib.a
+libhaj.a
+*.png
+__pycache__

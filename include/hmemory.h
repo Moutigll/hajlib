@@ -60,15 +60,6 @@
 void	*ft_bzero(void *s, size_t n);
 
 /**
- * @brief Allocates memory for an array of nmemb elements of size bytes each and returns a pointer to the allocated memory.
- * The memory is set to zero.
- * @param nmemb - number of elements to allocate
- * @param size - size of each element in bytes
- * @return a pointer to the allocated memory, or NULL if the allocation fails
- */
-void	*ft_calloc(size_t nmemb, size_t size);
-
-/**
  * @brief Compares the first n bytes of the memory areas s1 and s2 in constant time.
  * This function is designed to prevent timing attacks by ensuring that the comparison takes the same amount of time regardless of the input values.
  * @param s1 - pointer to the first memory area

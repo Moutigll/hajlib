@@ -45,6 +45,18 @@ void	free(void *ptr);
 void	*realloc(void *ptr, size_t size);
 
 /**
+ * @brief Allocates a block of memory of the specified size and initializes it to zero.
+ * 
+ * This function allocates a block of memory of the given size and initializes
+ * all bytes in the allocated storage to zero. If the allocation fails, it
+ * returns NULL.
+ * 
+ * @param size The size of the memory block to allocate in bytes.
+ * @return A pointer to the allocated and zero-initialized memory block, or NULL if allocation fails.
+ */
+void	*calloc(size_t nmemb, size_t size);
+
+/**
  * @brief Displays the current state of allocated memory blocks.
  * 
  * This function prints information about the currently allocated memory blocks,
