@@ -68,19 +68,7 @@ void free(void *ptr)
 			tc->counts[bin]++;
 			return;
 		}
-		/*
-		 * Full bin: flush ONE block back to the internal allocator to make room,
-		 * then insert the new one.
-		 */
-		t_tcacheEntry *old = tc->bins[bin];
-		tc->bins[bin] = old->next;
-		tc->counts[bin]--;
-		hmallocFreeInternal((void *)old);
-
-		t_tcacheEntry *e = (t_tcacheEntry *)ptr;
-		e->next = tc->bins[bin];
-		tc->bins[bin] = e;
-		tc->counts[bin]++;
+		hmallocFreeInternal(ptr);
 		return;
 	}
 

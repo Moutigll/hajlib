@@ -47,20 +47,28 @@ static size_t getZoneSize(size_t size)
 
 void *hmallocAllocInternal(size_t size)
 {
-	t_mallocZone	**zoneList;
-	t_mallocZone	*newZone;
-	t_mallocBlock	*block;
+	t_mallocZone		**zoneList;
+	t_mallocZone		*newZone;
+	t_mallocBlock		*block;
 	t_mallocCategory	category;
-	size_t			alignedSize;
+	size_t				alignedSize;
 
 	if (size == 0)
 		return (NULL);
 
 	alignedSize = (size + HMALLOC_ALIGNMENT - 1) & ~(HMALLOC_ALIGNMENT - 1);
 
+	category = getCategory(alignedSize);
+	if (category == HMALLOC_CAT_TINY || category == HMALLOC_CAT_SMALL) {
+		size_t bin = (alignedSize + HMALLOC_SEG_ALIGNMENT - 1) / HMALLOC_SEG_ALIGNMENT;
+		if (bin == 0)
+			bin = 1;
+		alignedSize = bin * HMALLOC_SEG_ALIGNMENT;
+		category = getCategory(alignedSize);
+	}
+
 	hmallocMutexLock(&g_mallocState.mutex);
 
-	category = getCategory(alignedSize);
 	zoneList = getZoneList(alignedSize);
 	block = findFreeBlock(category, alignedSize);
 
@@ -86,7 +94,6 @@ void *hmallocAllocInternal(size_t size)
 
 	return ((void *)(block + 1));
 }
-
 
 void hmallocFreeInternal(void *ptr)
 {
