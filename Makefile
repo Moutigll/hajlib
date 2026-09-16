@@ -16,7 +16,7 @@ ifeq ($(CROSS_COMPILING),1)
 	CFLAGS := $(filter-out -Werror,$(CFLAGS))
 endif
 
-SECTIONS = CHAR STRING MATH MEMORY LIST IO GNL PRINTF UTIL
+SECTIONS = CHAR STRING MALLOC MATH MEMORY LIST IO GNL PRINTF UTIL
 
 # Add popcnt optimization for GF(2^n) operations if supported
 ifeq ($(ARCH),x86_64)
@@ -56,6 +56,9 @@ char: $(CHAR_OBJS)
 string: $(STRING_OBJS)
 	$(AR) rcs $(OBJDIR)/string.a $^
 
+malloc: $(MALLOC_OBJS)
+	$(AR) rcs $(OBJDIR)/malloc.a $^
+
 math: $(MATH_OBJS)
 	$(AR) rcs $(OBJDIR)/math.a $^
 
@@ -89,4 +92,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re char string math memory list io gnl printf util
+.PHONY: all clean fclean re char string malloc math memory list io gnl printf util

@@ -5,6 +5,7 @@
 # Directories
 CHAR_DIR	= src/char
 STRING_DIR	= src/string
+MALLOC_DIR	= src/malloc
 MATH_DIR	= src/math
 MEMORY_DIR	= src/memory
 LIST_DIR	= src/list
@@ -48,6 +49,12 @@ STRING_SRCS	=	ft_split.c \
 				ft_strtrim.c \
 				ft_substr.c
 
+MALLOC_SRCS	=	malloc.c \
+				mallocInternal.c \
+				showMemory.c \
+				tcache.c \
+				zones.c
+
 # Math functions
 MATH_SRCS	=	ft_atod.c \
 				ft_atoi_base.c \
@@ -78,7 +85,6 @@ GALLOIS_SRCS	=	galoisField/ft_gf2nAffine.c \
 
 # Memory functions
 MEMORY_SRCS	=	ft_bzero.c \
-				ft_calloc.c \
 				ft_cmemcmp.c \
 				ft_memchr.c \
 				ft_memcmp.c \
@@ -132,6 +138,7 @@ MATH_SRCS	+= $(GALLOIS_SRCS)
 # Convert to full paths
 CHAR_SRCS	:= $(addprefix $(CHAR_DIR)/,$(CHAR_SRCS))
 STRING_SRCS	:= $(addprefix $(STRING_DIR)/,$(STRING_SRCS))
+MALLOC_SRCS	:= $(addprefix $(MALLOC_DIR)/,$(MALLOC_SRCS))
 MATH_SRCS	:= $(addprefix $(MATH_DIR)/,$(MATH_SRCS))
 MEMORY_SRCS	:= $(addprefix $(MEMORY_DIR)/,$(MEMORY_SRCS))
 LIST_SRCS	:= $(addprefix $(LIST_DIR)/,$(LIST_SRCS))
