@@ -18,6 +18,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Standard definitions: `include/stddef.h` (`size_t`, `ptrdiff_t`, `wchar_t`, `NULL`, `offsetof`, `max_align_t`)
 - Fixed-width integers: `include/stdint.h` (`int8_t`..`int64_t`, limits, printf format macros)
 - Boolean type: `include/stdbool.h` (`bool`, `true`, `false`)
+- POSIX limits: `include/bits/limits.h` (`HAJ_PATH_MAX`, `HAJ_NAME_MAX`, `HAJ_ARG_MAX`, `HAJ_OPEN_MAX`, `HAJ_PIPE_BUF` per OS)
+- Implementation limits: `include/limits.h` (`CHAR_BIT`, `INT_MAX`, `LONG_MAX`, `LLONG_MAX`, ... and POSIX aliases `PATH_MAX`, `NAME_MAX`, `ARG_MAX`, `OPEN_MAX`)
+- Variable arguments: `include/stdarg.h` (`va_list`, `va_start`, `va_arg`, `va_end`, `va_copy`, `__gnuc_va_list`)
+- Error codes: `include/bits/errno.h` (per-OS values for Linux, FreeBSD, Darwin, Windows)
+- Error reporting: `include/errno.h` (thread-local `errno`, `__haj_errno`), `src/errno/errno.c`, `src/errno/strerror.c`
+  - `strerror()` with per-OS message tables (common, networking, POSIX realtime, OS-specific)
+  - Thread-local buffer for unknown error codes
 
 ### Changed
 
