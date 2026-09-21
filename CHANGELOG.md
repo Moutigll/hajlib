@@ -21,6 +21,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed-width integers, pointer-sized types (`intptr`/`uintptr`), and max-width integers (`intmax`/`uintmax`)
 - POSIX type aliases: `size_t`, `ssize_t`, `ptrdiff_t`, `mode_t`, `off_t`, `pid_t`, `uid_t`, `gid_t`, `dev_t`, `ino_t`, `nlink_t`, `blksize_t`, `blkcnt_t`, `time_t`, `suseconds_t`, `clock_t`, `clockid_t`
 - OS-specific ABI matching: `mode_t` (unsigned int on Linux, unsigned short on BSD/Darwin), `dev_t` (signed 32-bit on Darwin), `nlink_t` (16-bit on Darwin, 64-bit elsewhere)
+- `stddef.h`: size_t, ptrdiff_t, wchar_t, NULL, offsetof, max_align_t
+- `stdint.h`: fixed-width integer types, limits, printf format macros
+- `stdbool.h`: bool, true, false
 
 ### Changed
 
