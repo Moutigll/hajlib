@@ -1,148 +1,116 @@
-# ======================
-# Sources for libft
-# ======================
+# sources.mk - list of source files for hajlib.
+#
+# Each section corresponds to a public header. The section names
+# are used by the Makefile to build per-section archives and to
+# generate object file paths.
+#
+# Rules:
+#   - Each section lists .c and .S files relative to its directory.
+#   - No path in the variable itself; the Makefile prefixes with
+#     the section directory.
+#   - Use tab indentation, one file per line, with trailing backslash.
+#
+# To add a new file: add it to the right section.
+# To add a new section: add a new SECTION_DIRS entry, a *_SRCS
+# variable, and register the section in SECTIONS (Makefile).
 
-# Directories
-CHAR_DIR	= src/char
-STRING_DIR	= src/string
-MALLOC_DIR	= src/malloc
-MATH_DIR	= src/math
-MEMORY_DIR	= src/memory
-LIST_DIR	= src/list
-IO_DIR		= src/io
-PRINTF_DIR	= $(IO_DIR)/ft_printf
-GNL_DIR		= $(IO_DIR)/gnl
-UTIL_DIR	= src/util
+# ---------------------------------------------------------------------------
+# Section directories
+# ---------------------------------------------------------------------------
+CTYPE_DIR	:= src/ctype
+STRING_DIR	:= src/string
+STDLIB_DIR	:= src/stdlib
+STDIO_DIR	:= src/stdio
+MATH_DIR	:= src/math
+TIME_DIR	:= src/time
+SIGNAL_DIR	:= src/signal
+UNISTD_DIR	:= src/unistd
+FCNTL_DIR	:= src/fcntl
+STAT_DIR	:= src/stat
+MMAN_DIR	:= src/mman
+GETOPT_DIR	:= src/getopt
+ERRNO_DIR	:= src/errno
 
-# Char functions
-CHAR_SRCS	=	ft_charToDigit.c \
-				ft_isalnum.c \
-				ft_isalpha.c \
-				ft_isascii.c \
-				ft_isdigit.c \
-				ft_isprint.c \
-				ft_isspace.c \
-				ft_tolower.c \
-				ft_toupper.c
 
-# String functions
-STRING_SRCS	=	ft_split.c \
-				ft_strchr.c \
-				ft_strcmp.c \
-				ft_strcut.c \
-				ft_strdup.c \
-				ft_striteri.c \
-				ft_strjoin.c \
-				ft_strjoin_free.c \
-				ft_strlcat.c \
-				ft_strlcpy.c \
-				ft_strlen.c \
-				ft_strmapi.c \
-				ft_strncmp.c \
-				ft_strncpy.c \
-				ft_strndup.c \
-				ft_strnstr.c \
-				ft_strpos.c \
-				ft_strrchr.c \
-				ft_str_replace.c \
-				ft_strstr.c \
-				ft_strtrim.c \
-				ft_substr.c
+# ---------------------------------------------------------------------------
+# ctype
+# ---------------------------------------------------------------------------
+CTYPE_SRCS := 
 
-MALLOC_SRCS	=	malloc.c \
-				mallocInternal.c \
-				showMemory.c \
-				tcache.c \
-				zones.c
+# ---------------------------------------------------------------------------
+# string
+# ---------------------------------------------------------------------------
+STRING_SRCS := 
 
-# Math functions
-MATH_SRCS	=	ft_atod.c \
-				ft_atoi_base.c \
-				ft_atoi.c \
-				ft_atol.c \
-				ft_cbrt.c \
-				ft_dtoa.c \
-				ft_fabs.c \
-				ft_itoa_intmax.c \
-				ft_itoa.c \
-				ft_log2.c \
-				ft_numlen.c \
-				ft_pow.c \
-				ft_sin.c \
-				ft_sqrtNewton.c \
-				ft_strtod.c \
-				ft_strtol.c \
-				ft_strtoul.c \
-				ft_utoa_base_uintmax.c \
-				ft_utoa_base.c \
-				ft_utoa_uintmax.c \
-				ft_utoa.c
+# ---------------------------------------------------------------------------
+# stdlib
+# ---------------------------------------------------------------------------
+STDLIB_SRCS := 
 
-GALLOIS_SRCS	=	galoisField/ft_gf2nAffine.c \
-					galoisField/ft_gf2nInv.c \
-					galoisField/ft_gf2nMul.c \
-					galoisField/ft_gf2nPow.c
+# ---------------------------------------------------------------------------
+# stdio
+# ---------------------------------------------------------------------------
+STDIO_SRCS := 
 
-# Memory functions
-MEMORY_SRCS	=	ft_bzero.c \
-				ft_cmemcmp.c \
-				ft_memchr.c \
-				ft_memcmp.c \
-				ft_memcpy.c \
-				ft_memmove.c \
-				ft_memset.c
+# ---------------------------------------------------------------------------
+# math
+# ---------------------------------------------------------------------------
+MATH_SRCS := 
 
-# List functions
-LIST_SRCS	=	free_list.c \
-				ft_lstadd_back.c \
-				ft_lstadd_front.c \
-				ft_lstclear.c \
-				ft_lstdelone.c \
-				ft_lstget.c \
-				ft_lstinsert_after.c \
-				ft_lstiter.c \
-				ft_lstlast.c \
-				ft_lstmap.c \
-				ft_lstnew.c \
-				ft_lstsize.c \
-				ft_removenode.c
+# ---------------------------------------------------------------------------
+# time
+# ---------------------------------------------------------------------------
+TIME_SRCS := 
 
-# IO functions
-IO_SRCS		=	ft_getnline.c \
-				ft_putchar_fd.c \
-				ft_putendl_fd.c \
-				ft_putnbr_fd.c \
-				ft_putstr_fd.c
+# ---------------------------------------------------------------------------
+# signal
+# ---------------------------------------------------------------------------
+SIGNAL_SRCS := 
 
-GNL_SRCS	=	gnl.c \
-				gnlUtils.c
+# ---------------------------------------------------------------------------
+# unistd
+# ---------------------------------------------------------------------------
+UNISTD_SRCS := 
 
-PRINTF_SRCS	=	printf.c \
-				buffer.c \
-				dispatch.c \
-				engine.c \
-				parsing.c \
-				handlers.c
+# ---------------------------------------------------------------------------
+# fcntl
+# ---------------------------------------------------------------------------
+FCNTL_SRCS := 
 
-# Util functions
-UTIL_SRCS	=	free_tab.c \
-				ft_addchar.c \
-				ft_is_empty_string.c \
-				ft_realloctab.c \
-				ft_remove_duplicates.c \
-				ft_tablen.c \
-				ft_getoptLong.c
+# ---------------------------------------------------------------------------
+# stat
+# ---------------------------------------------------------------------------
+STAT_SRCS := 
 
-MATH_SRCS	+= $(GALLOIS_SRCS)
+# ---------------------------------------------------------------------------
+# mman
+# ---------------------------------------------------------------------------
+MMAN_SRCS := 
 
-# Convert to full paths
-CHAR_SRCS	:= $(addprefix $(CHAR_DIR)/,$(CHAR_SRCS))
+# ---------------------------------------------------------------------------
+# getopt
+# ---------------------------------------------------------------------------
+GETOPT_SRCS := 
+
+# ---------------------------------------------------------------------------
+# errno
+# ---------------------------------------------------------------------------
+ERRNO_SRCS := 
+
+
+# ---------------------------------------------------------------------------
+# Prefix each section with its directory.
+# ---------------------------------------------------------------------------
+CTYPE_SRCS	:= $(addprefix $(CTYPE_DIR)/,$(CTYPE_SRCS))
 STRING_SRCS	:= $(addprefix $(STRING_DIR)/,$(STRING_SRCS))
-MALLOC_SRCS	:= $(addprefix $(MALLOC_DIR)/,$(MALLOC_SRCS))
+STDLIB_SRCS	:= $(addprefix $(STDLIB_DIR)/,$(STDLIB_SRCS))
+STDIO_SRCS	:= $(addprefix $(STDIO_DIR)/,$(STDIO_SRCS))
 MATH_SRCS	:= $(addprefix $(MATH_DIR)/,$(MATH_SRCS))
-MEMORY_SRCS	:= $(addprefix $(MEMORY_DIR)/,$(MEMORY_SRCS))
-LIST_SRCS	:= $(addprefix $(LIST_DIR)/,$(LIST_SRCS))
-IO_SRCS		:= $(addprefix $(IO_DIR)/,$(IO_SRCS))
-PRINTF_SRCS	:= $(addprefix $(PRINTF_DIR)/,$(PRINTF_SRCS))
-GNL_SRCS	:= $(addprefix $(GNL_DIR)/,$(GNL_SRCS))
-UTIL_SRCS	:= $(addprefix $(UTIL_DIR)/,$(UTIL_SRCS))
+TIME_SRCS	:= $(addprefix $(TIME_DIR)/,$(TIME_SRCS))
+SIGNAL_SRCS	:= $(addprefix $(SIGNAL_DIR)/,$(SIGNAL_SRCS))
+UNISTD_SRCS	:= $(addprefix $(UNISTD_DIR)/,$(UNISTD_SRCS))
+FCNTL_SRCS	:= $(addprefix $(FCNTL_DIR)/,$(FCNTL_SRCS))
+STAT_SRCS	:= $(addprefix $(STAT_DIR)/,$(STAT_SRCS))
+MMAN_SRCS	:= $(addprefix $(MMAN_DIR)/,$(MMAN_SRCS))
+GETOPT_SRCS	:= $(addprefix $(GETOPT_DIR)/,$(GETOPT_SRCS))
+ERRNO_SRCS	:= $(addprefix $(ERRNO_DIR)/,$(ERRNO_SRCS))

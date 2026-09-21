@@ -1,0 +1,35 @@
+# clangd configuration for hajlib.
+#
+# clangd reads compile_commands.json to know how to compile each
+# file. This file adds or removes flags on top of that for better
+# static analysis.
+
+CompileFlags:
+  # Flags to add for analysis.
+  Add:
+    - -Iinclude
+    - -Isrc
+    - -Wall
+    - -Wextra
+    - -Wpedantic
+    - -Wshadow
+    - -Wconversion
+    - -Wsign-conversion
+    - -Wcast-align
+    - -Wstrict-prototypes
+    - -Wmissing-prototypes
+    - -Wmissing-declarations
+    - -Wold-style-definition
+    - -Wpointer-arith
+    - -Wwrite-strings
+    - -Wundef
+    - -Wredundant-decls
+    - -Wnested-externs
+    - -Wno-unused-parameter
+    - -std=c11
+
+# Suppress warnings from system headers (they are not ours).
+Diagnostics:
+  Suppress:
+    - 'unused-includes'
+
