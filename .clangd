@@ -26,10 +26,15 @@ CompileFlags:
     - -Wredundant-decls
     - -Wnested-externs
     - -Wno-unused-parameter
+    - -Wno-reserved-identifier
+    - -Wno-reserved-macro-identifier
     - -std=c11
 
 # Suppress warnings from system headers (they are not ours).
 Diagnostics:
   Suppress:
     - 'unused-includes'
-
+    - 'reserved-identifier'
+    - 'reserved-macro-identifier'
+    - 'cert-dcl51-cpp'
+    - 'cert-dcl37-c'
