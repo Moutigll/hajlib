@@ -49,18 +49,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - File control flags: `include/bits/fcntl.h` (`O_*`, `F_*`, `FD_CLOEXEC`, lock types, per-OS)
 - File control: `include/fcntl.h` (`open`, `creat`, `fcntl`, `struct flock`)
 - Implementations: `src/fcntl/open.c` (via `SYS_openat` with `AT_FDCWD`), `src/fcntl/creat.c`, `src/fcntl/fcntl.c` (variadic, argument-type dispatch per command)
+- License: `LICENSE` (GNU GPL v3)
+- Build system: `mk/config.mk` (public `HAJ_*` variables, `HAJ_COMMON_CFLAGS`), `mk/targets.mk` (per-OS/arch source selection), `mk/hajlib.mk` (standalone include for external projects)
+- Tests: `tests/Makefile`, `tests/sources.mk`, `tests/main.c` (minimal link test using public flags)
 
 ### Changed
 
-- Nothing yet
+- Moved build files to `mk/` (`build.mk`, `cross.mk`, `sources.mk`, `version.mk`, `config.mk`, `targets.mk`, `hajlib.mk`)
+- `Makefile`: sources are now selected via `mk/sources.mk` + `mk/targets.mk`, ordered low-level-first for archive resolution
 
 ### Fixed
 
-- Nothing yet
+- `.gitignore`: added `tests/build`
 
 ### Removed
 
 - Removed `syscall.mk`
+- Removed top-level `build.mk`, `cross.mk`, `sources.mk`, `version.mk` (moved under `mk/`)
 
 ### Deprecated
 

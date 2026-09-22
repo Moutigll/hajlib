@@ -34,22 +34,6 @@
 #  error "hajlib: no syscall numbers for this OS/arch"
 # endif
 
-
-/*
- * AT_FDCWD: special value for the dirfd argument of the *at()
- * syscalls, meaning "interpret the path relative to the current
- * working directory".
- */
-# ifndef HAJ_AT_FDCWD
-#  if defined(HAJ_OS_LINUX) || defined(HAJ_OS_FREEBSD)
-#   define HAJ_AT_FDCWD			(-100)
-#  elif defined(HAJ_OS_DARWIN)
-#   define HAJ_AT_FDCWD			(-2)
-#  else
-#   define HAJ_AT_FDCWD			(-100)
-#  endif
-# endif
-
 /*
  * AT_* flags for the *at() syscalls. Values are POSIX and are
  * the same on Linux, FreeBSD, and Darwin. Windows does not have
