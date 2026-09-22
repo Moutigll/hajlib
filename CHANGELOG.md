@@ -38,6 +38,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - FreeBSD x86_64 / aarch64 (normalizes carry-flag error to `-errno`)
   - Darwin x86_64 / arm64 (same as FreeBSD)
   - Windows (C shim dispatching to the mingw CRT, normalizes `errno`)
+- Compiler abstraction: `include/bits/compiler.h` (compiler detection, attributes, `__HAJ_THREAD_LOCAL`, `__HAJ_INLINE`, `__HAJ_RESTRICT`, `__HAJ_ALIGNOF`, `__HAJ_STATIC_ASSERT`)
+- Assertions: `include/assert.h`, `src/assert/assert.c` (`__assert_fail`, `__assert_perror_fail`, `assert` disabled by `NDEBUG`)
+- Non-local jumps: `include/setjmp.h`, `src/setjmp/{x86_64,aarch64}/{setjmp,longjmp}.S`, `src/setjmp/sigsetjmp.c`
+  - `setjmp`/`longjmp`/`_setjmp`/`_longjmp`/`sigsetjmp`/`siglongjmp`
+  - Signal mask save/restore is a stub until sigprocmask is implemented
+- Program name: `src/crt/progname.c` (`__progname`, initialized to `argv[0]` in every `_start`)
+- Compiler runtime: `src/runtime/mul.c` (`__muldi3`), `src/runtime/div.c` (`__udivdi3`, `__umoddi3`, `__divdi3`, `__moddi3`)
+- Stack protection: `src/stack_chk/stack_chk_guard.c` (`__stack_chk_guard`), `src/stack_chk/stack_chk_fail.c` (`__stack_chk_fail`, `__stack_chk_fail_local`)
+- File control flags: `include/bits/fcntl.h` (`O_*`, `F_*`, `FD_CLOEXEC`, lock types, per-OS)
+- File control: `include/fcntl.h` (`open`, `creat`, `fcntl`, `struct flock`)
+- Implementations: `src/fcntl/open.c` (via `SYS_openat` with `AT_FDCWD`), `src/fcntl/creat.c`, `src/fcntl/fcntl.c` (variadic, argument-type dispatch per command)
 
 ### Changed
 
