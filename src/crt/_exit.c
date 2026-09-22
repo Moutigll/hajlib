@@ -14,7 +14,8 @@
 #include <unistd.h>
 #include <bits/syscall.h>
 
-_Noreturn void	_exit(int status)
+__HAJ_NORETURN
+void	_exit(int status)
 {
 #if defined(HAJ_OS_LINUX)
 	/*

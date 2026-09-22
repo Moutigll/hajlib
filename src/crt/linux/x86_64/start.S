@@ -10,8 +10,9 @@
  *
  * Our job in _start:
  *   1. Read argc, argv, and envp from the initial stack.
- *   2. Call main(argc, argv, envp).
- *   3. Call exit(main_return_value).
+ *   2. Store argv[0] into __progname (for diagnostics).
+ *   3. Call main(argc, argv, envp).
+ *   4. Call exit(main_return_value).
  *
  * REGISTERS (x86_64 System V ABI)
  *
@@ -107,7 +108,27 @@ _start:
 	leaq	8(%rsp), %rsi
 
 	/*
-	 * Step 3: compute envp.
+	 * Step 3: store argv[0] into __progname.
+	 *
+	 * __progname is a global variable defined in src/crt/progname.c.
+	 * It holds the program name (argv[0]) so that diagnostic
+	 * functions like __assert_fail can print it.
+	 *
+	 * rsi points to argv, so (%rsi) is argv[0]. We load it into
+	 * rax and store it into __progname using RIP-relative
+	 * addressing.
+	 *
+	 * RIP-relative addressing is required for position-independent
+	 * code and works in static binaries too. The linker resolves
+	 * the offset at link time.
+	 *
+	 * After: __progname = argv[0]
+	 */
+	movq	(%rsi), %rax		/* rax = argv[0] */
+	movq	%rax, __progname(%rip)	/* __progname = argv[0] */
+
+	/*
+	 * Step 4: compute envp.
 	 *
 	 * envp is located right after argv. argv has (argc + 1)
 	 * entries: argc pointers, then a NULL terminator.
@@ -135,7 +156,7 @@ _start:
 	leaq	8(%rsi,%rdi,8), %rdx
 
 	/*
-	 * Step 4: align the stack.
+	 * Step 5: align the stack.
 	 *
 	 * The System V ABI requires rsp to be 16-byte aligned at the
 	 * `call` instruction. The kernel guarantees that rsp is
@@ -153,7 +174,7 @@ _start:
 	andq	$-16, %rsp
 
 	/*
-	 * Step 5: call main.
+	 * Step 6: call main.
 	 *
 	 * `call main` does two things:
 	 *   1. Push the address of the next instruction (the return
@@ -170,7 +191,7 @@ _start:
 	call	main
 
 	/*
-	 * Step 6: call exit(main_return_value).
+	 * Step 7: call exit(main_return_value).
 	 *
 	 * main returned its int result in rax. We move it to rdi
 	 * (the 1st argument register) to pass it to exit().
@@ -191,7 +212,7 @@ _start:
 	call	exit
 
 	/*
-	 * Step 7: safety net.
+	 * Step 8: safety net.
 	 *
 	 * This code should never be reached. exit() terminates the
 	 * process. But if something goes wrong (e.g. exit returns

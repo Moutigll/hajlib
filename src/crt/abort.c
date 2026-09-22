@@ -10,9 +10,11 @@
 #include <stdlib.h>
 #include <bits/syscall.h>
 
-_Noreturn void	abort(void)
+__HAJ_NORETURN
+void	abort(void)
 {
-	/*
+	/**
+	 * @TODO: add sigabrt
 	 * In a full implementation, this would raise SIGABRT and
 	 * let the handler (if any) run. Since we do not have
 	 * signals, we just terminate with the status that a shell

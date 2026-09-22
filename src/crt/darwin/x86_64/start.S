@@ -38,6 +38,22 @@ start:
 	 *   rsi = argv
 	 *   rdx = envp
 	 *
+	 * Store argv[0] into __progname.
+	 *
+	 * __progname is a global variable defined in src/crt/progname.c.
+	 * It holds the program name (argv[0]) so that diagnostic
+	 * functions like __assert_fail can print it.
+	 *
+	 * On Darwin, the C symbol __progname becomes ___progname
+	 * (three underscores) in the assembly file, because the
+	 * assembler adds an extra underscore to every C symbol.
+	 *
+	 * rsi points to argv, so (%rsi) is argv[0].
+	 */
+	movq	(%rsi), %rax		/* rax = argv[0] */
+	movq	%rax, ___progname(%rip)	/* __progname = argv[0] */
+
+	/*
 	 * We could call main directly, but we still want to align
 	 * the stack defensively.
 	 */

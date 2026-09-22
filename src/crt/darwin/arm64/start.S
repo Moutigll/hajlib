@@ -21,6 +21,11 @@
 
 start:
 	/* x0, x1, x2 already contain argc, argv, envp. */
+	/* Load argv[0] into x3 and store it in __progname. */
+	ldr	x3, [x1]			/* x3 = argv[0] */
+	adrp	x4, ___progname			/* x4 = page of __progname */
+	add	x4, x4, :lo12:___progname	/* x4 = address of __progname */
+	str	x3, [x4]			/* __progname = argv[0] */
 
 	and	sp, sp, #-16		/* align stack */
 

@@ -14,6 +14,7 @@
 # define _ERRNO_H
 
 # include <bits/errno.h>
+# include <bits/compiler.h>
 
 /*
  * errno
@@ -33,7 +34,12 @@
 extern "C" {
 # endif
 
-extern __thread int	__haj_errno;
+/**
+ * @brief The thread-local errno variable.
+ *
+ * This variable is set by functions on error. It is thread-local, so each thread has its own errno value.
+ */
+extern __HAJ_THREAD_LOCAL int	__haj_errno;
 
 # if defined(__cplusplus)
 }

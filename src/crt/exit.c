@@ -19,7 +19,8 @@
 
 #include <bits/crt.h>
 
-_Noreturn void exit(int status)
+__HAJ_NORETURN
+void exit(int status)
 {
 	/*
 	 * Step 1: run atexit handlers.
@@ -32,8 +33,8 @@ _Noreturn void exit(int status)
 	 */
 	__haj_run_cxa_atexit();
 
-	/*
-	 * Step 3: flush stdio buffers.
+	/**
+	 * @TODO: Step 3: flush stdio buffers.
 	 * Not implemented yet.
 	 */
 

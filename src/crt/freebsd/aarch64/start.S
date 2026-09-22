@@ -16,6 +16,12 @@
 _start:
 	ldr	x0, [sp]		/* argc */
 	add	x1, sp, #8		/* argv */
+
+	ldr	x3, [x1]			/* x3 = argv[0] */
+	adrp	x4, __progname			/* x4 = page of __progname */
+	add	x4, x4, :lo12:__progname	/* x4 = address of __progname */
+	str	x3, [x4]			/* __progname = argv[0] */
+
 	add	x2, x1, x0, lsl #3	/* envp = argv + argc*8 */
 	add	x2, x2, #8		/* + 1 for NULL */
 

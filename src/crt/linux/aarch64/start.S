@@ -61,6 +61,29 @@ _start:
 	add	x1, sp, #8
 
 	/*
+	 * Store argv[0] into __progname.
+	 *
+	 * __progname is a global variable defined in src/crt/progname.c.
+	 * It holds the program name (argv[0]) so that diagnostic
+	 * functions like __assert_fail can print it.
+	 *
+	 * x1 points to argv, so [x1] is argv[0]. We load it into x3,
+	 * then load the address of __progname into x4 using adrp
+	 * (address of page) + add :lo12: (low 12 bits), and store
+	 * x3 into it.
+	 *
+	 * adrp + :lo12: is the standard aarch64 sequence to access
+	 * a global variable's address when it may be farther than
+	 * ±1 MiB from the current PC.
+	 *
+	 * After: __progname = argv[0]
+	 */
+	ldr	x3, [x1]			/* x3 = argv[0] */
+	adrp	x4, __progname			/* x4 = page of __progname */
+	add	x4, x4, :lo12:__progname	/* x4 = address of __progname */
+	str	x3, [x4]			/* __progname = argv[0] */
+
+	/*
 	 * Compute envp = argv + (argc + 1) * 8.
 	 *
 	 * `add x2, x1, x0, lsl #3` adds x1 to (x0 << 3) and stores

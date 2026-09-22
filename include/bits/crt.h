@@ -21,6 +21,17 @@ extern "C" {
 # endif
 
 /**
+ * @brief The program name (argv[0]).
+ *
+ * Initialized to "(program)" by the C runtime. The startup
+ * code overwrites it with the real argv[0] before calling
+ * main().
+ *
+ * This is the BSD convention, also used by musl and macOS.
+ */
+extern const char	*__progname;
+
+/**
  * @brief Run all atexit handlers.
  *
  * This function is called by exit() to run all functions registered

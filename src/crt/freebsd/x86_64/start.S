@@ -14,6 +14,9 @@ _start:
 	/* argv = rsp + 8 */
 	leaq	8(%rsp), %rsi
 
+	movq	(%rsi), %rax		/* rax = argv[0] */
+	movq	%rax, __progname(%rip)	/* __progname = argv[0] */
+
 	/* envp = argv + (argc + 1) * 8 */
 	leaq	8(%rsi,%rdi,8), %rdx
 
