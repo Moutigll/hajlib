@@ -1,0 +1,142 @@
+/**
+ * @file bits/syscall/linux/aarch64.h
+ * @brief Linux aarch64 syscall numbers.
+ *
+ * Source: <asm-generic/unistd.h> from the Linux kernel.
+ * aarch64 uses the generic syscall numbering. Many syscalls
+ * that existed on older arches are only available in their
+ * *at() variant.
+ *
+ * Do not include this header directly; include <bits/syscall.h>.
+ */
+
+#ifndef _BITS_SYSCALL_LINUX_AARCH64_H
+# define _BITS_SYSCALL_LINUX_AARCH64_H
+
+/* ---- Process control ---- */
+# define SYS_exit				93
+# define SYS_exit_group			94
+# define SYS_clone				220
+# define SYS_execve				221
+# define SYS_wait4				260
+# define SYS_kill				129
+# define SYS_getpid				172
+# define SYS_getppid			173
+# define SYS_gettid				178
+# define SYS_setpgid			154
+# define SYS_getpgid			155
+# define SYS_setsid				157
+# define SYS_getsid				156
+
+/* ---- File I/O ---- */
+# define SYS_read				63
+# define SYS_write				64
+# define SYS_close				57
+# define SYS_lseek				62
+# define SYS_pread64			67
+# define SYS_pwrite64			68
+# define SYS_readv				65
+# define SYS_writev				66
+# define SYS_ioctl				29
+# define SYS_poll				7
+# define SYS_select				23
+# define SYS_pselect6			72
+# define SYS_ppoll				73
+# define SYS_dup				23
+# define SYS_dup3				24
+# define SYS_pipe2				59
+# define SYS_nanosleep			101
+# define SYS_getitimer			102
+# define SYS_setitimer			103
+# define SYS_getcwd				17
+# define SYS_chdir				49
+# define SYS_fchdir				50
+# define SYS_fcntl				25
+# define SYS_flock				32
+# define SYS_fsync				82
+# define SYS_fdatasync			83
+# define SYS_truncate			45
+# define SYS_ftruncate			46
+# define SYS_getdents64			61
+# define SYS_utimensat			88
+# define SYS_statfs				43
+# define SYS_fstatfs			44
+# define SYS_getpriority		141
+# define SYS_setpriority		140
+# define SYS_sched_yield		124
+# define SYS_madvise			233
+# define SYS_epoll_create1		20
+# define SYS_epoll_ctl			21
+# define SYS_epoll_pwait		22
+
+/* ---- Modern *at variants (aarch64 only has these) ---- */
+# define SYS_openat				56
+# define SYS_mkdirat			34
+# define SYS_mknodat			33
+# define SYS_fchownat			54
+# define SYS_newfstatat			79
+# define SYS_unlinkat			35
+# define SYS_renameat			38
+# define SYS_linkat				37
+# define SYS_symlinkat			36
+# define SYS_readlinkat			78
+# define SYS_fchmodat			53
+# define SYS_faccessat			48
+
+/* ---- Memory ---- */
+# define SYS_mmap				222
+# define SYS_munmap				215
+# define SYS_mprotect			226
+# define SYS_mremap				216
+# define SYS_msync				227
+# define SYS_mincore			232
+# define SYS_mlock				228
+# define SYS_munlock			229
+# define SYS_mlockall			230
+# define SYS_munlockall			231
+# define SYS_brk				214
+
+/* ---- Signals ---- */
+# define SYS_rt_sigaction		134
+# define SYS_rt_sigprocmask		135
+# define SYS_rt_sigreturn		139
+# define SYS_rt_sigsuspend		133
+# define SYS_rt_sigpending		136
+# define SYS_rt_sigtimedwait	137
+# define SYS_rt_sigqueueinfo	138
+# define SYS_sigaltstack		132
+# define SYS_tgkill				131
+# define SYS_tkill				130
+
+/* ---- Threads ---- */
+# define SYS_futex				98
+# define SYS_set_tid_address	96
+# define SYS_set_robust_list	99
+# define SYS_get_robust_list	100
+# define SYS_sched_setaffinity	122
+# define SYS_sched_getaffinity	123
+# define SYS_sched_setparam		118
+# define SYS_sched_getparam		121
+# define SYS_sched_setscheduler	119
+# define SYS_sched_getscheduler	120
+
+/* ---- Time ---- */
+# define SYS_clock_gettime		113
+# define SYS_clock_settime		112
+# define SYS_clock_getres		114
+# define SYS_clock_nanosleep	115
+# define SYS_timer_create		107
+# define SYS_timer_settime		110
+# define SYS_timer_gettime		108
+# define SYS_timer_getoverrun	109
+# define SYS_timer_delete		111
+
+/* ---- Random ---- */
+# define SYS_getrandom			278
+
+/* ---- Misc ---- */
+# define SYS_uname				160
+# define SYS_prctl				167
+# define SYS_restart_syscall	128
+
+#endif /* _BITS_SYSCALL_LINUX_AARCH64_H */

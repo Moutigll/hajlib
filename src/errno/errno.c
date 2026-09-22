@@ -8,4 +8,4 @@
 
 #include <errno.h>
 
-__thread int	__haj_errno = 0;
+__HAJ_THREAD_LOCAL int	__haj_errno = 0;

@@ -25,6 +25,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Error reporting: `include/errno.h` (thread-local `errno`, `__haj_errno`), `src/errno/errno.c`, `src/errno/strerror.c`
   - `strerror()` with per-OS message tables (common, networking, POSIX realtime, OS-specific)
   - Thread-local buffer for unknown error codes
+- CRT internals: `include/bits/crt.h` (`__haj_run_atexit`, `__cxa_atexit`, `__cxa_finalize`, `__dso_handle`)
+- Program termination: `src/crt/exit.c`, `src/crt/_exit.c`, `src/crt/abort.c`
+- Exit handlers: `src/crt/atexit.c`, `src/crt/cxa_atexit.c`, `src/crt/cxa_finalize.c`, `src/crt/dso_handle.c`
+- Startup code: per-OS and per-arch entry points
+  - Linux x86_64 / aarch64, FreeBSD x86_64 / aarch64, Darwin x86_64 / arm64
+  - Reads `argc`/`argv`/`envp` (from stack on Linux/FreeBSD, from registers on Darwin), calls `main` then `exit`
+- Raw syscall interface: `include/bits/syscall.h` (`__haj_syscall6`, `HAJ_AT_FDCWD`, `HAJ_AT_*` flags)
+- Syscall numbers per OS/arch: `include/bits/syscall/{linux/x86_64,linux/aarch64,freebsd,darwin,windows}.h`
+- Syscall implementations per OS/arch:
+  - Linux x86_64 / aarch64 (raw Linux convention, negative = `-errno`)
+  - FreeBSD x86_64 / aarch64 (normalizes carry-flag error to `-errno`)
+  - Darwin x86_64 / arm64 (same as FreeBSD)
+  - Windows (C shim dispatching to the mingw CRT, normalizes `errno`)
 
 ### Changed
 
@@ -36,7 +49,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-- Nothing yet
+- Removed `syscall.mk`
 
 ### Deprecated
 
