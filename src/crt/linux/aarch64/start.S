@@ -98,17 +98,6 @@ _start:
 	add	x2, x2, #8
 
 	/*
-	 * Align the stack to 16 bytes.
-	 *
-	 * `and sp, sp, #-16` masks the low 4 bits of sp to 0.
-	 *
-	 * Note: aarch64 requires 16-byte alignment for SP at all
-	 * times. The kernel already guarantees this at _start entry,
-	 * so this is defensive.
-	 */
-	and	sp, sp, #-16
-
-	/*
 	 * Call main.
 	 *
 	 * `bl main` (Branch with Link) does two things:
