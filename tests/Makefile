@@ -92,5 +92,5 @@ help:
 	@echo ""
 	@echo "Variables:"
 	@echo "  HAJ_ROOT      root of the hajlib source tree (default: ..)"
-	@echo "  HAJ_BUILD_LIB if 1 (default), build libhaj.a if missing"
+	@echo "  HAJ_BUILD_LIB if 1 (default), build libhajc.a if missing"
 	@echo "                if 0, the library must already exist"

@@ -12,7 +12,9 @@ test/build/
 test/**/build/
 *.out
 
-.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
 .idea/
 *.swp
 *.swo
@@ -20,7 +22,6 @@ test/**/build/
 .project
 .settings/
 .cproject
-.vscode/ipch/
 
 .DS_Store
 Thumbs.db
@@ -32,3 +33,4 @@ clangd/
 .clangd/
 compile_flags.txt
 tests/build
+releases

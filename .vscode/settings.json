@@ -1,0 +1,48 @@
+{
+    "editor.insertSpaces": false,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "editor.renderWhitespace": "boundary",
+    "editor.rulers": [80, 100],
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.eol": "\n",
+
+    "C_Cpp.default.cStandard": "c11",
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/include",
+        "${workspaceFolder}/src"
+    ],
+
+    "clangd.arguments": [
+        "--compile-commands-dir=${workspaceFolder}",
+        "--background-index",
+        "--clang-tidy",
+        "--completion-style=detailed",
+        "--header-insertion=iwyu"
+    ],
+
+    "files.associations": {
+        "*.S": "asm",
+        "*.s": "asm",
+        "*.h": "c",
+        "*.mk": "makefile"
+    },
+
+    "search.exclude": {
+        "**/objs": true,
+        "**/build": true,
+        "**/.cache": true,
+        "**/releases": true,
+        "**/compile_commands.json": true
+    },
+
+    "emeraldwalk.runonsave": {
+        "commands": [
+            {
+                "match": "\\.(c|h)$",
+                "cmd": "${workspaceFolder}/scripts/header-update.sh ${file}"
+            }
+        ]
+    }
+}

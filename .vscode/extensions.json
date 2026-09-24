@@ -1,0 +1,12 @@
+{
+    "recommendations": [
+        "llvm-vs-code-extensions.vscode-clangd",
+        "editorconfig.editorconfig",
+        "timonwong.shellcheck",
+        "mads-hartmann.bash-ide-vscode",
+        "emeraldwalk.runonsave"
+    ],
+    "unwantedRecommendations": [
+        "ms-vscode.cpptools"
+    ]
+}

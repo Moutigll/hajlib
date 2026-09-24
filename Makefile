@@ -3,7 +3,7 @@
 # A POSIX-like C library, no libc dependency, multi-OS multi-arch.
 #
 # Targets:
-#   all       build libhaj.a (default)
+#   all       build libhajc.a (default)
 #   clean     remove object files
 #   fclean    remove object files and the library
 #   re        fclean + all
@@ -33,7 +33,7 @@ include mk/targets.mk
 include mk/build.mk
 
 # Library name-
-NAME		:= libhaj.a
+NAME		:= libhajc.a
 OBJDIR		:= objs
 
 # Collect all source files
@@ -66,7 +66,14 @@ ALL_SRCS := \
 ALL_OBJS := $(patsubst %.c,$(OBJDIR)/%.o,$(patsubst %.S,$(OBJDIR)/%.o,$(ALL_SRCS)))
 
 # Info targets
-.PHONY: version info help clean fclean re
+.PHONY: version info help clean fclean re headers-add headers-check init
+
+init:
+	@echo "Installing git hooks..."
+	@git config core.hooksPath .githooks
+	@chmod +x .githooks/pre-commit
+	@chmod +x scripts/*.sh
+	@echo "Done. Git hooks are now active."
 
 # Default target
 all: $(NAME)
@@ -76,6 +83,14 @@ $(NAME): $(ALL_OBJS)
 
 version:
 	@echo "$(HAJ_VERSION)"
+
+headers-add:
+	@for f in $$(find src include -type f \( -name '*.c' -o -name '*.h' -o -name '*.S' \)); do \
+		./scripts/header.sh "$$f"; \
+	done
+
+headers-check:
+	@./scripts/header-check.sh
 
 info:
 	@echo "hajlib version  : $(HAJ_VERSION)"
@@ -89,12 +104,15 @@ info:
 
 help:
 	@echo "hajlib targets:"
-	@echo "  make          build libhaj.a"
+	@echo "  make          build libhajc.a"
 	@echo "  make clean    remove object files"
 	@echo "  make fclean   remove object files and the library"
+	@echo "  make headers-add    add/update headers in source files"
+	@echo "  make headers-check  check headers in source files"
 	@echo "  make re       fclean + all"
 	@echo "  make version  print the current version"
 	@echo "  make info     print build configuration"
+	@echo "  make init     install git hooks"
 	@echo "  make help     this message"
 	@echo ""
 	@echo "Cross-compilation:"

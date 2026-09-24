@@ -1,0 +1,66 @@
+#!/bin/sh
+# .githooks/pre-commit - check that staged files have a valid header.
+#
+# This hook does NOT modify anything. It only checks that each
+# staged .c / .h / .hpp / .cpp / .S file has a complete license
+# header and a complete Doxygen block.
+#
+# If a file is missing a required field, the commit is aborted
+# with a clear message. The user must fix the file and re-stage
+# it before committing again.
+#
+# Files are processed one by one so that names containing spaces
+# or other special characters are handled correctly.
+
+set -e
+
+REPO_ROOT=$(git rev-parse --show-toplevel)
+SCRIPTS_DIR="$REPO_ROOT/scripts"
+
+# Collect staged files (Added, Copied, Modified, Renamed)
+# matching the supported extensions.
+STAGED=$(git diff --cached --name-only --diff-filter=ACMR | \
+         grep -E '\.(c|h|hpp|cpp|S)$' || true)
+
+if [ -z "$STAGED" ]; then
+    # Nothing to check
+    exit 0
+fi
+
+echo "pre-commit: checking headers on staged files..."
+
+# Check each file individually, keeping the exit status.
+# The pipeline is redirected from a here-string so the loop
+# runs in the current shell (not a subshell) on most shells.
+# For maximum portability, we use a temporary file.
+TMPFILE=$(mktemp)
+
+printf '%s\n' "$STAGED" > "$TMPFILE"
+
+FAILED=0
+while IFS= read -r file; do
+    [ -z "$file" ] && continue
+    [ ! -f "$file" ] && continue
+
+    if ! "$SCRIPTS_DIR/header-check.sh" "$file"; then
+        FAILED=1
+    fi
+done < "$TMPFILE"
+
+rm -f "$TMPFILE"
+
+if [ "$FAILED" -eq 1 ]; then
+    echo ""
+    echo "pre-commit: commit aborted due to missing header fields."
+    echo ""
+    echo "To fix a file, run:"
+    echo "    ./scripts/header-update.sh <file>"
+    echo ""
+    echo "Then re-stage it:"
+    echo "    git add <file>"
+    echo ""
+    exit 1
+fi
+
+echo "pre-commit: all headers OK"
+exit 0

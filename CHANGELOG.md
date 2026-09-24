@@ -9,11 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Nothing yet
+- Development tooling: `.vscode/settings.json`, `.vscode/extensions.json`
+- License header scripts: `scripts/header.sh`, `scripts/header-update.sh`, `scripts/header-check.sh`
+- Git hook: `.githooks/pre-commit` (checks headers on commit)
 
 ### Changed
 
-- Nothing yet
+- `.gitignore`: track `.vscode/settings.json` and `.vscode/extensions.json`
+- `Makefile`: added `init`, `headers-add`, `headers-check` targets
 
 ### Fixed
 
