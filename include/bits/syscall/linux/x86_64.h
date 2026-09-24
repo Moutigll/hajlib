@@ -1,6 +1,16 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Copyright (C) 2026 Moutig <ele-lean@moutig.sh>
+ *
+ * This file is part of hajlib.
+ * See LICENSE for the full license text.
+ */
+
 /**
- * @file bits/syscall/linux/x86_64.h
+ * @file x86_64.h
  * @brief Linux x86_64 syscall numbers.
+ * @Created: 2026/09/24 15:06:42 by Moutig
+ * @Updated: 2026/09/24 15:55:26 by Moutig
  *
  * Source: <asm/unistd_64.h> from the Linux kernel.
  * These numbers are stable for the Linux x86_64 ABI.

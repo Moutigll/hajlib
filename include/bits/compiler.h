@@ -1,6 +1,16 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Copyright (C) 2026 Moutig <ele-lean@moutig.sh>
+ *
+ * This file is part of hajlib.
+ * See LICENSE for the full license text.
+ */
+
 /**
- * @file bits/compiler.h
+ * @file compiler.h
  * @brief Compiler-specific macros and attributes.
+ * @Created: 2026/09/24 15:06:42 by Moutig
+ * @Updated: 2026/09/24 15:58:39 by Moutig
  *
  * This header provides portable macros for compiler-specific
  * features: TLS, attributes, and other extensions.

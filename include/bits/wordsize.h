@@ -1,11 +1,16 @@
-#ifndef _BITS_WORDSIZE_H
-# define _BITS_WORDSIZE_H
-
-# include <bits/arch.h>
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Copyright (C) 2026 Moutig <ele-lean@moutig.sh>
+ *
+ * This file is part of hajlib.
+ * See LICENSE for the full license text.
+ */
 
 /**
- * @brief Word size detection.
- * @brief Defines __HAJ_WORDSIZE as 32 or 64, and a few derived sizes.
+ * @file wordsize.h
+ * @brief Word size detection macros.
+ * @Created: 2026/09/24 15:06:42 by Moutig
+ * @Updated: 2026/09/24 16:12:43 by Moutig
  *
  * "Word size" here means the size of a pointer and of a `long`,
  * which is what LP64/ILP32 conventions refer to.
@@ -21,6 +26,11 @@
  *
  * This header must only depend on bits/arch.h.
  */
+
+#ifndef _BITS_WORDSIZE_H
+# define _BITS_WORDSIZE_H
+
+# include <bits/arch.h>
 
 /**
  * @brief First, determine pointer size.

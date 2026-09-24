@@ -1,13 +1,16 @@
-#ifndef _BITS_TYPES_H
-# define _BITS_TYPES_H
-
-# include <bits/os.h>
-# include <bits/arch.h>
-# include <bits/wordsize.h>
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Copyright (C) 2026 Moutig <ele-lean@moutig.sh>
+ *
+ * This file is part of hajlib.
+ * See LICENSE for the full license text.
+ */
 
 /**
- * @file bits/types.h
+ * @file types.h
  * @brief Internal fixed-width and POSIX-like types.
+ * @Created: 2026/09/24 15:06:42 by Moutig
+ * @Updated: 2026/09/24 16:05:51 by Moutig
  *
  * This header defines the real typedefs used across hajlib. The
  * public headers (stddef.h, stdint.h, sys/types.h) alias these
@@ -22,10 +25,15 @@
  * public headers (sys/types.h, stdint.h, ...) instead.
  */
 
-/* --------------------------------------------------------------------------
- * Fixed-width integer types
- * --------------------------------------------------------------------------
- *
+#ifndef _BITS_TYPES_H
+# define _BITS_TYPES_H
+
+# include <bits/os.h>
+# include <bits/arch.h>
+# include <bits/wordsize.h>
+
+/* ----- Fixed-width integer types ----- */
+/**
  * We could use the compiler's __INT8_TYPE__ and friends, but we
  * define them explicitly for clarity. All modern platforms use
  * two's complement, so signed/unsigned char, short, int, long
@@ -72,10 +80,8 @@ typedef __haj_u32			__haj_uintptr;
 typedef __haj_i64			__haj_intmax;
 typedef __haj_u64			__haj_uintmax;
 
-/* --------------------------------------------------------------------------
- * Size-related types
- * --------------------------------------------------------------------------
- *
+/* ----- Size-related types ----- */
+/**
  * size_t   : unsigned, result of sizeof
  * ssize_t  : signed, size of a buffer, return of read/write
  * ptrdiff_t: signed, result of pointer subtraction
@@ -94,10 +100,8 @@ typedef int					__haj_ssize;
 typedef int					__haj_ptrdiff;
 # endif
 
-/* --------------------------------------------------------------------------
- * POSIX types
- * --------------------------------------------------------------------------
- *
+/* ----- POSIX types ----- */
+/**
  * These match the kernel ABI per OS. The sizes are chosen to match
  * what the kernel expects when passing these values to syscalls.
  */
@@ -121,7 +125,7 @@ typedef unsigned short		__haj_mode;
 typedef unsigned int		__haj_mode;
 # endif
 
-/*
+/**
  * off_t: file offset, size, and count of bytes.
  *
  * hajlib uses 64 bits everywhere. This is the natural size on

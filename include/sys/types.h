@@ -1,9 +1,16 @@
-#ifndef _SYS_TYPES_H
-# define _SYS_TYPES_H
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Copyright (C) 2026 Moutig <ele-lean@moutig.sh>
+ *
+ * This file is part of hajlib.
+ * See LICENSE for the full license text.
+ */
 
 /**
- * @file sys/types.h
+ * @file types.h
  * @brief POSIX types.
+ * @Created: 2026/09/24 15:06:43 by Moutig
+ * @Updated: 2026/09/24 16:13:53 by Moutig
  *
  * This header defines the standard POSIX types in the global
  * namespace: size_t, ssize_t, off_t, mode_t, pid_t, uid_t, gid_t,
@@ -16,11 +23,12 @@
  * syscalls with these types pass the correct values.
  */
 
+#ifndef _SYS_TYPES_H
+# define _SYS_TYPES_H
+
 # include <bits/types.h>
 
-/* --------------------------------------------------------------------------
- * Size-related types
- * -------------------------------------------------------------------------- */
+/* ----- Size-related types ----- */
 
 # ifndef __size_t_defined
 #  define __size_t_defined
@@ -49,9 +57,7 @@ typedef __haj_ssize		ssize_t;
 typedef __haj_ptrdiff	ptrdiff_t;
 # endif
 
-/* --------------------------------------------------------------------------
- * POSIX types
- * -------------------------------------------------------------------------- */
+/* ----- POSIX types ----- */
 
 # ifndef __mode_t_defined
 #  define __mode_t_defined

@@ -1,4 +1,12 @@
 /*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Copyright (C) 2026 Moutig <ele-lean@moutig.sh>
+ *
+ * This file is part of hajlib.
+ * See LICENSE for the full license text.
+ */
+
+/*
  * _start - FreeBSD aarch64 entry point.
  *
  * FreeBSD and Linux share the AAPCS64 ABI on aarch64. The initial
