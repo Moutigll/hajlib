@@ -1,4 +1,12 @@
 /*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Copyright (C) 2026 Moutig <ele-lean@moutig.sh>
+ *
+ * This file is part of hajlib.
+ * See LICENSE for the full license text.
+ */
+
+/*
  * _start - FreeBSD x86_64 entry point.
  * It's the same as Linux x86_64 but we keep it separate for clarity and future FreeBSD-specific changes.
  */

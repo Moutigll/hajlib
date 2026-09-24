@@ -1,6 +1,16 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Copyright (C) 2026 Moutig <ele-lean@moutig.sh>
+ *
+ * This file is part of hajlib.
+ * See LICENSE for the full license text.
+ */
+
 /**
  * @file assert.c
  * @brief Implementation of assertion failure handlers.
+ * @Created: 2026/09/24 15:06:42 by Moutig
+ * @Updated: 2026/09/24 18:27:03 by Moutig
  *
  * When an assertion fails, the assert() macro calls
  * __assert_fail(). This function prints a diagnostic message to
@@ -15,7 +25,6 @@
  *
  * We use this format for compatibility with tools that parse
  * assertion messages (test runners, CI, etc.).
- *
  */
 
 #include <assert.h>

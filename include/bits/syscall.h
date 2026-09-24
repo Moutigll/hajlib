@@ -1,6 +1,16 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Copyright (C) 2026 Moutig <ele-lean@moutig.sh>
+ *
+ * This file is part of hajlib.
+ * See LICENSE for the full license text.
+ */
+
 /**
- * @file bits/syscall.h
+ * @file syscall.h
  * @brief Raw syscall interface.
+ * @Created: 2026/09/24 15:06:42 by Moutig
+ * @Updated: 2026/09/24 16:03:40 by Moutig
  *
  * This header declares __haj_syscall6 and includes the correct
  * syscall numbers for the target OS and architecture.

@@ -1,6 +1,21 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Copyright (C) 2026 Moutig <ele-lean@moutig.sh>
+ *
+ * This file is part of hajlib.
+ * See LICENSE for the full license text.
+ */
+
 /**
  * @file open.c
  * @brief Implementation of open().
+ * @Created: 2026/09/24 15:06:42 by Moutig
+ * @Updated: 2026/09/24 18:29:35 by Moutig
+ *
+ * open() opens or creates a file and returns a file descriptor.
+ * It is a variadic function: the third argument (mode) is only
+ * present if O_CREAT or O_TMPFILE is set in flags. The mode
+ * argument is ignored if the file already exists.
  */
 
 #include <fcntl.h>

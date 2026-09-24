@@ -1,6 +1,16 @@
+/*
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ * Copyright (C) 2026 Moutig <ele-lean@moutig.sh>
+ *
+ * This file is part of hajlib.
+ * See LICENSE for the full license text.
+ */
+
 /**
- * @file bits/syscall/freebsd.h
+ * @file freebsd.h
  * @brief FreeBSD syscall numbers.
+ * @Created: 2026/09/24 15:06:42 by Moutig
+ * @Updated: 2026/09/24 15:56:32 by Moutig
  *
  * Source: <sys/syscall.h> from the FreeBSD kernel.
  * FreeBSD uses the same syscall numbers on all 64-bit
