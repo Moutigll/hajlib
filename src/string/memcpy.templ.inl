@@ -8,9 +8,9 @@
 
 /**
  * @file memcpy.templ.inl
- * @brief Template for vectorized memcpy implementations.
+ * @brief Template for vectorized memcpy and memmove implementations.
  * @Created: 2026/09/24 23:34:09 by Moutig
- * @Updated: 2026/09/24 23:59:22 by Moutig
+ * @Updated: 2026/09/25 18:14:08 by Moutig
  *
  * This file is included by memcpy.c with different definitions of
  * HAJ_FUNC_NAME, HAJ_VEC_TYPE, HAJ_VEC_SIZE, HAJ_LOAD, HAJ_STORE,
@@ -20,24 +20,35 @@
 #include <stddef.h>
 #include <bits/compiler.h>
 
-#if !defined(HAJ_FUNC_NAME) || !defined(HAJ_VEC_TYPE) || !defined(HAJ_VEC_SIZE) || !defined(HAJ_LOAD) || !defined(HAJ_STORE) || !defined(HAJ_TARGET)
+#if !defined(HAJ_FUNC_NAME) \
+	|| !defined(HAJ_VEC_TYPE) \
+	|| !defined(HAJ_VEC_SIZE) \
+	|| !defined(HAJ_LOAD) \
+	|| !defined(HAJ_STORE) \
+	|| !defined(HAJ_DIRECTION) \
+	|| !defined(HAJ_RESTRICT) \
+	|| !defined(HAJ_TARGET)
 # error "Missing required definitions for memcpy template" /* We keep the defines below to avoid warnings in the IDE. */
 typedef __haj_size __HAJ_UNALIGNED_WORD haj_word_t;
-# define HAJ_FUNC_NAME		hajMemcpyGeneric
-# define HAJ_ATTR_UNUSED	__HAJ_UNUSED
-# define HAJ_VEC_TYPE		haj_word_t
-# define HAJ_VEC_SIZE		sizeof(haj_word_t)
-# define HAJ_LOAD(p)		 (*(const HAJ_VEC_TYPE *)(p))
-# define HAJ_STORE(p, v)	(*(HAJ_VEC_TYPE *)(p) = (v))
-# define HAJ_TARGET
+# define HAJ_FUNC_NAME		hajMemcpyGeneric				/* Function name */
+# define HAJ_ATTR_UNUSED	__HAJ_UNUSED					/* If the function may be unused */
+# define HAJ_VEC_TYPE		haj_word_t						/* Vector type use to copy data */
+# define HAJ_VEC_SIZE		sizeof(haj_word_t)				/* Size of the vector type in bytes */
+# define HAJ_LOAD(p)		 (*(const HAJ_VEC_TYPE *)(p))	/* Load a vector from memory */
+# define HAJ_STORE(p, v)	(*(HAJ_VEC_TYPE *)(p) = (v))	/* Store a vector to memory */
+# define HAJ_DIRECTION		1								/* Direction of the copy: 1 for forward else backward */
+# define HAJ_RESTRICT		__HAJ_RESTRICT					/* Restrict qualifier for pointers */
+# define HAJ_TARGET											/* Target architecture */
 #endif
 
 HAJ_ATTR_UNUSED
 HAJ_TARGET
-static void *HAJ_FUNC_NAME(void *__HAJ_RESTRICT dest,
-						   const void *__HAJ_RESTRICT src,
-						   size_t n)
+static void *HAJ_FUNC_NAME(void			*HAJ_RESTRICT dest,
+						   const void	*HAJ_RESTRICT src,
+						   size_t		n)
 {
+#if HAJ_DIRECTION == 1
+	/* ---- Forward copy (memcpy) ----- */
 	unsigned char		*d = (unsigned char *)dest;
 	const unsigned char *s = (const unsigned char *)src;
 
@@ -80,6 +91,47 @@ static void *HAJ_FUNC_NAME(void *__HAJ_RESTRICT dest,
 		*d++ = *s++;
 
 	return (dest);
+#else
+	/* ----- Backward copy (memmove, dest > src with overlap) ----- */
+	unsigned char	   *d = (unsigned char *)dest;
+	const unsigned char *s = (const unsigned char *)src;
+
+	/* Byte-by-byte at the end until (d + n) is aligned. */
+	while (n && (((size_t)(d + n)) & (HAJ_VEC_SIZE - 1)))
+	{
+		n--;
+		d[n] = s[n];
+	}
+
+	/* Vector loop, from the end. */
+	while (n >= 4 * HAJ_VEC_SIZE)
+	{
+		n -= 4 * HAJ_VEC_SIZE;
+		HAJ_VEC_TYPE a = HAJ_LOAD(s + n + 0 * HAJ_VEC_SIZE);
+		HAJ_VEC_TYPE b = HAJ_LOAD(s + n + 1 * HAJ_VEC_SIZE);
+		HAJ_VEC_TYPE c = HAJ_LOAD(s + n + 2 * HAJ_VEC_SIZE);
+		HAJ_VEC_TYPE e = HAJ_LOAD(s + n + 3 * HAJ_VEC_SIZE);
+		HAJ_STORE(d + n + 0 * HAJ_VEC_SIZE, a);
+		HAJ_STORE(d + n + 1 * HAJ_VEC_SIZE, b);
+		HAJ_STORE(d + n + 2 * HAJ_VEC_SIZE, c);
+		HAJ_STORE(d + n + 3 * HAJ_VEC_SIZE, e);
+	}
+	while (n >= HAJ_VEC_SIZE)
+	{
+		n -= HAJ_VEC_SIZE;
+		HAJ_VEC_TYPE a = HAJ_LOAD(s + n);
+		HAJ_STORE(d + n, a);
+	}
+
+	/* Tail bytes at the beginning. */
+	while (n)
+	{
+		n--;
+		d[n] = s[n];
+	}
+
+	return (dest);
+#endif
 }
 
 # undef HAJ_FUNC_NAME

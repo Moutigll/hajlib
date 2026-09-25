@@ -18,6 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed library references from `libhaj.a` to `libhajc.a` (`mk/config.mk`, `mk/hajlib.mk`)
 - `Makefile`, `mk/sources.mk` and `mk/targets.mk`: added CPU source selection per OS/arch
 - `string.h` with `memcpy` (SSE2/AVX2/AVX-512/NEON dispatch via CPU detection, generic fallback)
+- `string.h`: `memmove`
+- Refactored `memcpy` into a shared vector template (`src/string/memcpyImpl.h`), reused by `memmove`
 
 ### Changed
 

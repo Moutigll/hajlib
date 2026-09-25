@@ -40,8 +40,7 @@ ASSERT_SRCS := \
 	assert.c
 
 # cpu (portable C parts)
-CPU_SRCS := \
-	cpu_features.c
+CPU_SRCS :=
 
 # crt (portable C parts)
 CRT_SRCS := \
@@ -104,7 +103,8 @@ STDLIB_SRCS :=
 
 # string
 STRING_SRCS := \
-	memcpy.c
+	memcpy.c \
+	memmove.c
 
 # time
 TIME_SRCS :=

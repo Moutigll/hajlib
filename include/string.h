@@ -10,7 +10,7 @@
  * @file string.h
  * @brief C standard string and memory functions.
  * @Created: 2026/09/24 22:10:46 by Moutig
- * @Updated: 2026/09/24 22:20:49 by Moutig
+ * @Updated: 2026/09/25 17:52:08 by Moutig
  *
  * This header declares the C standard string and memory
  * functions, plus a few POSIX/GNU extensions (memrchr, strdup,
@@ -38,6 +38,16 @@ extern "C" {
  * @return dest.
  */
 void	*memcpy(void *__HAJ_RESTRICT dest, const void *__HAJ_RESTRICT src, size_t n);
+
+/**
+ * @brief Copy n bytes from src to dest. Regions may overlap.
+ *
+ * @param dest Destination buffer.
+ * @param src  Source buffer.
+ * @param n    Number of bytes to copy.
+ * @return dest.
+ */
+void	*memmove(void *dest, const void *src, size_t n);
 
 # if defined(__cplusplus)
 }

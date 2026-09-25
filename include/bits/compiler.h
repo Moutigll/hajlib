@@ -10,7 +10,7 @@
  * @file compiler.h
  * @brief Compiler-specific macros and attributes.
  * @Created: 2026/09/24 15:06:42 by Moutig
- * @Updated: 2026/09/25 00:27:21 by Moutig
+ * @Updated: 2026/09/25 20:36:16 by Moutig
  *
  * This header provides portable macros for compiler-specific
  * features: TLS, attributes, and other extensions.
@@ -75,7 +75,7 @@
 #  define __HAJ_PACKED		__attribute__((__packed__))			/* Structure without padding between members. */
 #  define __HAJ_ALIGNED(n)	__attribute__((__aligned__(n)))		/* Force a minimum alignment. */
 #  define __HAJ_WEAK		__attribute__((__weak__))			/* Symbol that may be undefined at link time. */
-#  define __HAJ_ALIAS(name)	__attribute__((__alias__(name)))	/* Symbol that aliases another symbol. */
+#  define __HAJ_ALIAS(name)	__attribute__((__alias__(#name)))	/* Symbol that aliases another symbol. */
 #  define __HAJ_USED		__attribute__((__used__))			/* Prevent the compiler from removing an unused symbol. */
 #  define __HAJ_CONSTRUCTOR	__attribute__((__constructor__))	/* Function called at program startup. */
 #  define __HAJ_DESTRUCTOR	__attribute__((__destructor__))		/* Function called at program termination. */
@@ -335,5 +335,9 @@
 #   define __HAJ_HAVE_IFUNC_ATTR 0
 #  endif
 # endif
+
+/* ----- Concatenation macro ----- */
+# define __HAJ_CONCAT_(a, b)	a##b
+# define __HAJ_CONCAT(a, b)		__HAJ_CONCAT_(a, b)
 
 #endif /* _BITS_COMPILER_H */
