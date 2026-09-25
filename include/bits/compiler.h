@@ -10,7 +10,7 @@
  * @file compiler.h
  * @brief Compiler-specific macros and attributes.
  * @Created: 2026/09/24 15:06:42 by Moutig
- * @Updated: 2026/09/25 20:36:16 by Moutig
+ * @Updated: 2026/09/25 21:18:53 by Moutig
  *
  * This header provides portable macros for compiler-specific
  * features: TLS, attributes, and other extensions.
@@ -339,5 +339,10 @@
 /* ----- Concatenation macro ----- */
 # define __HAJ_CONCAT_(a, b)	a##b
 # define __HAJ_CONCAT(a, b)		__HAJ_CONCAT_(a, b)
+
+/* ----- HAJ SOURCE ----- */
+#if defined(_GNU_SOURCE) || defined(_BSD_SOURCE) || defined(_POSIX_C_SOURCE) || defined(__HAJ_COMPILER_GNULIKE)
+# define __HAJ_SOURCE	1
+#endif
 
 #endif /* _BITS_COMPILER_H */

@@ -18,7 +18,7 @@
  */
 
 #include <stddef.h>
-#include <bits/compiler.h>
+#include <bits/types.h>
 
 #if !defined(HAJ_FUNC_NAME) \
 	|| !defined(HAJ_VEC_TYPE) \
@@ -29,11 +29,10 @@
 	|| !defined(HAJ_RESTRICT) \
 	|| !defined(HAJ_TARGET)
 # error "Missing required definitions for memcpy template" /* We keep the defines below to avoid warnings in the IDE. */
-typedef __haj_size __HAJ_UNALIGNED_WORD haj_word_t;
 # define HAJ_FUNC_NAME		hajMemcpyGeneric				/* Function name */
 # define HAJ_ATTR_UNUSED	__HAJ_UNUSED					/* If the function may be unused */
-# define HAJ_VEC_TYPE		haj_word_t						/* Vector type use to copy data */
-# define HAJ_VEC_SIZE		sizeof(haj_word_t)				/* Size of the vector type in bytes */
+# define HAJ_VEC_TYPE		__hajUnalignedWord_t						/* Vector type use to copy data */
+# define HAJ_VEC_SIZE		sizeof(__hajUnalignedWord_t)				/* Size of the vector type in bytes */
 # define HAJ_LOAD(p)		 (*(const HAJ_VEC_TYPE *)(p))	/* Load a vector from memory */
 # define HAJ_STORE(p, v)	(*(HAJ_VEC_TYPE *)(p) = (v))	/* Store a vector to memory */
 # define HAJ_DIRECTION		1								/* Direction of the copy: 1 for forward else backward */

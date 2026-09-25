@@ -10,7 +10,7 @@
  * @file string.h
  * @brief C standard string and memory functions.
  * @Created: 2026/09/24 22:10:46 by Moutig
- * @Updated: 2026/09/25 17:52:08 by Moutig
+ * @Updated: 2026/09/25 22:04:13 by Moutig
  *
  * This header declares the C standard string and memory
  * functions, plus a few POSIX/GNU extensions (memrchr, strdup,
@@ -48,6 +48,20 @@ void	*memcpy(void *__HAJ_RESTRICT dest, const void *__HAJ_RESTRICT src, size_t n
  * @return dest.
  */
 void	*memmove(void *dest, const void *src, size_t n);
+
+/**
+ * @brief Fill the first n bytes of the memory area pointed to by s with the constant byte c.
+ *
+ * @param s Pointer to the memory area to fill.
+ * @param c Byte value to set (converted to unsigned char).
+ * @param n Number of bytes to fill.
+ * @return s.
+ */
+void	*memset(void *s, int c, size_t n);
+
+#if defined(__HAJ_SOURCE)
+#define bzero(b,len) (memset((b), '\0', (len)), (void) 0)	/* Fill memory with zero bytes. */
+#endif
 
 # if defined(__cplusplus)
 }

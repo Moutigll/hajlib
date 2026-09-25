@@ -10,7 +10,7 @@
  * @file memcpy.c
  * @brief C standard memcpy implementation with vectorization.
  * @Created: 2026/09/24 23:08:35 by Moutig
- * @Updated: 2026/09/25 20:46:34 by Moutig
+ * @Updated: 2026/09/25 21:55:38 by Moutig
  *
  * This file implements the C standard memcpy function, which copies
  * n bytes from the source buffer to the destination buffer. It uses
@@ -28,7 +28,7 @@
 # define HAJ_DIRECTION	1
 # define HAJ_RESTRICT	__HAJ_RESTRICT
 # define HAJ_PREFIX		hajMemcpy
-# include "memcpyImpl.h"
+# include "../impl/memcpyImpl.h"
 
 # undef HAJ_PREFIX
 # undef HAJ_RESTRICT
@@ -37,8 +37,6 @@
 /* ----- Dispatcher ----- */
 
 #if defined(__ELF__) && (defined(__x86_64__) || defined(_M_X64))
-
-static void *(*g_memcpyImpl)(void *, const void *, size_t) = NULL;
 
 static void *memcpySelectImpl(void)
 {
@@ -49,13 +47,15 @@ static void *memcpySelectImpl(void)
 	return ((void *)hajMemcpySse2);
 }
 
-void *memcpy(void *__HAJ_RESTRICT dest,
-			 const void *__HAJ_RESTRICT src,
-			 size_t n)
+void *memcpy(void		*__HAJ_RESTRICT dest,
+			 const void	*__HAJ_RESTRICT src,
+			 size_t		n)
 {
-	if (g_memcpyImpl == NULL)
-		g_memcpyImpl = (void *(*)(void *, const void *, size_t))memcpySelectImpl();
-	return (g_memcpyImpl(dest, src, n));
+	static void *(*memcpyFunc)(void *, const void *, size_t) = NULL;
+
+	if (memcpyFunc == NULL)
+		memcpyFunc = (void *(*)(void *, const void *, size_t))memcpySelectImpl();
+	return (memcpyFunc(dest, src, n));
 }
 
 #elif defined(__aarch64__)

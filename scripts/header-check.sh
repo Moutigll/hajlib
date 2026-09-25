@@ -14,14 +14,14 @@ set -e
 
 if [ "$#" -eq 0 ]; then
     FILES=$(find src include -type f \
-        \( -name '*.c' -o -name '*.h' -o -name '*.hpp' -o -name '*.cpp' -o -name '*.S' \) \
+        \( -name '*.c' -o -name '*.h' -o -name '*.hpp' -o -name '*.cpp' -o -name '*.S' -o -name '*.inl' \) \
         2>/dev/null)
 else
     FILES=""
     for arg in "$@"; do
         if [ -d "$arg" ]; then
             FILES="$FILES $(find "$arg" -type f \
-                \( -name '*.c' -o -name '*.h' -o -name '*.hpp' -o -name '*.cpp' -o -name '*.S' \) \
+                \( -name '*.c' -o -name '*.h' -o -name '*.hpp' -o -name '*.cpp' -o -name '*.S' -o -name '*.inl' \) \
                 2>/dev/null)"
         else
             FILES="$FILES $arg"
@@ -36,7 +36,7 @@ for f in $FILES; do
 
     # Only process supported extensions
     case "$f" in
-        *.c|*.h|*.hpp|*.cpp|*.S) ;;
+        *.c|*.h|*.hpp|*.cpp|*.S|*.inl) ;;
         *) continue ;;
     esac
 
@@ -50,7 +50,7 @@ for f in $FILES; do
 
     # Doxygen block (C/C++ only, not assembly)
     case "$f" in
-        *.c|*.h|*.hpp|*.cpp)
+        *.c|*.h|*.hpp|*.cpp|*.inl)
             head -30 "$f" | grep -q "@file "    || MISSING="$MISSING @file"
             head -30 "$f" | grep -q "@brief "   || MISSING="$MISSING @brief"
             head -30 "$f" | grep -q "@Created:" || MISSING="$MISSING @Created"

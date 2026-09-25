@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `string.h` with `memcpy` (SSE2/AVX2/AVX-512/NEON dispatch via CPU detection, generic fallback)
 - `string.h`: `memmove`
 - Refactored `memcpy` into a shared vector template (`src/string/memcpyImpl.h`), reused by `memmove`
+- `string.h`: `memset` (SSE2/AVX2/AVX-512/NEON dispatch) and `bzero` macro
+- `__HAJ_SOURCE` macro in `bits/compiler.h` (gated on `_GNU_SOURCE`/`_BSD_SOURCE`/`_POSIX_C_SOURCE`/GNU-like compilers)
 
 ### Changed
 

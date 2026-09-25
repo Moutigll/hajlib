@@ -10,7 +10,7 @@
  * @file memcpyImpl.h
  * @brief Template for vectorized memcpy and memmove implementations.
  * @Created: 2026/09/25 20:12:09 by Moutig
- * @Updated: 2026/09/25 20:45:58 by Moutig
+ * @Updated: 2026/09/25 21:22:53 by Moutig
  *
  * This file is included by memcpy.c and memmove.c with different definitions of
  * HAJ_PREFIX, HAJ_DIRECTION, and HAJ_RESTRICT. It implements vectorized
@@ -19,7 +19,7 @@
 
 
 #include <stddef.h>
-#include <bits/compiler.h>
+#include <bits/types.h>
 
 #if !defined(HAJ_PREFIX) || !defined(HAJ_DIRECTION) || !defined(HAJ_RESTRICT)
 # error "Missing required definitions for memcpy template" /* We keep the defines below to avoid warnings in the IDE. */
@@ -28,19 +28,16 @@
 # define HAJ_RESTRICT __HAJ_RESTRICT
 #endif
 
-/* Generic word type, shared by all instances. */
-typedef __haj_size __HAJ_UNALIGNED_WORD haj_word_t;
-
 /* -----  Generic (word-at-a-time) ----- */
 
 # define HAJ_FUNC_NAME		__HAJ_CONCAT(HAJ_PREFIX, Generic)
 # define HAJ_ATTR_UNUSED	__HAJ_UNUSED
-# define HAJ_VEC_TYPE		haj_word_t
-# define HAJ_VEC_SIZE		sizeof(haj_word_t)
+# define HAJ_VEC_TYPE		__hajUnalignedWord_t
+# define HAJ_VEC_SIZE		sizeof(__hajUnalignedWord_t)
 # define HAJ_LOAD(p)		(*(const HAJ_VEC_TYPE *)(p))
 # define HAJ_STORE(p, v)	(*(HAJ_VEC_TYPE *)(p) = (v))
 # define HAJ_TARGET
-# include "memcpy.templ.inl"
+# include "../templates/memcpy.templ.inl"
 
 /* ----- x86_64 : SSE2, AVX2, AVX-512 ----- */
 
@@ -56,7 +53,7 @@ typedef __haj_size __HAJ_UNALIGNED_WORD haj_word_t;
 # define HAJ_LOAD(p)		_mm_loadu_si128((const __m128i *)(p))
 # define HAJ_STORE(p, v)	_mm_storeu_si128((__m128i *)(p), (v))
 # define HAJ_TARGET			__HAJ_TARGET("sse2")
-# include "memcpy.templ.inl"
+# include "../templates/memcpy.templ.inl"
 
 /* AVX2 */
 # define HAJ_FUNC_NAME		__HAJ_CONCAT(HAJ_PREFIX, Avx2)
@@ -65,7 +62,7 @@ typedef __haj_size __HAJ_UNALIGNED_WORD haj_word_t;
 # define HAJ_LOAD(p)		_mm256_loadu_si256((const __m256i *)(p))
 # define HAJ_STORE(p, v)	_mm256_storeu_si256((__m256i *)(p), (v))
 # define HAJ_TARGET			__HAJ_TARGET("avx2")
-# include "memcpy.templ.inl"
+# include "../templates/memcpy.templ.inl"
 
 /* AVX-512 */
 # define HAJ_FUNC_NAME		__HAJ_CONCAT(HAJ_PREFIX, Avx512)
@@ -74,7 +71,7 @@ typedef __haj_size __HAJ_UNALIGNED_WORD haj_word_t;
 # define HAJ_LOAD(p)		_mm512_loadu_si512((const void *)(p))
 # define HAJ_STORE(p, v)	_mm512_storeu_si512((void *)(p), (v))
 # define HAJ_TARGET			__HAJ_TARGET("avx512f,avx512bw,avx512vl")
-# include "memcpy.templ.inl"
+# include "../templates/memcpy.templ.inl"
 
 #endif /* x86_64 */
 
@@ -90,6 +87,6 @@ typedef __haj_size __HAJ_UNALIGNED_WORD haj_word_t;
 # define HAJ_LOAD(p)		vld1q_u8((const uint8_t *)(p))
 # define HAJ_STORE(p, v)	vst1q_u8((uint8_t *)(p), (v))
 # define HAJ_TARGET
-# include "memcpy.templ.inl"
+# include "../templates/memcpy.templ.inl"
 
 #endif /* aarch64 */

@@ -10,7 +10,7 @@
  * @file memmove.c
  * @brief Implementation of the memmove function.
  * @Created: 2026/09/25 17:52:31 by Moutig
- * @Updated: 2026/09/25 20:46:15 by Moutig
+ * @Updated: 2026/09/25 21:54:47 by Moutig
  *
  * This file implements the memmove function, which copies n bytes from src to dest,
  * allowing for overlapping memory regions. It uses vectorized implementations for
@@ -26,7 +26,7 @@
 # define HAJ_DIRECTION	-1
 # define HAJ_RESTRICT
 # define HAJ_PREFIX		hajMemmoveBackward
-# include "memcpyImpl.h"
+# include "../impl/memcpyImpl.h"
 
 # undef HAJ_PREFIX
 # undef HAJ_RESTRICT
@@ -36,8 +36,6 @@
 /* ----- Dispatcher ----- */
 
 #if defined(__ELF__) && (defined(__x86_64__) || defined(_M_X64))
-
-static void *(*g_memmoveBackwardImpl)(void *, const void *, size_t) = NULL;
 
 static void *memmoveSelectImpl(void)
 {
@@ -50,9 +48,10 @@ static void *memmoveSelectImpl(void)
 
 static void *memmoveBackward(void *dest, const void *src, size_t n)
 {
-	if (g_memmoveBackwardImpl == NULL)
-		g_memmoveBackwardImpl = (void *(*)(void *, const void *, size_t))memmoveSelectImpl();
-	return (g_memmoveBackwardImpl(dest, src, n));
+	static void *(*memmoveBackFunc)(void *, const void *, size_t) = NULL;
+	if (memmoveBackFunc == NULL)
+		memmoveBackFunc = (void *(*)(void *, const void *, size_t))memmoveSelectImpl();
+	return (memmoveBackFunc(dest, src, n));
 }
 
 #elif defined(__aarch64__)
