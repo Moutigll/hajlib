@@ -16,6 +16,7 @@
 SRC_DIR	:= src
 
 ASSERT_DIR		:= $(SRC_DIR)/assert
+CPU_DIR			:= $(SRC_DIR)/cpu
 CRT_DIR			:= $(SRC_DIR)/crt
 CTYPE_DIR		:= $(SRC_DIR)/ctype
 ERRNO_DIR		:= $(SRC_DIR)/errno
@@ -37,6 +38,10 @@ UNISTD_DIR		:= $(SRC_DIR)/unistd
 # assert (portable C parts)
 ASSERT_SRCS := \
 	assert.c
+
+# cpu (portable C parts)
+CPU_SRCS := \
+	cpu_features.c
 
 # crt (portable C parts)
 CRT_SRCS := \
@@ -108,6 +113,7 @@ UNISTD_SRCS :=
 
 # Prefix each section with its directory.
 ASSERT_SRCS		:= $(addprefix $(ASSERT_DIR)/,$(ASSERT_SRCS))
+CPU_SRCS		:= $(addprefix $(CPU_DIR)/,$(CPU_SRCS))
 CRT_SRCS		:= $(addprefix $(CRT_DIR)/,$(CRT_SRCS))
 CTYPE_SRCS		:= $(addprefix $(CTYPE_DIR)/,$(CTYPE_SRCS))
 ERRNO_SRCS		:= $(addprefix $(ERRNO_DIR)/,$(ERRNO_SRCS))

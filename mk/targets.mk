@@ -32,6 +32,7 @@ ifeq ($(TARGET_OS),Linux)
     SYSCALL_SRCS	:= src/syscall/linux/x86_64/__haj_syscall6.S
     SETJMP_SRCS		:= src/setjmp/x86_64/setjmp.S \
 			   src/setjmp/x86_64/longjmp.S
+    CPU_SRCS		:= src/cpu/x86/cpuFeatures.c
 
   else ifeq ($(TARGET_ARCH),aarch64)
     CRT_START_SRCS	:= src/crt/linux/aarch64/start.S
@@ -51,6 +52,7 @@ else ifeq ($(TARGET_OS),FreeBSD)
     SYSCALL_SRCS	:= src/syscall/freebsd/x86_64/__haj_syscall6.S
     SETJMP_SRCS		:= src/setjmp/x86_64/setjmp.S \
 			   src/setjmp/x86_64/longjmp.S
+	CPU_SRCS		:= src/cpu/x86/cpuFeatures.c
 
   else ifeq ($(TARGET_ARCH),aarch64)
     CRT_START_SRCS	:= src/crt/freebsd/aarch64/start.S
@@ -70,6 +72,7 @@ else ifeq ($(TARGET_OS),Darwin)
     SYSCALL_SRCS	:= src/syscall/darwin/x86_64/__haj_syscall6.S
     SETJMP_SRCS		:= src/setjmp/x86_64/setjmp.S \
 			   src/setjmp/x86_64/longjmp.S
+	CPU_SRCS		:= src/cpu/x86/cpuFeatures.c
 
   else ifeq ($(TARGET_ARCH),arm64)
     CRT_START_SRCS	:= src/crt/darwin/arm64/start.S

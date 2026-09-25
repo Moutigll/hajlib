@@ -41,6 +41,7 @@ OBJDIR		:= objs
 # The linker scans the archive from left to right and picks the
 # objects that resolve unresolved symbols.
 ALL_SRCS := \
+	$(CPU_SRCS) \
 	$(CRT_SRCS) \
 	$(CRT_START_SRCS) \
 	$(SYSCALL_SRCS) \

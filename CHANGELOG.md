@@ -12,11 +12,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Development tooling: `.vscode/settings.json`, `.vscode/extensions.json`
 - License header scripts: `scripts/header.sh`, `scripts/header-update.sh`, `scripts/header-check.sh`
 - Git hook: `.githooks/pre-commit` (checks headers on commit)
+- CPU feature detection: `include/bits/cpu.h` (SSE2/3/SSSE3, SSE4.1/4.2, AVX, AVX2, FMA, AVX-512F/BW/VL, ERMS)
+- Implementation: `src/cpu/x86/cpuFeatures.c` (CPUID + XGETBV, lazy detection, cached in static struct)
+- Compiler attributes: `__HAJ_MAY_ALIAS`, `__HAJ_EXTENSION`, `__HAJ_TYPEOF`, `__HAJ_ALIGNED_MAX`, `__HAJ_UNALIGNED_WORD`, `__HAJ_TARGET`, `__HAJ_IFUNC`
+- Renamed library references from `libhaj.a` to `libhajc.a` (`mk/config.mk`, `mk/hajlib.mk`)
+- `Makefile`, `mk/sources.mk` and `mk/targets.mk`: added CPU source selection per OS/arch
 
 ### Changed
 
 - `.gitignore`: track `.vscode/settings.json` and `.vscode/extensions.json`
 - `Makefile`: added `init`, `headers-add`, `headers-check` targets
+- Renamed library references from `libhaj.a` to `libhajc.a` (`mk/config.mk`, `mk/hajlib.mk`)
 
 ### Fixed
 
