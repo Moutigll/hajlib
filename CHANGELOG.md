@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Compiler attributes: `__HAJ_MAY_ALIAS`, `__HAJ_EXTENSION`, `__HAJ_TYPEOF`, `__HAJ_ALIGNED_MAX`, `__HAJ_UNALIGNED_WORD`, `__HAJ_TARGET`, `__HAJ_IFUNC`
 - Renamed library references from `libhaj.a` to `libhajc.a` (`mk/config.mk`, `mk/hajlib.mk`)
 - `Makefile`, `mk/sources.mk` and `mk/targets.mk`: added CPU source selection per OS/arch
+- `string.h` with `memcpy` (SSE2/AVX2/AVX-512/NEON dispatch via CPU detection, generic fallback)
 
 ### Changed
 

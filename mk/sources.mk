@@ -103,7 +103,8 @@ STDIO_SRCS :=
 STDLIB_SRCS :=
 
 # string
-STRING_SRCS :=
+STRING_SRCS := \
+	memcpy.c
 
 # time
 TIME_SRCS :=
