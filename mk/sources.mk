@@ -105,7 +105,11 @@ STDLIB_SRCS :=
 STRING_SRCS := \
 	mem/memcpy.c \
 	mem/memmove.c \
-	mem/memset.c
+	mem/memset.c \
+	mem/memcmp.c \
+	mem/memchr.c \
+	mem/memrchr.c \
+	mem/memccpy.c
 
 # time
 TIME_SRCS :=

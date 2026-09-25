@@ -10,7 +10,7 @@
  * @file memsetImpl.h
  * @brief Template for vectorized memset implementations.
  * @Created: 2026/09/25 21:06:36 by Moutig
- * @Updated: 2026/09/25 22:02:42 by Moutig
+ * @Updated: 2026/09/25 22:38:37 by Moutig
  *
  * This file is included by memset.c with different definitions of
  * HAJ_PREFIX, HAJ_VEC_TYPE, HAJ_VEC_SIZE, HAJ_SET1, HAJ_STORE, and HAJ_TARGET.
@@ -28,9 +28,9 @@
 
 # define HAJ_FUNC_NAME		__HAJ_CONCAT(HAJ_PREFIX, Generic)
 # define HAJ_ATTR_UNUSED	__HAJ_UNUSED
-# define HAJ_VEC_TYPE		__hajUnalignedWord_t
-# define HAJ_VEC_SIZE		sizeof(__hajUnalignedWord_t)
-# define HAJ_SET1(v)		hajMemsetSplat(v)
+# define HAJ_VEC_TYPE		__hajULW_t
+# define HAJ_VEC_SIZE		sizeof(__hajULW_t)
+# define HAJ_SET1(v)		__hajSplatByte(v)
 # define HAJ_STORE(p, w)	(*(HAJ_VEC_TYPE *)(p) = (w))
 # define HAJ_TARGET
 # include "../templates/memset.templ.inl"

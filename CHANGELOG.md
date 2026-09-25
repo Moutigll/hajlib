@@ -22,6 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Refactored `memcpy` into a shared vector template (`src/string/memcpyImpl.h`), reused by `memmove`
 - `string.h`: `memset` (SSE2/AVX2/AVX-512/NEON dispatch) and `bzero` macro
 - `__HAJ_SOURCE` macro in `bits/compiler.h` (gated on `_GNU_SOURCE`/`_BSD_SOURCE`/`_POSIX_C_SOURCE`/GNU-like compilers)
+- `string.h`: `memcmp`, `memchr`, `memccpy`, and `memrchr` (GNU, under `__HAJ_SOURCE`)
+- Internal helpers: `src/string/impl/wordOps.h` (`__hajSplatByte`, `__hajHasZeroByte`, first/last zero byte index)
 
 ### Changed
 

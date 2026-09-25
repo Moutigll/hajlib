@@ -10,7 +10,7 @@
  * @file memcpyImpl.h
  * @brief Template for vectorized memcpy and memmove implementations.
  * @Created: 2026/09/25 20:12:09 by Moutig
- * @Updated: 2026/09/25 21:22:53 by Moutig
+ * @Updated: 2026/09/25 22:31:40 by Moutig
  *
  * This file is included by memcpy.c and memmove.c with different definitions of
  * HAJ_PREFIX, HAJ_DIRECTION, and HAJ_RESTRICT. It implements vectorized
@@ -32,8 +32,8 @@
 
 # define HAJ_FUNC_NAME		__HAJ_CONCAT(HAJ_PREFIX, Generic)
 # define HAJ_ATTR_UNUSED	__HAJ_UNUSED
-# define HAJ_VEC_TYPE		__hajUnalignedWord_t
-# define HAJ_VEC_SIZE		sizeof(__hajUnalignedWord_t)
+# define HAJ_VEC_TYPE		__hajULW_t
+# define HAJ_VEC_SIZE		sizeof(__hajULW_t)
 # define HAJ_LOAD(p)		(*(const HAJ_VEC_TYPE *)(p))
 # define HAJ_STORE(p, v)	(*(HAJ_VEC_TYPE *)(p) = (v))
 # define HAJ_TARGET

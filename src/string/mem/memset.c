@@ -8,27 +8,19 @@
 
 /**
  * @file memset.c
- * @brief TODO: brief description.
+ * @brief Implementation of the memset function.
  * @Created: 2026/09/25 20:50:06 by Moutig
- * @Updated: 2026/09/25 21:53:40 by Moutig
+ * @Updated: 2026/09/25 22:39:54 by Moutig
  *
- * TODO: description.
+ * This file implements the memset function, which fills a block of memory
+ * with a specified byte value. It uses architecture-specific implementations
+ * for optimal performance on x86_64 and aarch64 platforms, with a generic fallback
+ * for other architectures.
  */
 
 #include <string.h>
 #include <bits/cpu.h>
-
-/* Splat helper for the generic implementation. */
-static inline __haj_size hajMemsetSplat(unsigned char v)
-{
-	__haj_size w = (__haj_size)v;
-	w |= w << 8;
-	w |= w << 16;
-# if __HAJ_WORDSIZE == 64
-	w |= w << 32;
-# endif
-	return (w);
-}
+#include "../impl/wordOps.h"
 
 # define HAJ_PREFIX	hajMemset
 # include "../impl/memsetImpl.h"

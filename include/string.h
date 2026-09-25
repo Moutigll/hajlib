@@ -10,7 +10,7 @@
  * @file string.h
  * @brief C standard string and memory functions.
  * @Created: 2026/09/24 22:10:46 by Moutig
- * @Updated: 2026/09/25 22:04:13 by Moutig
+ * @Updated: 2026/09/25 22:28:23 by Moutig
  *
  * This header declares the C standard string and memory
  * functions, plus a few POSIX/GNU extensions (memrchr, strdup,
@@ -62,6 +62,55 @@ void	*memset(void *s, int c, size_t n);
 #if defined(__HAJ_SOURCE)
 #define bzero(b,len) (memset((b), '\0', (len)), (void) 0)	/* Fill memory with zero bytes. */
 #endif
+
+/**
+ * @brief Compare the first n bytes of two memory areas.
+ *
+ * @param s1 Pointer to the first memory area.
+ * @param s2 Pointer to the second memory area.
+ * @param n  Number of bytes to compare.
+ * @return An integer less than, equal to, or greater than zero if the first n bytes of s1 is found,
+ *         respectively, to be less than, to match, or be greater than the first n bytes of s2.
+ */
+int		memcmp(const void *s1, const void *s2, size_t n);
+
+/**
+ * @brief Locate the first occurrence of c (converted to an unsigned char) in the first n bytes of s.
+ *
+ * Each byte is interpreted as an unsigned char.
+ * The function returns a pointer to the matching byte or NULL if the character does not occur in the given memory area.
+ * @param s Pointer to the memory area to search.
+ * @param c Byte value to search for (converted to unsigned char).
+ * @param n Number of bytes to search.
+ * @return A pointer to the matching byte or NULL if the character does not occur in the given memory area.
+ */
+void	*memchr(const void *s, int c, size_t n);
+
+#if defined(__HAJ_SOURCE)
+/**
+ * @brief Locate the last occurrence of c (converted to an unsigned char) in the first n bytes of s.
+ *
+ * Each byte is interpreted as an unsigned char.
+ * The function returns a pointer to the matching byte or NULL if the character does not occur in the given memory area.
+ * @param s Pointer to the memory area to search.
+ * @param c Byte value to search for (converted to unsigned char).
+ * @param n Number of bytes to search.
+ * @return A pointer to the matching byte or NULL if the character does not occur in the given memory area.
+ */
+void	*memrchr(const void *s, int c, size_t n);
+#endif
+
+/**
+ * @brief Copy bytes from src to dest until the character c (converted to an unsigned char) is found.
+ *
+ * The function copies bytes from src to dest until it encounters the character c (converted to an unsigned char) or reaches n bytes.
+ * @param dest Destination buffer.
+ * @param src  Source buffer.
+ * @param c    Character to stop copying at (converted to an unsigned char).
+ * @param n    Maximum number of bytes to copy.
+ * @return A pointer to the byte after the first occurrence of c in the copied data, or NULL if c is not found within n bytes.
+ */
+void	*memccpy(void *__HAJ_RESTRICT dest, const void *__HAJ_RESTRICT src, int c, size_t n);
 
 # if defined(__cplusplus)
 }

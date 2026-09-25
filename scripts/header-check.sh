@@ -9,6 +9,7 @@
 # Exit status:
 #   0 : all files have a complete header
 #   1 : at least one file is missing a header field
+#
 
 set -e
 
@@ -30,6 +31,34 @@ else
 fi
 
 FAIL=0
+
+# ---------------------------------------------------------------------------
+# Check that a Doxygen tag has real content (not TODO/FIXME/empty).
+#   $1 = file
+#   $2 = tag (e.g. "@brief")
+#   $3 = field name for MISSING (e.g. "@brief-content")
+# Returns 0 if OK, 1 if placeholder or empty.
+# ---------------------------------------------------------------------------
+check_content() {
+    value=$(grep -m1 "$2 " "$1" \
+        | sed "s/.*$2[[:space:]]*//" \
+        | sed 's/[[:space:]]*\*\/[[:space:]]*$//' \
+        | sed 's/[[:space:]]*$//' \
+        | tr '[:upper:]' '[:lower:]')
+
+    case "$value" in
+        ""|todo|fixme|tbd|xxx|tba|tbc|"..."|"<...>"|"<description>"|description|\
+        "to be done"|"to do"|wip|placeholder|unimplemented|"not implemented"|\
+        none|n/a|"à faire"|"à compléter")
+            return 1
+            ;;
+    esac
+
+    # Minimum length: 5 characters
+    [ "${#value}" -lt 5 ] && return 1
+
+    return 0
+}
 
 for f in $FILES; do
     [ ! -f "$f" ] && continue
@@ -55,6 +84,24 @@ for f in $FILES; do
             head -30 "$f" | grep -q "@brief "   || MISSING="$MISSING @brief"
             head -30 "$f" | grep -q "@Created:" || MISSING="$MISSING @Created"
             head -30 "$f" | grep -q "@Updated:" || MISSING="$MISSING @Updated"
+
+            # Real content of @brief (not TODO/FIXME/empty)
+            if head -30 "$f" | grep -q "@brief "; then
+                check_content "$f" "@brief" \
+                    || MISSING="$MISSING @brief-content"
+            fi
+
+            # Real content of @Updated: (not empty, not TODO)
+            if head -30 "$f" | grep -q "@Updated:"; then
+                check_content "$f" "@Updated:" \
+                    || MISSING="$MISSING @Updated-content"
+            fi
+
+            # Real content of @details if present
+            if head -30 "$f" | grep -q "@details "; then
+                check_content "$f" "@details" \
+                    || MISSING="$MISSING @details-content"
+            fi
             ;;
     esac
 

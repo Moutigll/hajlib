@@ -29,8 +29,8 @@
 # error "Missing required definitions for memset template"
 # define HAJ_FUNC_NAME		hajMemsetGeneric					/* Function name */
 # define HAJ_ATTR_UNUSED	__HAJ_UNUSED						/* If the function may be unused */
-# define HAJ_VEC_TYPE		__hajUnalignedWord_t				/* Vector type use to copy data */
-# define HAJ_VEC_SIZE		sizeof(__hajUnalignedWord_t)		/* Size of the vector type in bytes */
+# define HAJ_VEC_TYPE		__hajULW_t							/* Vector type use to copy data */
+# define HAJ_VEC_SIZE		sizeof(__hajULW_t)					/* Size of the vector type in bytes */
 # define HAJ_SET1(c) \
 	((HAJ_VEC_TYPE)(unsigned char)(c) * 0x0101010101010101ULL)	/* Splat a byte into a vector */
 # define HAJ_STORE(p, v)	(*(HAJ_VEC_TYPE *)(p) = (v))		/* Store a vector to memory */

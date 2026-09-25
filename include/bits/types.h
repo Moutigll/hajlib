@@ -10,7 +10,7 @@
  * @file types.h
  * @brief Internal fixed-width and POSIX-like types.
  * @Created: 2026/09/24 15:06:42 by Moutig
- * @Updated: 2026/09/24 16:05:51 by Moutig
+ * @Updated: 2026/09/25 22:31:40 by Moutig
  *
  * This header defines the real typedefs used across hajlib. The
  * public headers (stddef.h, stdint.h, sys/types.h) alias these
@@ -31,6 +31,7 @@
 # include <bits/os.h>
 # include <bits/arch.h>
 # include <bits/wordsize.h>
+# include <bits/compiler.h>
 
 /* ----- Fixed-width integer types ----- */
 /**
@@ -217,5 +218,13 @@ typedef long				__haj_clock;
  * Signed int on all platforms.
  */
 typedef int					__haj_clockid;
+
+/**
+ * __hajULW_t: an unaligned word type.
+ * This type is used to represent a word that is not aligned to its natural
+ * boundary. It is typically used in low-level memory operations where
+ * alignment is not guaranteed.
+ */
+typedef __haj_size __HAJ_UNALIGNED_WORD __hajULW_t;
 
 #endif /* _BITS_TYPES_H */
