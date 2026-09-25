@@ -109,7 +109,9 @@ STRING_SRCS := \
 	mem/memcmp.c \
 	mem/memchr.c \
 	mem/memrchr.c \
-	mem/memccpy.c
+	mem/memccpy.c \
+	str/strlen.c \
+	str/strnlen.c
 
 # time
 TIME_SRCS :=

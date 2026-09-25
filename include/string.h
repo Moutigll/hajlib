@@ -10,7 +10,7 @@
  * @file string.h
  * @brief C standard string and memory functions.
  * @Created: 2026/09/24 22:10:46 by Moutig
- * @Updated: 2026/09/25 22:28:23 by Moutig
+ * @Updated: 2026/09/25 23:23:20 by Moutig
  *
  * This header declares the C standard string and memory
  * functions, plus a few POSIX/GNU extensions (memrchr, strdup,
@@ -111,6 +111,30 @@ void	*memrchr(const void *s, int c, size_t n);
  * @return A pointer to the byte after the first occurrence of c in the copied data, or NULL if c is not found within n bytes.
  */
 void	*memccpy(void *__HAJ_RESTRICT dest, const void *__HAJ_RESTRICT src, int c, size_t n);
+
+
+
+/* ----- String operations ----- */
+
+/**
+ * @brief Calculate the length of a null-terminated string.
+ *
+ * The function computes the length of the string s, excluding the terminating null byte ('\0').
+ * @param s Pointer to the null-terminated string.
+ * @return The number of characters in the string, excluding the null terminator.
+ */
+size_t	strlen(const char *s);
+
+/**
+ * @brief Calculate the length of a null-terminated string, up to a maximum of maxlen bytes.
+ *
+ * The function computes the length of the string s, excluding the terminating null byte ('\0'),
+ * but at most maxlen bytes are examined.
+ * @param s Pointer to the null-terminated string.
+ * @param maxlen Maximum number of bytes to examine.
+ * @return The number of characters in the string, excluding the null terminator, but at most maxlen.
+ */
+size_t	strnlen(const char *s, size_t maxlen);
 
 # if defined(__cplusplus)
 }
