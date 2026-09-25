@@ -10,15 +10,13 @@
  * @file memmove.c
  * @brief Implementation of the memmove function.
  * @Created: 2026/09/25 17:52:31 by Moutig
- * @Updated: 2026/09/25 21:54:47 by Moutig
+ * @Updated: 2026/09/26 00:27:11 by Moutig
  *
  * This file implements the memmove function, which copies n bytes from src to dest,
  * allowing for overlapping memory regions. It uses vectorized implementations for
  * performance on supported architectures.
  */
 
-
-#include <stddef.h>
 #include <string.h>
 #include <bits/cpu.h>
 

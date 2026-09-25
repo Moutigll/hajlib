@@ -10,7 +10,7 @@
  * @file string.h
  * @brief C standard string and memory functions.
  * @Created: 2026/09/24 22:10:46 by Moutig
- * @Updated: 2026/09/25 23:23:20 by Moutig
+ * @Updated: 2026/09/26 00:26:13 by Moutig
  *
  * This header declares the C standard string and memory
  * functions, plus a few POSIX/GNU extensions (memrchr, strdup,
@@ -21,7 +21,7 @@
 # define _STRING_H
 
 # include <bits/compiler.h>
-# include <sys/types.h>	/* size_t */
+# include <stddef.h>
 
 # if defined(__cplusplus)
 extern "C" {
@@ -135,6 +135,31 @@ size_t	strlen(const char *s);
  * @return The number of characters in the string, excluding the null terminator, but at most maxlen.
  */
 size_t	strnlen(const char *s, size_t maxlen);
+
+/**
+ * @brief Compare two null-terminated strings.
+ *
+ * The function compares the string s1 to the string s2.
+ * It returns an integer less than, equal to, or greater than zero if s1 is found,
+ * respectively, to be less than, to match, or be greater than s2.
+ * @param s1 Pointer to the first null-terminated string.
+ * @param s2 Pointer to the second null-terminated string.
+ * @return An integer indicating the relationship between the two strings.
+ */
+int		strcmp(const char *s1, const char *s2);
+
+/**
+ * @brief Compare two null-terminated strings, up to a maximum of n characters.
+ *
+ * The function compares the string s1 to the string s2, but at most n characters are compared.
+ * It returns an integer less than, equal to, or greater than zero if s1 is found,
+ * respectively, to be less than, to match, or be greater than s2.
+ * @param s1 Pointer to the first null-terminated string.
+ * @param s2 Pointer to the second null-terminated string.
+ * @param n Maximum number of characters to compare.
+ * @return An integer indicating the relationship between the two strings.
+ */
+int		strncmp(const char *s1, const char *s2, size_t n);
 
 # if defined(__cplusplus)
 }

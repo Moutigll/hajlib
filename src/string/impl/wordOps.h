@@ -10,7 +10,7 @@
  * @file wordOps.h
  * @brief Helper functions for word-level operations used in memory functions.
  * @Created: 2026/09/25 22:36:12 by Moutig
- * @Updated: 2026/09/25 22:44:07 by Moutig
+ * @Updated: 2026/09/26 00:24:49 by Moutig
  *
  * This header provides inline functions for word-level operations, such as
  * splatting a byte across a word and checking for zero bytes in a word. These
@@ -86,6 +86,20 @@ static inline size_t __hajLastZeroByteIndex(__hajULW_t mask)
 			- (size_t)__builtin_clzll((unsigned long long)mask) / 8);
 #elif defined(__HAJ_BIG_ENDIAN)
 	return ((size_t)__builtin_ctzll((unsigned long long)mask) / 8);
+#endif
+}
+
+static inline size_t __hajFirstDiffOrZero(__hajULW_t w1, __hajULW_t w2)
+{
+	__hajULW_t z1 = __hajHasZeroByte(w1);
+	__hajULW_t z2 = __hajHasZeroByte(w2);
+	__hajULW_t d = __hajHasZeroByte(w1 ^ w2);
+	__hajULW_t mask = z1 | z2 | d;
+
+#if defined(__HAJ_LITTLE_ENDIAN)
+	return ((size_t)__builtin_ctzll((unsigned long long)mask) / 8);
+#elif defined(__HAJ_BIG_ENDIAN)
+	return ((size_t)__builtin_clzll((unsigned long long)mask) / 8);
 #endif
 }
 
