@@ -130,7 +130,10 @@ STRING_SRCS := \
 	str/strcspn.c \
 	str/strpbrk.c \
 	str/strstr.c \
-	str/strcasestr.c
+	str/strcasestr.c \
+	str/strtok.c \
+	str/strtok_r.c \
+	str/strsep.c
 
 # time
 TIME_SRCS :=

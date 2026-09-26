@@ -10,7 +10,7 @@
  * @file string.h
  * @brief C standard string and memory functions.
  * @Created: 2026/09/24 22:10:46 by Moutig
- * @Updated: 2026/09/26 03:57:47 by Moutig
+ * @Updated: 2026/09/26 04:15:11 by Moutig
  *
  * This header declares the C standard string and memory
  * functions, plus a few POSIX/GNU extensions (memrchr, strdup,
@@ -334,6 +334,43 @@ char	*strstr(const char *haystack, const char *needle);
  * @return A pointer to the beginning of the located substring, or NULL if the substring is not found.
  */
 char	*strcasestr(const char *haystack, const char *needle);
+#endif
+
+/**
+ * @brief Tokenize a string into substrings based on delimiters.
+ *
+ * The function splits the string str into tokens, which are sequences of characters separated by any of the characters in delim.
+ * On the first call, str should point to the string to be tokenized. Subsequent calls should pass NULL for str to continue tokenizing the same string.
+ * @param str Pointer to the string to be tokenized (or NULL for subsequent calls).
+ * @param delim String containing delimiter characters.
+ * @return A pointer to the next token, or NULL if there are no more tokens.
+ */
+char	*strtok(char *__HAJ_RESTRICT str, const char *__HAJ_RESTRICT delim);
+
+/**
+ * @brief Tokenize a string into substrings based on delimiters, in a reentrant manner.
+ *
+ * The function splits the string str into tokens, which are sequences of characters separated by any of the characters in delim.
+ * On the first call, str should point to the string to be tokenized. Subsequent calls should pass NULL for str to continue tokenizing the same string.
+ * The saveptr argument is used to maintain context between successive calls that parse the same string.
+ * @param str Pointer to the string to be tokenized (or NULL for subsequent calls).
+ * @param delim String containing delimiter characters.
+ * @param saveptr Pointer to a char* variable that is used internally by strtok_r to maintain context between successive calls.
+ * @return A pointer to the next token, or NULL if there are no more tokens.
+ */
+char	*strtok_r(char *__HAJ_RESTRICT str, const char *__HAJ_RESTRICT delim, char **__HAJ_RESTRICT saveptr);
+
+#if defined(__HAJ_SOURCE)
+/**
+ * @brief Split a string into tokens, using the specified delimiter.
+ *
+ * This function splits the string pointed to by stringp into tokens, which are sequences of characters separated by any of the characters in delim.
+ * The function modifies the original string by replacing the delimiter characters with null terminators.
+ * @param stringp Pointer to a pointer to the string to be split (or NULL for subsequent calls).
+ * @param delim String containing delimiter characters.
+ * @return A pointer to the next token, or NULL if there are no more tokens.
+ */
+char	*strsep(char **__HAJ_RESTRICT stringp, const char *__HAJ_RESTRICT delim);
 #endif
 
 # if defined(__cplusplus)
