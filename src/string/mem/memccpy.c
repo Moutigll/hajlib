@@ -10,7 +10,7 @@
  * @file memccpy.c
  * @brief POSIX memccpy implementation.
  * @Created: 2026/09/25 22:34:33 by Moutig
- * @Updated: 2026/09/25 23:10:15 by Moutig
+ * @Updated: 2026/09/26 00:26:59 by Moutig
  *
  * Copies bytes from src to dest, stopping after the first
  * occurrence of byte `c` has been copied, or after `n` bytes.
@@ -19,7 +19,6 @@
  * copy of `c`, or NULL if `c` was not found in the first n bytes.
  */
 
-#include <stddef.h>
 #include <string.h>
 
 void *memccpy(void *__HAJ_RESTRICT dest, const void *__HAJ_RESTRICT src, int c, size_t n)

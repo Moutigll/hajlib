@@ -53,7 +53,8 @@ CRT_SRCS := \
 	progname.c
 
 # ctype
-CTYPE_SRCS :=
+CTYPE_SRCS := \
+	ctype.c
 
 # errno
 ERRNO_SRCS := \
@@ -109,7 +110,30 @@ STRING_SRCS := \
 	mem/memcmp.c \
 	mem/memchr.c \
 	mem/memrchr.c \
-	mem/memccpy.c
+	mem/memccpy.c \
+	str/strlen.c \
+	str/strnlen.c \
+	str/strcmp.c \
+	str/strncmp.c \
+	str/strchr.c \
+	str/strrchr.c \
+	str/strchrnul.c \
+	str/strcpy.c \
+	str/stpcpy.c \
+	str/strncpy.c \
+	str/stpncpy.c \
+	str/strlcpy.c \
+	str/strcat.c \
+	str/strncat.c \
+	str/strlcat.c \
+	str/strspn.c \
+	str/strcspn.c \
+	str/strpbrk.c \
+	str/strstr.c \
+	str/strcasestr.c \
+	str/strtok.c \
+	str/strtok_r.c \
+	str/strsep.c
 
 # time
 TIME_SRCS :=

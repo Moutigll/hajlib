@@ -38,24 +38,42 @@ FAIL=0
 #   $2 = tag (e.g. "@brief")
 #   $3 = field name for MISSING (e.g. "@brief-content")
 # Returns 0 if OK, 1 if placeholder or empty.
+#
+# Extracts the value after the tag using awk (robust), lowercases it,
+# and rejects values that start with a placeholder keyword (TODO,
+# FIXME, ...) or are too short.
 # ---------------------------------------------------------------------------
 check_content() {
-    value=$(grep -m1 "$2 " "$1" \
-        | sed "s/.*$2[[:space:]]*//" \
-        | sed 's/[[:space:]]*\*\/[[:space:]]*$//' \
-        | sed 's/[[:space:]]*$//' \
-        | tr '[:upper:]' '[:lower:]')
+    value=$(awk -v tag="$2" '
+        index($0, tag) {
+            sub(/^.*'"$2"'[ \t]*/, "")
+            sub(/[ \t]*\*\/[ \t]*$/, "")
+            sub(/[ \t]+$/, "")
+            print
+            exit
+        }
+    ' "$1")
 
-    case "$value" in
-        ""|todo|fixme|tbd|xxx|tba|tbc|"..."|"<...>"|"<description>"|description|\
-        "to be done"|"to do"|wip|placeholder|unimplemented|"not implemented"|\
-        none|n/a|"à faire"|"à compléter")
+    value_lc=$(printf '%s' "$value" | tr '[:upper:]' '[:lower:]')
+
+    # Empty
+    if [ -z "$value_lc" ]; then
+        return 1
+    fi
+
+    # Placeholder keyword (prefix match)
+    case "$value_lc" in
+        todo*|fixme*|tbd*|xxx*|tba*|tbc*|wip*|placeholder*|\
+        "to be done"*|"to do"*|"à faire"*|"à compléter"*|\
+        none|n/a|"not implemented"*|unimplemented*|\
+        "brief description."*|"description."*|\
+        "..."*|"<..."*)
             return 1
             ;;
     esac
 
     # Minimum length: 5 characters
-    [ "${#value}" -lt 5 ] && return 1
+    [ "${#value_lc}" -lt 5 ] && return 1
 
     return 0
 }
