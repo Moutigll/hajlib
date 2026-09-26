@@ -33,6 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `string.h`: `strtok`, `strtok_r`, `strsep` (BSD)
 - `bits/mman.h`: per-OS `mmap` constants (`PROT_*`, `MAP_*`, `MS_*`, `MADV_*`, `MCL_*`) for Linux, FreeBSD, Darwin
 - `__haj_syscall0` .. `__haj_syscall5` variants for all supported OS/arch (assembly)
+- `sys/mman.h`: `mmap`, `munmap` (other mman functions declared, implementations pending)
+- `src/mman/`: `mmap.c`, `munmap.c` using raw syscalls
 
 ### Changed
 
