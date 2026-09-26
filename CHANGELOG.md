@@ -28,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `string.h`: `strcmp`, `strncmp` (word-at-a-time, with zero-byte/diff detection)
 - `string.h`: `strchr`, `strrchr`, `strchrnul` (GNU), `strcpy`, `stpcpy`, `strncpy`, `stpncpy`, `strlcpy` (BSD)
 - `string.h`: `strcat`, `strncat`, `strlcat` (BSD), `strspn`, `strcspn`
+- `ctype.h`: ASCII classification and conversion (`is*` and `to*`), static inline
 
 ### Changed
 
