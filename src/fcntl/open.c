@@ -10,7 +10,7 @@
  * @file open.c
  * @brief Implementation of open().
  * @Created: 2026/09/24 15:06:42 by Moutig
- * @Updated: 2026/09/24 18:29:35 by Moutig
+ * @Updated: 2026/09/26 05:05:40 by Moutig
  *
  * open() opens or creates a file and returns a file descriptor.
  * It is a variadic function: the third argument (mode) is only
@@ -54,12 +54,11 @@ int	open(const char *path, int flags, ...)
 	}
 
 	/* We use the openat syscall since open is not available on all architectures. */
-	ret = __haj_syscall6(SYS_openat,
-	                     AT_FDCWD,
-	                     (long)path,
-	                     flags,
-	                     (long)mode,
-	                     0, 0);
+	ret = __haj_syscall4(SYS_openat,
+						 AT_FDCWD,
+						 (long)path,
+						 flags,
+						 (long)mode);
 
 	if (ret < 0 && ret >= -4095) {
 		errno = (int)-ret;

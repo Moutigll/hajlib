@@ -10,7 +10,7 @@
  * @file abort.c
  * @brief Implementation of abort().
  * @Created: 2026/09/24 15:06:42 by Moutig
- * @Updated: 2026/09/24 18:25:10 by Moutig
+ * @Updated: 2026/09/26 05:04:38 by Moutig
  *
  * abort() raises SIGABRT and terminates the process. We do not
  * have signal support yet, so we do the syscall directly with
@@ -30,7 +30,7 @@ void	abort(void)
 	 * signals, we just terminate with the status that a shell
 	 * would report for SIGABRT.
 	 */
-	__haj_syscall6(SYS_exit_group, 134, 0, 0, 0, 0, 0);
+	__haj_syscall1(SYS_exit_group, 134);
 	for (;;) {
 	}
 }

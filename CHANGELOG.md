@@ -32,12 +32,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `string.h`: `strpbrk`, `strstr` (Horspool + Two-Way for long needles), `strcasestr` (GNU)
 - `string.h`: `strtok`, `strtok_r`, `strsep` (BSD)
 - `bits/mman.h`: per-OS `mmap` constants (`PROT_*`, `MAP_*`, `MS_*`, `MADV_*`, `MCL_*`) for Linux, FreeBSD, Darwin
+- `__haj_syscall0` .. `__haj_syscall5` variants for all supported OS/arch (assembly)
 
 ### Changed
 
 - `.gitignore`: track `.vscode/settings.json` and `.vscode/extensions.json`
 - `Makefile`: added `init`, `headers-add`, `headers-check` targets
 - Renamed library references from `libhaj.a` to `libhajc.a` (`mk/config.mk`, `mk/hajlib.mk`)
+- Rewrote internal syscall call sites to use the smallest `__haj_syscallN` variant
+- `mk/targets.mk`: use `SYSCALL_BASE_SRCS` to include all 7 syscall files per target
+- All syscall6 assembly files now emit `.note.GNU-stack`
 
 ### Fixed
 
