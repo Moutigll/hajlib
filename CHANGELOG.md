@@ -28,7 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `string.h`: `strcmp`, `strncmp` (word-at-a-time, with zero-byte/diff detection)
 - `string.h`: `strchr`, `strrchr`, `strchrnul` (GNU), `strcpy`, `stpcpy`, `strncpy`, `stpncpy`, `strlcpy` (BSD)
 - `string.h`: `strcat`, `strncat`, `strlcat` (BSD), `strspn`, `strcspn`
-- `ctype.h`: ASCII classification and conversion (`is*` and `to*`), static inline
+- `ctype.h`: character classification and conversion (inline `__haj_*` fast paths, `HAJ_NO_CTYPE_MACROS` toggle, external symbols in `src/ctype/ctype.c`)
+- `string.h`: `strpbrk`, `strstr` (Horspool + Two-Way for long needles), `strcasestr` (GNU)
 
 ### Changed
 

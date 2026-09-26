@@ -53,7 +53,8 @@ CRT_SRCS := \
 	progname.c
 
 # ctype
-CTYPE_SRCS :=
+CTYPE_SRCS := \
+	ctype.c
 
 # errno
 ERRNO_SRCS := \
@@ -126,7 +127,10 @@ STRING_SRCS := \
 	str/strncat.c \
 	str/strlcat.c \
 	str/strspn.c \
-	str/strcspn.c
+	str/strcspn.c \
+	str/strpbrk.c \
+	str/strstr.c \
+	str/strcasestr.c
 
 # time
 TIME_SRCS :=

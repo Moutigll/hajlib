@@ -10,7 +10,7 @@
  * @file string.h
  * @brief C standard string and memory functions.
  * @Created: 2026/09/24 22:10:46 by Moutig
- * @Updated: 2026/09/26 02:19:11 by Moutig
+ * @Updated: 2026/09/26 03:57:47 by Moutig
  *
  * This header declares the C standard string and memory
  * functions, plus a few POSIX/GNU extensions (memrchr, strdup,
@@ -309,6 +309,32 @@ size_t	strspn(const char *s, const char *accept);
  * @return The length of the initial segment of s which contains no characters from reject.
  */
 size_t	strcspn(const char *s, const char *reject);
+
+/**
+ * @brief Locate the first occurrence in the string s of any of the characters in the string accept.
+ * @param s The string to be scanned.
+ * @param accept The string containing the characters to match.
+ * @return A pointer to the first occurrence in s of any of the characters in accept, or NULL if no such character is found.
+ */
+char	*strpbrk(const char *s, const char *accept);
+
+/**
+ * @brief Locate the first occurrence of the null-terminated string needle in the null-terminated string haystack.
+ * @param haystack The string to be scanned.
+ * @param needle The string to be searched for.
+ * @return A pointer to the beginning of the located substring, or NULL if the substring is not found.
+ */
+char	*strstr(const char *haystack, const char *needle);
+
+#if defined(__HAJ_SOURCE)
+/**
+ * @brief Locate the first occurrence of the null-terminated string needle in the null-terminated string haystack, ignoring case.
+ * @param haystack The string to be scanned.
+ * @param needle The string to be searched for.
+ * @return A pointer to the beginning of the located substring, or NULL if the substring is not found.
+ */
+char	*strcasestr(const char *haystack, const char *needle);
+#endif
 
 # if defined(__cplusplus)
 }
