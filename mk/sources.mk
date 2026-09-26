@@ -23,7 +23,7 @@ ERRNO_DIR		:= $(SRC_DIR)/errno
 FCNTL_DIR		:= $(SRC_DIR)/fcntl
 GETOPT_DIR		:= $(SRC_DIR)/getopt
 MATH_DIR		:= $(SRC_DIR)/math
-MMAN_DIR		:= $(SRC_DIR)/mman
+MMAN_DIR		:= $(SRC_DIR)/sys/mman
 RUNTIME_DIR		:= $(SRC_DIR)/runtime
 SETJMP_DIR		:= $(SRC_DIR)/setjmp
 SIGNAL_DIR		:= $(SRC_DIR)/signal
@@ -74,7 +74,17 @@ GETOPT_SRCS :=
 MATH_SRCS :=
 
 # mman---
-MMAN_SRCS :=
+MMAN_SRCS := \
+	mmap.c \
+	munmap.c \
+	mlock.c \
+	munlock.c \
+	mlockall.c \
+	munlockall.c \
+	mprotect.c \
+	msync.c \
+	madvise.c \
+	posix_typed_mem.c
 
 # runtime (libgcc helpers)
 RUNTIME_SRCS := \

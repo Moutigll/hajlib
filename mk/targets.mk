@@ -27,6 +27,8 @@ endif
 # Linux
 ifeq ($(TARGET_OS),Linux)
 
+    MMAN_PLATFORM_SRCS	:= src/sys/mman/linux/shm_open.c \
+						   src/sys/mman/linux/shm_unlink.c
   ifeq ($(TARGET_ARCH),x86_64)
     CRT_START_SRCS		:= src/crt/linux/x86_64/start.S
     SYSCALL_BASE_SRCS	:= src/syscall/linux/x86_64/
@@ -47,6 +49,8 @@ ifeq ($(TARGET_OS),Linux)
 # FreeBSD
 else ifeq ($(TARGET_OS),FreeBSD)
 
+    MMAN_PLATFORM_SRCS	:= src/sys/mman/freebsd/shm_open.c \
+						   src/sys/mman/freebsd/shm_unlink.c
   ifeq ($(TARGET_ARCH),x86_64)
     CRT_START_SRCS		:= src/crt/freebsd/x86_64/start.S
     SYSCALL_BASE_SRCS	:= src/syscall/freebsd/x86_64/
@@ -67,6 +71,8 @@ else ifeq ($(TARGET_OS),FreeBSD)
 # Darwin (macOS, iOS)
 else ifeq ($(TARGET_OS),Darwin)
 
+    MMAN_PLATFORM_SRCS	:= src/sys/mman/darwin/shm_open.c \
+						   src/sys/mman/darwin/shm_unlink.c
   ifeq ($(TARGET_ARCH),x86_64)
     CRT_START_SRCS		:= src/crt/darwin/x86_64/start.S
     SYSCALL_BASE_SRCS	:= src/syscall/darwin/x86_64/

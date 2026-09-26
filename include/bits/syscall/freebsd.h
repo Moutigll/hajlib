@@ -10,7 +10,7 @@
  * @file freebsd.h
  * @brief FreeBSD syscall numbers.
  * @Created: 2026/09/24 15:06:42 by Moutig
- * @Updated: 2026/09/24 15:56:32 by Moutig
+ * @Updated: 2026/09/26 07:35:17 by Moutig
  *
  * Source: <sys/syscall.h> from the FreeBSD kernel.
  * FreeBSD uses the same syscall numbers on all 64-bit
@@ -125,6 +125,8 @@
 # define SYS_munlockall			325
 # define SYS_msync				65
 # define SYS_break				17
+# define SYS_shm_open			482
+# define SYS_shm_unlink			483
 
 /* ---- Signals ---- */
 # define SYS_sigaction			46

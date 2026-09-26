@@ -10,7 +10,7 @@
  * @file open.c
  * @brief Implementation of open().
  * @Created: 2026/09/24 15:06:42 by Moutig
- * @Updated: 2026/09/26 05:05:40 by Moutig
+ * @Updated: 2026/09/26 06:39:05 by Moutig
  *
  * open() opens or creates a file and returns a file descriptor.
  * It is a variadic function: the third argument (mode) is only
@@ -24,13 +24,6 @@
 
 #include <bits/syscall.h>
 
-/**
- * @brief Open or create a file.
- *
- * On Linux, we use the openat syscall with AT_FDCWD as the
- * directory file descriptor, because the raw open syscall is
- * not available on all architectures (aarch64 only has openat).
- */
 int	open(const char *path, int flags, ...)
 {
 	mode_t	mode = 0;

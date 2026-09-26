@@ -35,6 +35,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `__haj_syscall0` .. `__haj_syscall5` variants for all supported OS/arch (assembly)
 - `sys/mman.h`: `mmap`, `munmap` (other mman functions declared, implementations pending)
 - `src/mman/`: `mmap.c`, `munmap.c` using raw syscalls
+- `sys/mman.h`: `mprotect`, `msync`, `madvise`, `posix_madvise`, `mlock`, `munlock`, `mlockall`, `munlockall`, `shm_open`, `shm_unlink`, POSIX typed-memory API
+- `src/sys/mman/`: platform-agnostic implementations + per-OS `shm_open`/`shm_unlink`
+- Linux: `/dev/shm` + name; FreeBSD: dedicated syscalls; Darwin: `/var/tmp/.hajlib-shm-<uid>-...`
+- FreeBSD: `SYS_shm_open`, `SYS_shm_unlink` in `bits/syscall/freebsd.h`
+- `bits/mman.h`: `SHM_PREFIX`, `SHM_PREFIX_LEN`, `SHM_PATH_MAX` per OS
 
 ### Changed
 
