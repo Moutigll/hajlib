@@ -31,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ctype.h`: character classification and conversion (inline `__haj_*` fast paths, `HAJ_NO_CTYPE_MACROS` toggle, external symbols in `src/ctype/ctype.c`)
 - `string.h`: `strpbrk`, `strstr` (Horspool + Two-Way for long needles), `strcasestr` (GNU)
 - `string.h`: `strtok`, `strtok_r`, `strsep` (BSD)
+- `bits/mman.h`: per-OS `mmap` constants (`PROT_*`, `MAP_*`, `MS_*`, `MADV_*`, `MCL_*`) for Linux, FreeBSD, Darwin
 
 ### Changed
 
