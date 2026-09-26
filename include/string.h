@@ -10,7 +10,7 @@
  * @file string.h
  * @brief C standard string and memory functions.
  * @Created: 2026/09/24 22:10:46 by Moutig
- * @Updated: 2026/09/26 01:54:54 by Moutig
+ * @Updated: 2026/09/26 02:19:11 by Moutig
  *
  * This header declares the C standard string and memory
  * functions, plus a few POSIX/GNU extensions (memrchr, strdup,
@@ -255,6 +255,60 @@ char	*stpncpy(char *__HAJ_RESTRICT dest, const char *__HAJ_RESTRICT src, size_t 
  */
 size_t	strlcpy(char *__HAJ_RESTRICT dest, const char *__HAJ_RESTRICT src, size_t size);
 #endif
+
+/**
+ * @brief Append a null-terminated string src to the end of dest.
+ *
+ * The function appends the string pointed to by src to the end of the string pointed to by dest.
+ * The dest string must have enough space to hold the resulting concatenated string.
+ * @param dest Destination buffer containing a null-terminated string.
+ * @param src  Source null-terminated string to append.
+ * @return dest.
+ */
+char	*strcat(char *__HAJ_RESTRICT dest, const char *__HAJ_RESTRICT src);
+
+/**
+ * @brief Append at most n characters from the null-terminated string src to the end of dest.
+ *
+ * The function appends at most n characters from the string pointed to by src to the end of the string pointed to by dest.
+ * The dest string must have enough space to hold the resulting concatenated string.
+ * @param dest Destination buffer containing a null-terminated string.
+ * @param src  Source null-terminated string to append.
+ * @param n    Maximum number of characters to append from src.
+ * @return dest.
+ */
+char	*strncat(char *__HAJ_RESTRICT dest, const char *__HAJ_RESTRICT src, size_t n);
+
+#if defined(__HAJ_SOURCE)
+/**
+ * @brief Append the null-terminated string src to the end of dest, ensuring that the total length does not exceed size - 1 characters.
+ *
+ * The function appends the string pointed to by src to the end of the string pointed to by dest,
+ * ensuring that the total length of the resulting string does not exceed size - 1 characters,
+ * and that the resulting string is null-terminated.
+ * @param dest Destination buffer containing a null-terminated string.
+ * @param src  Source null-terminated string to append.
+ * @param size Size of the destination buffer.
+ * @return The total length of the string it tried to create (initial length of dest plus length of src).
+ */
+size_t	strlcat(char *__HAJ_RESTRICT dest, const char *__HAJ_RESTRICT src, size_t size);
+#endif
+
+/**
+ * @brief Calculate the length of the initial segment of s which contains only characters from accept.
+ * @param s The string to be analyzed.
+ * @param accept The string containing the characters to be accepted.
+ * @return The length of the initial segment of s which contains only characters from accept.
+ */
+size_t	strspn(const char *s, const char *accept);
+
+/**
+ * @brief Calculate the length of the initial segment of s which contains no characters from reject.
+ * @param s The string to be analyzed.
+ * @param reject The string containing the characters to be rejected.
+ * @return The length of the initial segment of s which contains no characters from reject.
+ */
+size_t	strcspn(const char *s, const char *reject);
 
 # if defined(__cplusplus)
 }

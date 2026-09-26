@@ -121,7 +121,12 @@ STRING_SRCS := \
 	str/stpcpy.c \
 	str/strncpy.c \
 	str/stpncpy.c \
-	str/strlcpy.c
+	str/strlcpy.c \
+	str/strcat.c \
+	str/strncat.c \
+	str/strlcat.c \
+	str/strspn.c \
+	str/strcspn.c
 
 # time
 TIME_SRCS :=
