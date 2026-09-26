@@ -113,7 +113,15 @@ STRING_SRCS := \
 	str/strlen.c \
 	str/strnlen.c \
 	str/strcmp.c \
-	str/strncmp.c
+	str/strncmp.c \
+	str/strchr.c \
+	str/strrchr.c \
+	str/strchrnul.c \
+	str/strcpy.c \
+	str/stpcpy.c \
+	str/strncpy.c \
+	str/stpncpy.c \
+	str/strlcpy.c
 
 # time
 TIME_SRCS :=

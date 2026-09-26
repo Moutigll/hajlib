@@ -10,7 +10,7 @@
  * @file wordOps.h
  * @brief Helper functions for word-level operations used in memory functions.
  * @Created: 2026/09/25 22:36:12 by Moutig
- * @Updated: 2026/09/26 00:24:49 by Moutig
+ * @Updated: 2026/09/26 01:38:12 by Moutig
  *
  * This header provides inline functions for word-level operations, such as
  * splatting a byte across a word and checking for zero bytes in a word. These
@@ -89,6 +89,15 @@ static inline size_t __hajLastZeroByteIndex(__hajULW_t mask)
 #endif
 }
 
+/**
+ * @brief Get the index of the first differing byte or zero byte in two words.
+ *
+ * This function compares two words and returns the index of the first byte that differs
+ * or is zero in either word.
+ * @param w1 The first word to compare.
+ * @param w2 The second word to compare.
+ * @return The index of the first differing or zero byte, or sizeof(word) if no such byte is found.
+ */
 static inline size_t __hajFirstDiffOrZero(__hajULW_t w1, __hajULW_t w2)
 {
 	__hajULW_t z1 = __hajHasZeroByte(w1);
@@ -100,6 +109,27 @@ static inline size_t __hajFirstDiffOrZero(__hajULW_t w1, __hajULW_t w2)
 	return ((size_t)__builtin_ctzll((unsigned long long)mask) / 8);
 #elif defined(__HAJ_BIG_ENDIAN)
 	return ((size_t)__builtin_clzll((unsigned long long)mask) / 8);
+#endif
+}
+
+/**
+ * @brief Merge two words by shifting and combining them.
+ *
+ * This function merges two words by shifting the first word right and the second word left,
+ * then combining them with a bitwise OR operation.
+ * @param w0 The first word to merge.
+ * @param sh_1 The number of bits to shift the first word right.
+ * @param w1 The second word to merge.
+ * @param sh_2 The number of bits to shift the second word left.
+ * @return The merged word.
+ */
+static inline __hajULW_t __hajMergeBytes(__hajULW_t w0, size_t sh_1,
+										 __hajULW_t w1, size_t sh_2)
+{
+#if defined(__HAJ_LITTLE_ENDIAN)
+	return ((w0 >> sh_1) | (w1 << sh_2));
+#elif defined(__HAJ_BIG_ENDIAN)
+	return ((w0 << sh_1) | (w1 >> sh_2));
 #endif
 }
 

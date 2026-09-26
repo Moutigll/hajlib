@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Internal helpers: `src/string/impl/wordOps.h` (`__hajSplatByte`, `__hajHasZeroByte`, first/last zero byte index)
 - `string.h`: `strlen`, `strnlen` (word-at-a-time scan)
 - `string.h`: `strcmp`, `strncmp` (word-at-a-time, with zero-byte/diff detection)
+- `string.h`: `strchr`, `strrchr`, `strchrnul` (GNU), `strcpy`, `stpcpy`, `strncpy`, `stpncpy`, `strlcpy` (BSD)
 
 ### Changed
 
