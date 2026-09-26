@@ -62,6 +62,7 @@ ALL_SRCS := \
 	$(UNISTD_SRCS) \
 	$(STAT_SRCS) \
 	$(MMAN_SRCS) \
+	$(MMAN_PLATFORM_SRCS) \
 	$(GETOPT_SRCS)
 
 ALL_OBJS := $(patsubst %.c,$(OBJDIR)/%.o,$(patsubst %.S,$(OBJDIR)/%.o,$(ALL_SRCS)))

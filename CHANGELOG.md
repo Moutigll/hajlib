@@ -31,12 +31,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ctype.h`: character classification and conversion (inline `__haj_*` fast paths, `HAJ_NO_CTYPE_MACROS` toggle, external symbols in `src/ctype/ctype.c`)
 - `string.h`: `strpbrk`, `strstr` (Horspool + Two-Way for long needles), `strcasestr` (GNU)
 - `string.h`: `strtok`, `strtok_r`, `strsep` (BSD)
+- `bits/mman.h`: per-OS `mmap` constants (`PROT_*`, `MAP_*`, `MS_*`, `MADV_*`, `MCL_*`) for Linux, FreeBSD, Darwin
+- `__haj_syscall0` .. `__haj_syscall5` variants for all supported OS/arch (assembly)
+- `sys/mman.h`: `mmap`, `munmap` (other mman functions declared, implementations pending)
+- `src/mman/`: `mmap.c`, `munmap.c` using raw syscalls
+- `sys/mman.h`: `mprotect`, `msync`, `madvise`, `posix_madvise`, `mlock`, `munlock`, `mlockall`, `munlockall`, `shm_open`, `shm_unlink`, POSIX typed-memory API
+- `src/sys/mman/`: platform-agnostic implementations + per-OS `shm_open`/`shm_unlink`
+- Linux: `/dev/shm` + name; FreeBSD: dedicated syscalls; Darwin: `/var/tmp/.hajlib-shm-<uid>-...`
+- FreeBSD: `SYS_shm_open`, `SYS_shm_unlink` in `bits/syscall/freebsd.h`
+- `bits/mman.h`: `SHM_PREFIX`, `SHM_PREFIX_LEN`, `SHM_PATH_MAX` per OS
 
 ### Changed
 
 - `.gitignore`: track `.vscode/settings.json` and `.vscode/extensions.json`
 - `Makefile`: added `init`, `headers-add`, `headers-check` targets
 - Renamed library references from `libhaj.a` to `libhajc.a` (`mk/config.mk`, `mk/hajlib.mk`)
+- Rewrote internal syscall call sites to use the smallest `__haj_syscallN` variant
+- `mk/targets.mk`: use `SYSCALL_BASE_SRCS` to include all 7 syscall files per target
+- All syscall6 assembly files now emit `.note.GNU-stack`
 
 ### Fixed
 

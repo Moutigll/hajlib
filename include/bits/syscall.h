@@ -10,7 +10,7 @@
  * @file syscall.h
  * @brief Raw syscall interface.
  * @Created: 2026/09/24 15:06:42 by Moutig
- * @Updated: 2026/09/24 16:03:40 by Moutig
+ * @Updated: 2026/09/26 05:02:50 by Moutig
  *
  * This header declares __haj_syscall6 and includes the correct
  * syscall numbers for the target OS and architecture.
@@ -81,6 +81,20 @@
  *         -errno.
  */
 long	__haj_syscall6(long nr, long a1, long a2, long a3,
-                       long a4, long a5, long a6);
+					   long a4, long a5, long a6);
+
+long	__haj_syscall5(long nr, long a1, long a2, long a3,
+					   long a4, long a5);
+
+long	__haj_syscall4(long nr, long a1, long a2, long a3,
+					   long a4);
+
+long	__haj_syscall3(long nr, long a1, long a2, long a3);
+
+long	__haj_syscall2(long nr, long a1, long a2);
+
+long	__haj_syscall1(long nr, long a1);
+
+long	__haj_syscall0(long nr);
 
 #endif /* _BITS_SYSCALL_H */

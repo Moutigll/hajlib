@@ -57,4 +57,5 @@ __haj_syscall6:
 	/* Return to the caller. x0 holds the result. */
 	ret
 
-.size	__haj_syscall6, .-__haj_syscall6
+.size		__haj_syscall6, .-__haj_syscall6
+.section	.note.GNU-stack,"",@progbits

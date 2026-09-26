@@ -73,4 +73,5 @@ __haj_syscall6:
 	popq	%rbx
 	ret
 
-.size	__haj_syscall6, .-__haj_syscall6
+.size		__haj_syscall6, .-__haj_syscall6
+.section	.note.GNU-stack,"",@progbits

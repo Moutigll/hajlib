@@ -10,7 +10,7 @@
  * @file _exit.c
  * @brief Implementation of _exit().
  * @Created: 2026/09/24 15:06:42 by Moutig
- * @Updated: 2026/09/24 18:24:53 by Moutig
+ * @Updated: 2026/09/26 05:04:17 by Moutig
  *
  * _exit() terminates the process immediately, without running
  * atexit handlers or flushing stdio buffers. This is the
@@ -33,14 +33,14 @@ void	_exit(int status)
 	 * one. This is the correct behavior for a process-wide
 	 * exit.
 	 */
-	__haj_syscall6(SYS_exit_group, status, 0, 0, 0, 0, 0);
+	__haj_syscall1(SYS_exit_group, status);
 #else
 	/*
 	 * On other OSes, exit terminates the process. There is no
 	 * distinction between "exit this thread" and "exit the
 	 * process" in the base syscall.
 	 */
-	__haj_syscall6(SYS_exit, status, 0, 0, 0, 0, 0);
+	__haj_syscall1(SYS_exit, status);
 #endif
 
 	/*
